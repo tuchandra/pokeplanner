@@ -1,9 +1,10 @@
-import { SPECIALTIES } from '@/data/specialties';
+import { POKEMON } from '@/data/pokemon';
+import { SPECIALTY_ICONS } from '@/data/specialty-icons';
 import { cn } from '@/lib/cn';
+import { MISC_GROUP, STORY_GROUP, partitionGroups } from '@/lib/picker-groups';
 import { useStore } from '@/state/store';
-import type { Specialty } from '@/types';
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Checkbox } from './ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
@@ -14,10 +15,15 @@ export function SpecialtyFilter() {
   const setFilter = useStore((s) => s.setFilter);
   const [open, setOpen] = useState(false);
 
-  function toggle(s: Specialty) {
+  // The filter dropdown shows the same set of groups the picker grid uses —
+  // real specialties (>2 members) plus the virtual Story and Misc. buckets —
+  // so toggling 'Story' or 'Misc.' is consistent with how the grid groups.
+  const options = useMemo(() => partitionGroups(POKEMON).orderedKeys, []);
+
+  function toggle(key: string) {
     const set = new Set(selected);
-    if (set.has(s)) set.delete(s);
-    else set.add(s);
+    if (set.has(key)) set.delete(key);
+    else set.add(key);
     setFilter('specialtyFilter', Array.from(set));
   }
 
@@ -43,17 +49,35 @@ export function SpecialtyFilter() {
           align="start"
         >
           <ul className="list-none m-0 p-0">
-            {SPECIALTIES.map((s) => {
-              const checked = selected.includes(s);
+            {options.map((key) => {
+              const checked = selected.includes(key);
+              const icon = SPECIALTY_ICONS[key];
+              const isVirtual = key === STORY_GROUP || key === MISC_GROUP;
               return (
-                <li key={s}>
+                <li key={key}>
                   <button
                     type="button"
-                    onClick={() => toggle(s)}
+                    onClick={() => toggle(key)}
                     className="flex w-full items-center gap-2.5 rounded-sm px-2 py-1.5 text-sm cursor-pointer hover:bg-card-soft text-left"
                   >
                     <Checkbox checked={checked} tabIndex={-1} />
-                    <span>{s}</span>
+                    {icon ? (
+                      <img
+                        src={icon}
+                        alt=""
+                        aria-hidden
+                        className="size-5 [image-rendering:pixelated] shrink-0"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden
+                        className={cn(
+                          'inline-block size-5 rounded-sm shrink-0',
+                          isVirtual ? 'bg-card-soft' : 'bg-card-soft',
+                        )}
+                      />
+                    )}
+                    <span>{key}</span>
                   </button>
                 </li>
               );

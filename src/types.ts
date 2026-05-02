@@ -4,6 +4,7 @@ export type Location = {
   readonly id: LocationId;
   readonly name: string;
   readonly capacity: number;
+  readonly iconUrl: string;
 };
 
 export type HouseType = 'prefab' | 'custom';

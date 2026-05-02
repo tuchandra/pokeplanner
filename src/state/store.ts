@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { House, HouseType, LocationId, SlotCount, Specialty } from '../types';
+import type { House, HouseType, LocationId, SlotCount } from '../types';
 import { STORAGE_KEY } from './storage';
 
 type Filters = {
@@ -9,11 +9,12 @@ type Filters = {
   pendingType: HouseType;
   pendingSlots: SlotCount;
   /**
-   * Work-specialty filter for the Pokémon picker. Multi-select via checkboxes
-   * (matches reference). Empty array = no filter; otherwise show only Pokémon
-   * whose specialty1 OR specialty2 is in this set.
+   * Group filter for the Pokémon picker. Multi-select. Each entry is either a
+   * canonical Specialty name, or one of the picker's virtual groups: 'Story'
+   * (story characters) or 'Misc.' (??? specialty + small one/two-mon
+   * specialties). Empty array = no filter.
    */
-  specialtyFilter: readonly Specialty[];
+  specialtyFilter: readonly string[];
   /**
    * Restrict the picker to Pokémon whose `habitat` is one of the selected
    * house's derived lighting chips. False = show all.

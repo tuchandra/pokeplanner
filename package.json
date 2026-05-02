@@ -13,7 +13,9 @@
     "test": "bun test",
     "ingest": "bun run scripts/ingest-tracker.ts",
     "mirror-sprites": "bun run scripts/mirror-sprites.ts",
-    "mirror-litter": "bun run scripts/mirror-litter.ts"
+    "mirror-litter": "bun run scripts/mirror-litter.ts",
+    "mirror-locations": "bun run scripts/mirror-locations.ts",
+    "mirror-specialties": "bun run scripts/mirror-specialties.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

@@ -33,7 +33,9 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
   const setFilter = useStore((s) => s.setFilter);
   const addHouse = useStore((s) => s.addHouse);
 
-  const slotOptions: readonly (1 | 2 | 4)[] = pendingType === 'custom' ? [1, 4] : [1, 2, 4];
+  // Custom houses always have 4 slots (game has no smaller custom variant);
+  // only prefab offers 1/2/4 sizes.
+  const slotOptions: readonly (1 | 2 | 4)[] = pendingType === 'custom' ? [4] : [1, 2, 4];
   const targetName = activeLocation
     ? (LOCATIONS.find((l) => l.id === activeLocation)?.name ?? activeLocation)
     : 'Withered Wastelands';
@@ -51,7 +53,7 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
             if (!v) return;
             const t = v as HouseType;
             setFilter('pendingType', t);
-            if (t === 'custom' && pendingSlots === 2) setFilter('pendingSlots', 4);
+            if (t === 'custom' && pendingSlots !== 4) setFilter('pendingSlots', 4);
           }}
           className="w-full justify-stretch"
         >
@@ -136,6 +138,12 @@ export function Topbar() {
                   'bg-card text-foreground border-border shadow-[inset_0_0_0_1px_var(--color-border-soft)]',
               )}
             >
+              <img
+                src={loc.iconUrl}
+                alt=""
+                aria-hidden
+                className="size-5 [image-rendering:pixelated] -mt-0.5"
+              />
               <span
                 className={cn(
                   'font-mono text-[12px] font-medium tracking-wide',

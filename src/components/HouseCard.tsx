@@ -1,5 +1,5 @@
 import { LITTER_ITEM_SPRITES } from '@/data/litter-items';
-import { LOCATIONS } from '@/data/locations';
+import { LOCATIONS, LOCATION_BY_ID } from '@/data/locations';
 import { POKEMON_BY_ID } from '@/data/pokemon';
 import { cn } from '@/lib/cn';
 import { useStore } from '@/state/store';
@@ -19,6 +19,14 @@ const LOC_BORDER: Record<LocationId, string> = {
   RR: 'border-loc-rr',
   SS: 'border-loc-ss',
   PT: 'border-loc-pt',
+};
+
+const LOC_DOT: Record<LocationId, string> = {
+  WW: 'bg-loc-ww',
+  BB: 'bg-loc-bb',
+  RR: 'bg-loc-rr',
+  SS: 'bg-loc-ss',
+  PT: 'bg-loc-pt',
 };
 
 type SlotProps = { houseId: string; slot: number; pokemonId: string | null };
@@ -109,16 +117,38 @@ export function HouseCard({ house }: Props) {
             >
               <SelectTrigger
                 size="sm"
-                className="h-auto px-1.5 py-0.5 border-transparent bg-transparent uppercase tracking-[0.04em] font-mono text-[10px] hover:bg-card-soft hover:border-border-soft w-auto gap-1"
+                className="h-auto px-1.5 py-0.5 border-transparent bg-transparent uppercase tracking-[0.04em] font-mono text-[10px] hover:bg-card-soft hover:border-border-soft w-auto gap-1.5"
                 onClick={(e) => e.stopPropagation()}
                 title="Move to another area"
               >
+                <span
+                  aria-hidden
+                  className={cn('inline-block size-2 rounded-full', LOC_DOT[house.location])}
+                />
+                <img
+                  src={LOCATION_BY_ID[house.location].iconUrl}
+                  alt=""
+                  aria-hidden
+                  className="size-4 [image-rendering:pixelated]"
+                />
                 <SelectValue />
               </SelectTrigger>
               <SelectContent align="start">
                 {LOCATIONS.map((l) => (
                   <SelectItem key={l.id} value={l.id} className="text-xs">
-                    {l.name}
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        aria-hidden
+                        className={cn('inline-block size-2 rounded-full', LOC_DOT[l.id])}
+                      />
+                      <img
+                        src={l.iconUrl}
+                        alt=""
+                        aria-hidden
+                        className="size-4 [image-rendering:pixelated]"
+                      />
+                      {l.name}
+                    </span>
                   </SelectItem>
                 ))}
               </SelectContent>

@@ -1,28 +1,19 @@
 import { POKEMON, POKEMON_BY_ID } from '@/data/pokemon';
 import { cn } from '@/lib/cn';
+import {
+  type GroupPartition,
+  MISC_GROUP,
+  STORY_GROUP,
+  partitionGroups,
+  pokemonInGroup,
+} from '@/lib/picker-groups';
 import { recommend } from '@/lib/recommend';
 import { useStore } from '@/state/store';
 import { type Pokemon, derivedHabitats } from '@/types';
 import { useDraggable } from '@dnd-kit/core';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { PokemonDetail } from './PokemonDetail';
 import { SpecialtyFilter } from './SpecialtyFilter';
-
-// Tracker uses real Pokémon names; the parenthetical is the in-game character.
-const STORY_NAMES: ReadonlySet<string> = new Set([
-  'Peakychu',
-  'Mosslax',
-  'Ditto',
-  'Professor Tangrowth',
-  'Smeargle', // Smearguru
-  'Stereo Rotom', // DJ Rotom
-  'Greedent', // Chef Dente
-  'Tinkaton', // Tinkmaster
-]);
-const UNKNOWN_SPECIALTY = '???';
-const STORY_GROUP = 'Story';
-const MISC_GROUP = 'Misc.';
-const MISC_THRESHOLD = 2;
 
 function PickItem({
   p,
@@ -111,9 +102,10 @@ function Grid({ children }: { children: React.ReactNode }) {
   return <ul className="grid grid-cols-6 gap-1 list-none m-0 p-0">{children}</ul>;
 }
 
-function groupBySpecialty(
+function buildGroupedView(
   visible: readonly Pokemon[],
-  filterActive: boolean,
+  partition: GroupPartition,
+  showAllGroups: boolean,
 ): [string, Pokemon[]][] {
   const groups = new Map<string, Pokemon[]>();
   const push = (key: string, p: Pokemon) => {
@@ -123,38 +115,33 @@ function groupBySpecialty(
   };
 
   for (const p of visible) {
-    if (STORY_NAMES.has(p.name)) {
+    if (partition.storyIds.has(p.id)) {
       push(STORY_GROUP, p);
+      continue;
+    }
+    if (showAllGroups) {
+      push(p.specialty1, p);
+      if (p.specialty2 && p.specialty2 !== p.specialty1) push(p.specialty2, p);
+      continue;
+    }
+    if (partition.miscIds.has(p.id)) {
+      push(MISC_GROUP, p);
       continue;
     }
     push(p.specialty1, p);
     if (p.specialty2 && p.specialty2 !== p.specialty1) push(p.specialty2, p);
   }
 
-  // When the user has narrowed the picker to specific specialties, every
-  // secondary specialty is informative ("which Build Pokémon also Burn?").
-  // Skip the Misc/Story collapse and show every group.
-  if (filterActive) {
-    return Array.from(groups.entries()).sort(([a], [b]) => a.localeCompare(b));
-  }
-
-  const misc: Pokemon[] = [];
+  // Order: real specialties (alpha), then Story, then Misc.
   const main: [string, Pokemon[]][] = [];
-  for (const [key, list] of groups) {
-    if (key === STORY_GROUP) continue;
-    // ??? always folds into Misc (legendaries with no work specialty), as do
-    // any specialty group small enough to be an island.
-    if (key === UNKNOWN_SPECIALTY || list.length <= MISC_THRESHOLD) {
-      for (const p of list) {
-        if (!misc.includes(p)) misc.push(p);
-      }
-    } else {
-      main.push([key, list]);
-    }
+  const realKeys: string[] = [];
+  for (const key of groups.keys()) {
+    if (key !== STORY_GROUP && key !== MISC_GROUP) realKeys.push(key);
   }
-  main.sort(([a], [b]) => a.localeCompare(b));
+  realKeys.sort((a, b) => a.localeCompare(b));
+  for (const key of realKeys) main.push([key, groups.get(key) ?? []]);
   if (groups.has(STORY_GROUP)) main.push([STORY_GROUP, groups.get(STORY_GROUP) ?? []]);
-  if (misc.length > 0) main.push([MISC_GROUP, misc]);
+  if (groups.has(MISC_GROUP)) main.push([MISC_GROUP, groups.get(MISC_GROUP) ?? []]);
   return main;
 }
 
@@ -195,11 +182,13 @@ export function PokemonPicker() {
     }
   }
 
+  const partition = useMemo(() => partitionGroups(POKEMON), []);
+
   const visible = POKEMON.filter((p) => {
     if (specFilter.length > 0) {
-      const ok =
-        specFilter.includes(p.specialty1) ||
-        (p.specialty2 != null && specFilter.includes(p.specialty2));
+      // Match if the Pokémon belongs to ANY selected group. Groups can be a
+      // real specialty, Story, or Misc. — see partitionGroups.
+      const ok = specFilter.some((key) => pokemonInGroup(p, key, partition));
       if (!ok) return false;
     }
     if (
@@ -248,22 +237,24 @@ export function PokemonPicker() {
         )}
         {grouping === 'specialty' ? (
           <div className="flex flex-col gap-4">
-            {groupBySpecialty(visible, specFilter.length > 0).map(([specialty, members]) => (
-              <section key={specialty} className="flex flex-col gap-1.5">
-                <GroupTitle title={specialty} count={members.length} />
-                <Grid>
-                  {members.map((p) => (
-                    <PickItem
-                      key={`${specialty}-${p.id}`}
-                      p={p}
-                      assigned={assignedIds.has(p.id)}
-                      quickPlaceMode={quickPlaceMode}
-                      groupKey={specialty}
-                    />
-                  ))}
-                </Grid>
-              </section>
-            ))}
+            {buildGroupedView(visible, partition, specFilter.length > 0).map(
+              ([specialty, members]) => (
+                <section key={specialty} className="flex flex-col gap-1.5">
+                  <GroupTitle title={specialty} count={members.length} />
+                  <Grid>
+                    {members.map((p) => (
+                      <PickItem
+                        key={`${specialty}-${p.id}`}
+                        p={p}
+                        assigned={assignedIds.has(p.id)}
+                        quickPlaceMode={quickPlaceMode}
+                        groupKey={specialty}
+                      />
+                    ))}
+                  </Grid>
+                </section>
+              ),
+            )}
           </div>
         ) : (
           <Grid>
