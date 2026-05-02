@@ -16,14 +16,6 @@ const LOC_BORDER: Record<LocationId, string> = {
   PT: 'border-loc-pt',
 };
 
-const LOC_BAR: Record<LocationId, string> = {
-  WW: 'bg-loc-ww',
-  BB: 'bg-loc-bb',
-  RR: 'bg-loc-rr',
-  SS: 'bg-loc-ss',
-  PT: 'bg-loc-pt',
-};
-
 type SlotProps = { houseId: string; slot: number; pokemonId: string | null };
 
 function HouseSlot({ houseId, slot, pokemonId }: SlotProps) {
@@ -87,14 +79,6 @@ export function HouseCard({ house }: Props) {
       )}
       onClick={() => selectHouse(house.id)}
     >
-      <span
-        aria-hidden
-        className={cn(
-          'absolute top-0 left-4 right-4 h-[2px] rounded-b-full opacity-70',
-          LOC_BAR[house.location],
-        )}
-      />
-
       <header className="flex items-start gap-1">
         <div className="flex-1 min-w-0">
           <input

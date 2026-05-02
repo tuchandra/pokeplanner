@@ -88,7 +88,10 @@ function Grid({ children }: { children: React.ReactNode }) {
   return <ul className="grid grid-cols-6 gap-1 list-none m-0 p-0">{children}</ul>;
 }
 
-function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
+function groupBySpecialty(
+  visible: readonly Pokemon[],
+  filterActive: boolean,
+): [string, Pokemon[]][] {
   const groups = new Map<string, Pokemon[]>();
   const push = (key: string, p: Pokemon) => {
     const list = groups.get(key);
@@ -103,6 +106,13 @@ function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
     }
     push(p.specialty1, p);
     if (p.specialty2 && p.specialty2 !== p.specialty1) push(p.specialty2, p);
+  }
+
+  // When the user has narrowed the picker to specific specialties, every
+  // secondary specialty is informative ("which Build Pokémon also Burn?").
+  // Skip the Misc/Story collapse and show every group.
+  if (filterActive) {
+    return Array.from(groups.entries()).sort(([a], [b]) => a.localeCompare(b));
   }
 
   const misc: Pokemon[] = [];
@@ -206,7 +216,7 @@ export function PokemonPicker() {
         )}
         {grouping === 'specialty' ? (
           <div className="flex flex-col gap-4">
-            {groupBySpecialty(visible).map(([specialty, members]) => (
+            {groupBySpecialty(visible, specFilter.length > 0).map(([specialty, members]) => (
               <section key={specialty} className="flex flex-col gap-1.5">
                 <GroupTitle title={specialty} count={members.length} />
                 <Grid>
