@@ -1,6 +1,5 @@
 /* ============================================================
- * Pokopia Planner — cozy field-guide aesthetic
- * Fraunces (display, italic-friendly) + Manrope (UI) + JetBrains Mono (numbers)
+ * Pokopia Planner — Manrope (UI) + JetBrains Mono (numbers/labels)
  * ============================================================ */
 
 :root,
@@ -226,12 +225,9 @@ textarea {
   line-height: 1;
 }
 .brand {
-  font-family: "Fraunces", Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-  font-feature-settings: "ss01" on;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.03em;
   color: var(--text);
 }
 .brand__sub {
@@ -316,10 +312,9 @@ textarea {
   position: relative;
 }
 .loc__name {
-  font-family: "Fraunces", Georgia, serif;
-  font-weight: 500;
-  font-size: 0.95rem;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   position: relative;
 }
@@ -550,11 +545,9 @@ textarea {
 
 .empty {
   color: var(--text-muted);
-  font-style: italic;
   text-align: center;
   padding: 3rem 1rem;
-  font-family: "Fraunces", serif;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
 }
 
 .grid {
@@ -635,10 +628,9 @@ textarea {
   background: transparent;
   border: 0;
   color: var(--text);
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   padding: 0;
   width: 100%;
 }
@@ -703,9 +695,8 @@ textarea {
   cursor: default;
 }
 .member.empty .member__empty {
-  font-family: "Fraunces", serif;
-  font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 .member.filled {
   cursor: pointer;
@@ -1075,10 +1066,9 @@ textarea {
 }
 .detail__title h2 {
   margin: 0;
-  font-family: "Fraunces", Georgia, serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 .detail__num {
   margin: 0.15rem 0 0;
