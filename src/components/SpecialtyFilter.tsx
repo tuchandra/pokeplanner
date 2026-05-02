@@ -30,15 +30,11 @@ export function SpecialtyFilter() {
         <span aria-hidden>▾</span>
       </button>
       {open && (
-        <ul className="specialty-filter__menu" role="listbox" aria-multiselectable>
+        <ul className="specialty-filter__menu">
           {SPECIALTIES.map((s) => (
             <li key={s}>
               <label>
-                <input
-                  type="checkbox"
-                  checked={selected.includes(s)}
-                  onChange={() => toggle(s)}
-                />
+                <input type="checkbox" checked={selected.includes(s)} onChange={() => toggle(s)} />
                 {s}
               </label>
             </li>

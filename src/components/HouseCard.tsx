@@ -2,7 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { LOCATION_BY_ID } from '../data/locations';
 import { POKEMON_BY_ID } from '../data/pokemon';
 import { useStore } from '../state/store';
-import { derivedHabitats, type House } from '../types';
+import { type House, derivedHabitats } from '../types';
 
 type SlotProps = { houseId: string; slot: number; pokemonId: string | null };
 
@@ -14,6 +14,7 @@ function HouseSlot({ houseId, slot, pokemonId }: SlotProps) {
   });
   const p = pokemonId == null ? null : (POKEMON_BY_ID.get(pokemonId) ?? null);
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: drop target with click-to-clear shortcut; primary affordance is drag/drop
     <li
       ref={setNodeRef}
       className={`member ${p ? 'filled' : 'empty'} ${isOver ? 'is-over' : ''}`}
@@ -37,6 +38,7 @@ export function HouseCard({ house }: Props) {
   const { lighting, tags } = derivedHabitats(house, (id) => POKEMON_BY_ID.get(id));
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: card click selects to scope the picker; nested controls remain individually focusable
     <article
       className={`house ${locationClass} ${isSelected ? 'selected' : ''}`}
       onClick={() => selectHouse(house.id)}
@@ -50,8 +52,7 @@ export function HouseCard({ house }: Props) {
             onClick={(e) => e.stopPropagation()}
           />
           <div className="location">
-            {LOCATION_BY_ID[house.location].name} —{' '}
-            {house.type === 'prefab' ? 'Prefab' : 'Custom'}
+            {LOCATION_BY_ID[house.location].name} — {house.type === 'prefab' ? 'Prefab' : 'Custom'}
           </div>
         </div>
         <button
