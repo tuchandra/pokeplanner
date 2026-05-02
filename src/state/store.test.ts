@@ -36,6 +36,7 @@ beforeEach(() => {
       pendingLocation: 'WW',
       specialtyFilter: [],
       habitatCompatible: false,
+      pickerGrouping: 'none',
       view: 'grid',
     },
     selectedHouseId: null,

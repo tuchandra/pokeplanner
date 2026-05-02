@@ -6,6 +6,7 @@ import type { Specialty } from '../types';
 export function SpecialtyFilter() {
   const selected = useStore((s) => s.filters.specialtyFilter);
   const habitatCompat = useStore((s) => s.filters.habitatCompatible);
+  const grouping = useStore((s) => s.filters.pickerGrouping);
   const setFilter = useStore((s) => s.setFilter);
   const [open, setOpen] = useState(false);
 
@@ -49,6 +50,15 @@ export function SpecialtyFilter() {
         aria-pressed={habitatCompat}
       >
         Habitat: {habitatCompat ? 'compatible' : 'all'}
+      </button>
+      <button
+        type="button"
+        className={`habitat-toggle ${grouping === 'specialty' ? 'is-on' : ''}`}
+        onClick={() => setFilter('pickerGrouping', grouping === 'specialty' ? 'none' : 'specialty')}
+        aria-pressed={grouping === 'specialty'}
+        title="Group by specialty"
+      >
+        Group: {grouping === 'specialty' ? 'specialty' : 'flat'}
       </button>
     </div>
   );

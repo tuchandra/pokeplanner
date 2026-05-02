@@ -569,3 +569,27 @@ body,
   white-space: nowrap;
   width: 100%;
 }
+
+.picker__groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.picker__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.picker__group-title {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.picker__group-count {
+  color: var(--text-muted);
+  opacity: 0.7;
+  font-weight: 400;
+}

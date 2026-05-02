@@ -35,9 +35,20 @@ function PickItem({ p, assigned }: { p: Pokemon; assigned: boolean }) {
   );
 }
 
+function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
+  const groups = new Map<string, Pokemon[]>();
+  for (const p of visible) {
+    const list = groups.get(p.specialty1);
+    if (list) list.push(p);
+    else groups.set(p.specialty1, [p]);
+  }
+  return Array.from(groups.entries()).sort(([a], [b]) => a.localeCompare(b));
+}
+
 export function PokemonPicker() {
   const specFilter = useStore((s) => s.filters.specialtyFilter);
   const habitatCompat = useStore((s) => s.filters.habitatCompatible);
+  const grouping = useStore((s) => s.filters.pickerGrouping);
   const houses = useStore((s) => s.houses);
   const selectedHouseId = useStore((s) => s.selectedHouseId);
   const selectedPokemonId = useStore((s) => s.selectedPokemonId);
@@ -87,11 +98,28 @@ export function PokemonPicker() {
       <div className="picker__head">
         <SpecialtyFilter />
       </div>
-      <ul className="picker__grid">
-        {visible.map((p) => (
-          <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
-        ))}
-      </ul>
+      {grouping === 'specialty' ? (
+        <div className="picker__groups">
+          {groupBySpecialty(visible).map(([specialty, members]) => (
+            <section key={specialty} className="picker__group">
+              <h3 className="picker__group-title">
+                {specialty} <span className="picker__group-count">({members.length})</span>
+              </h3>
+              <ul className="picker__grid">
+                {members.map((p) => (
+                  <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <ul className="picker__grid">
+          {visible.map((p) => (
+            <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

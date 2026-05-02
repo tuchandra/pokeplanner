@@ -19,6 +19,11 @@ type Filters = {
    * house's derived lighting chips. False = show all.
    */
   habitatCompatible: boolean;
+  /**
+   * How to render the picker grid. 'none' is the default flat tracker order
+   * (preserves evolutionary adjacency). 'specialty' groups by specialty1.
+   */
+  pickerGrouping: 'none' | 'specialty';
   view: 'grid' | 'table';
 };
 
@@ -48,6 +53,7 @@ const initialFilters: Filters = {
   pendingLocation: 'WW',
   specialtyFilter: [],
   habitatCompatible: false,
+  pickerGrouping: 'none',
   view: 'grid',
 };
 
