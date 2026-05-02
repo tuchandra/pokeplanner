@@ -27,13 +27,19 @@ const MISC_THRESHOLD = 2;
 function PickItem({
   p,
   assigned,
+  quickPlaceMode,
   groupKey,
 }: {
   p: Pokemon;
   assigned: boolean;
+  /** When true, click places into the active house's next empty slot instead of opening detail. */
+  quickPlaceMode: boolean;
   groupKey?: string;
 }) {
   const selectPokemon = useStore((s) => s.selectPokemon);
+  const setSlotPokemon = useStore((s) => s.setSlotPokemon);
+  const selectedHouseId = useStore((s) => s.selectedHouseId);
+  const houses = useStore((s) => s.houses);
   const dndId = groupKey ? `pokemon:${groupKey}:${p.id}` : `pokemon:${p.id}`;
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: dndId,
@@ -41,19 +47,36 @@ function PickItem({
     disabled: assigned,
   });
   const dragProps = assigned ? {} : { ...attributes, ...listeners };
+
+  function handleClick() {
+    if (quickPlaceMode && !assigned && selectedHouseId) {
+      const house = houses.find((h) => h.id === selectedHouseId);
+      if (house) {
+        const emptyIdx = house.slots.findIndex((s) => s == null);
+        if (emptyIdx !== -1) {
+          setSlotPokemon(house.id, emptyIdx, p.id);
+          return;
+        }
+      }
+    }
+    selectPokemon(p.id);
+  }
+
   const title = assigned
     ? `${p.name} — already assigned (click for details)`
-    : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
+    : quickPlaceMode
+      ? `${p.name} — click to place; drag to a specific slot`
+      : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
   return (
     <li
       ref={setNodeRef}
       {...dragProps}
       title={title}
-      onClick={() => selectPokemon(p.id)}
+      onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          selectPokemon(p.id);
+          handleClick();
         }
       }}
       className={cn(
@@ -194,6 +217,9 @@ export function PokemonPicker() {
     ? recommend(POKEMON, selectedHouse, (id) => POKEMON_BY_ID.get(id), assignedIds)
     : [];
 
+  // Click → place into the active house's first empty slot when one exists.
+  const quickPlaceMode = !!selectedHouse && selectedHouse.slots.some((s) => s == null);
+
   return (
     <div className="flex flex-col flex-1 min-h-0">
       <div className="sticky top-0 z-10 flex flex-col gap-2 px-3 py-2.5 bg-secondary border-b border-border-soft">
@@ -209,7 +235,13 @@ export function PokemonPicker() {
             <GroupTitle title="Recommended" count={selectedHouse?.name} />
             <Grid>
               {recommendations.map((p) => (
-                <PickItem key={`rec-${p.id}`} p={p} assigned={false} groupKey="rec" />
+                <PickItem
+                  key={`rec-${p.id}`}
+                  p={p}
+                  assigned={false}
+                  quickPlaceMode={quickPlaceMode}
+                  groupKey="rec"
+                />
               ))}
             </Grid>
           </section>
@@ -225,6 +257,7 @@ export function PokemonPicker() {
                       key={`${specialty}-${p.id}`}
                       p={p}
                       assigned={assignedIds.has(p.id)}
+                      quickPlaceMode={quickPlaceMode}
                       groupKey={specialty}
                     />
                   ))}
@@ -235,7 +268,12 @@ export function PokemonPicker() {
         ) : (
           <Grid>
             {visible.map((p) => (
-              <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
+              <PickItem
+                key={p.id}
+                p={p}
+                assigned={assignedIds.has(p.id)}
+                quickPlaceMode={quickPlaceMode}
+              />
             ))}
           </Grid>
         )}

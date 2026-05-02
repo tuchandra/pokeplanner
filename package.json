@@ -12,7 +12,8 @@
     "format": "biome format --write .",
     "test": "bun test",
     "ingest": "bun run scripts/ingest-tracker.ts",
-    "mirror-sprites": "bun run scripts/mirror-sprites.ts"
+    "mirror-sprites": "bun run scripts/mirror-sprites.ts",
+    "mirror-litter": "bun run scripts/mirror-litter.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

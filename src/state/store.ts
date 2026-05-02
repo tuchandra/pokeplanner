@@ -158,10 +158,16 @@ export const useStore = create<AppState & AppActions>()(
 
       addHouseWith: (pokemonId) => {
         const s = get();
+        // Strip the Pokemon from any existing slot first so this acts like a
+        // move rather than producing a duplicate placement.
+        const stripped = s.houses.map((h) => ({
+          ...h,
+          slots: h.slots.map((id) => (id === pokemonId ? null : id)),
+        }));
         const house = buildHouse(s, `House ${s.houses.length + 1}`);
         house.slots = [pokemonId, ...house.slots.slice(1)];
         set({
-          houses: [...s.houses, house],
+          houses: [...stripped, house],
           selectedHouseId: house.id,
           selectedPokemonId: null,
         });

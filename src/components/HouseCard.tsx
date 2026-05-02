@@ -1,12 +1,17 @@
+import { LITTER_ITEM_SPRITES } from '@/data/litter-items';
 import { LOCATIONS } from '@/data/locations';
 import { POKEMON_BY_ID } from '@/data/pokemon';
 import { cn } from '@/lib/cn';
 import { useStore } from '@/state/store';
-import { type House, type LocationId, derivedHabitats } from '@/types';
+import { type House, type LocationId, type Pokemon, derivedHabitats } from '@/types';
 import { useDroppable } from '@dnd-kit/core';
 import { X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+
+function specialtyLabel(p: Pokemon): string {
+  return p.specialty2 ? `${p.specialty1} / ${p.specialty2}` : p.specialty1;
+}
 
 const LOC_BORDER: Record<LocationId, string> = {
   WW: 'border-loc-ww',
@@ -25,13 +30,14 @@ function HouseSlot({ houseId, slot, pokemonId }: SlotProps) {
     data: { kind: 'slot', houseId, slot },
   });
   const p = pokemonId == null ? null : (POKEMON_BY_ID.get(pokemonId) ?? null);
+  const litterSprite = p?.litterDrop ? LITTER_ITEM_SPRITES[p.litterDrop] : null;
   return (
     // biome-ignore lint/a11y/useKeyWithClickEvents: drop target with click-to-clear; primary affordance is drag
     <li
       ref={setNodeRef}
       className={cn(
-        'aspect-square rounded-lg border border-border-soft bg-card-soft grid place-items-center transition-colors relative overflow-hidden',
-        p ? 'cursor-pointer hover:border-destructive bg-background' : 'cursor-default',
+        'rounded-lg border border-border-soft bg-card-soft transition-colors relative overflow-hidden flex flex-col',
+        p ? 'cursor-pointer hover:border-destructive bg-background' : 'cursor-default min-h-20',
         isOver &&
           'border-primary bg-[color-mix(in_oklch,var(--color-primary)_15%,transparent)] shadow-[inset_0_0_0_1px_var(--color-primary)]',
       )}
@@ -40,15 +46,24 @@ function HouseSlot({ houseId, slot, pokemonId }: SlotProps) {
     >
       {p ? (
         <>
-          <img
-            src={p.spriteUrl}
-            alt={p.name}
-            className="size-[86%] [image-rendering:pixelated] relative z-10"
-          />
-          <span className="absolute inset-0 bg-destructive/15 opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="relative grid place-items-center pt-1">
+            <img src={p.spriteUrl} alt={p.name} className="size-12 [image-rendering:pixelated]" />
+            {litterSprite && (
+              <img
+                src={litterSprite}
+                alt={p.litterDrop ?? 'litter'}
+                title={p.litterDrop ?? undefined}
+                className="absolute right-0.5 bottom-0 size-5 rounded-sm bg-card border border-border-soft p-0.5"
+              />
+            )}
+          </div>
+          <div className="text-[9px] uppercase tracking-[0.04em] font-mono text-faint-foreground text-center leading-tight px-1 py-1 truncate">
+            {specialtyLabel(p)}
+          </div>
+          <span className="absolute inset-0 bg-destructive/15 opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none" />
         </>
       ) : (
-        <span className="font-medium text-base text-faint-foreground">?</span>
+        <span className="m-auto font-medium text-base text-faint-foreground">?</span>
       )}
     </li>
   );

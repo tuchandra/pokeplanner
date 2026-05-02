@@ -1,3 +1,4 @@
+import { LITTER_ITEM_SPRITES } from '@/data/litter-items';
 import { POKEMON, POKEMON_BY_ID } from '@/data/pokemon';
 import { useStore } from '@/state/store';
 import type { Pokemon } from '@/types';
@@ -65,16 +66,18 @@ export function PokemonDetail({ id }: { id: string }) {
         </div>
       </div>
 
-      <Button onClick={() => addHouseWith(p.id)}>Add to a new house</Button>
+      <Button onClick={() => addHouseWith(p.id)}>Move to a new house</Button>
 
-      <dl className="m-0 flex flex-col gap-1 rounded-lg border border-border-soft bg-card p-2.5">
+      <dl className="m-0 flex items-stretch divide-x divide-border-soft rounded-lg border border-border-soft bg-card text-center">
         <Stat label="Habitat" value={p.habitat} />
         <Stat
           label="Specialty"
           value={`${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`}
         />
-        <Stat label="Taste" value={p.taste} />
-        {p.litterDrop && <Stat label="Litter" value={p.litterDrop} />}
+        <Stat label="Taste" value={tasteLabel(p.taste)} />
+        {p.litterDrop && (
+          <Stat label="Litter" value={p.litterDrop} icon={LITTER_ITEM_SPRITES[p.litterDrop]} />
+        )}
       </dl>
 
       <Section title="Favorites">
@@ -138,15 +141,23 @@ function BackButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, icon }: { label: string; value: string; icon?: string }) {
   return (
-    <div className="grid grid-cols-[64px_1fr] items-baseline gap-2">
-      <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-faint-foreground">
+    <div className="flex flex-1 min-w-0 flex-col items-center gap-1 px-2 py-2">
+      <dt className="font-mono text-[10px] uppercase tracking-[0.08em] text-faint-foreground">
         {label}
       </dt>
-      <dd className="m-0 text-sm">{value}</dd>
+      <dd className="m-0 inline-flex items-center gap-1 text-[13px] leading-tight font-medium truncate w-full justify-center">
+        {icon && <img src={icon} alt="" className="size-4 [image-rendering:pixelated] shrink-0" />}
+        <span className="truncate">{value}</span>
+      </dd>
     </div>
   );
+}
+
+function tasteLabel(t: string): string {
+  // 'Sweet flavors' -> 'Sweet', 'None' stays.
+  return t.replace(/\s+flavors$/i, '');
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
