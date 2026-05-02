@@ -1,10 +1,9 @@
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { useEffect } from 'react';
-import { Header } from './components/Header';
 import { HouseGrid } from './components/HouseGrid';
 import { HouseTable } from './components/HouseTable';
-import { LocationTabs } from './components/LocationTabs';
 import { PokemonPicker } from './components/PokemonPicker';
+import { Topbar } from './components/Topbar';
 import { useStore } from './state/store';
 
 export function App() {
@@ -32,8 +31,7 @@ export function App() {
   return (
     <DndContext sensors={sensors} onDragEnd={onDragEnd}>
       <div className="app">
-        <Header />
-        <LocationTabs />
+        <Topbar />
         <div className="app__body">
           <main className="app__main">{view === 'grid' ? <HouseGrid /> : <HouseTable />}</main>
           <aside className="app__sidebar">

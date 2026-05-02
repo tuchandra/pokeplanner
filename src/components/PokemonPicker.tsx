@@ -95,39 +95,45 @@ export function PokemonPicker() {
       <div className="picker__head">
         <SpecialtyFilter />
       </div>
-      {selectedPokemonId && <PokemonDetail id={selectedPokemonId} />}
-      {recommendations.length > 0 && (
-        <section className="picker__recs">
-          <h3 className="picker__group-title">Recommended for {selectedHouse?.name}</h3>
+      <div className="picker__scroll">
+        {selectedPokemonId && <PokemonDetail key={selectedPokemonId} id={selectedPokemonId} />}
+        {recommendations.length > 0 && (
+          <section className="picker__recs">
+            <h3 className="picker__group-title">
+              <span>Recommended</span>
+              <span className="picker__group-count">{selectedHouse?.name}</span>
+            </h3>
+            <ul className="picker__grid">
+              {recommendations.map((p) => (
+                <PickItem key={`rec-${p.id}`} p={p} assigned={false} />
+              ))}
+            </ul>
+          </section>
+        )}
+        {grouping === 'specialty' ? (
+          <div className="picker__groups">
+            {groupBySpecialty(visible).map(([specialty, members]) => (
+              <section key={specialty} className="picker__group">
+                <h3 className="picker__group-title">
+                  <span>{specialty}</span>
+                  <span className="picker__group-count">{members.length}</span>
+                </h3>
+                <ul className="picker__grid">
+                  {members.map((p) => (
+                    <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        ) : (
           <ul className="picker__grid">
-            {recommendations.map((p) => (
-              <PickItem key={`rec-${p.id}`} p={p} assigned={false} />
+            {visible.map((p) => (
+              <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
             ))}
           </ul>
-        </section>
-      )}
-      {grouping === 'specialty' ? (
-        <div className="picker__groups">
-          {groupBySpecialty(visible).map(([specialty, members]) => (
-            <section key={specialty} className="picker__group">
-              <h3 className="picker__group-title">
-                {specialty} <span className="picker__group-count">({members.length})</span>
-              </h3>
-              <ul className="picker__grid">
-                {members.map((p) => (
-                  <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-      ) : (
-        <ul className="picker__grid">
-          {visible.map((p) => (
-            <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
-          ))}
-        </ul>
-      )}
+        )}
+      </div>
     </div>
   );
 }
