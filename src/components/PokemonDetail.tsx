@@ -1,7 +1,9 @@
+import { POKEMON, POKEMON_BY_ID } from '@/data/pokemon';
+import { useStore } from '@/state/store';
+import type { Pokemon } from '@/types';
+import { ChevronLeft } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
-import { useStore } from '../state/store';
-import type { Pokemon } from '../types';
+import { Button } from './ui/button';
 
 const SIMILAR_LIMIT = 8;
 const FAVORITE_OVERLAP_THRESHOLD = 3;
@@ -33,11 +35,9 @@ export function PokemonDetail({ id }: { id: string }) {
 
   if (!p) {
     return (
-      <div className="detail" ref={ref}>
-        <button type="button" className="detail__close" onClick={() => selectPokemon(null)}>
-          ← Back
-        </button>
-        <p className="empty">Unknown Pokémon.</p>
+      <div ref={ref} className="flex flex-col gap-3 pb-3 border-b border-dashed border-border-soft">
+        <BackButton onClick={() => selectPokemon(null)} />
+        <p className="text-muted-foreground">Unknown Pokémon.</p>
       </div>
     );
   }
@@ -45,88 +45,117 @@ export function PokemonDetail({ id }: { id: string }) {
   const similar = findSimilar(p);
 
   return (
-    <div className="detail" ref={ref}>
-      <button type="button" className="detail__close" onClick={() => selectPokemon(null)}>
-        ← Back
-      </button>
+    <div
+      ref={ref}
+      className="flex flex-col gap-3 pb-3 border-b border-dashed border-border-soft animate-in fade-in slide-in-from-top-1 duration-200"
+    >
+      <BackButton onClick={() => selectPokemon(null)} />
 
-      <div className="detail__head">
-        <img src={p.spriteUrl} alt={p.name} className="detail__sprite" />
-        <div className="detail__title">
-          <h2>{p.name}</h2>
-          <p className="detail__num">#{p.number}</p>
+      <div className="flex items-center gap-3">
+        <img
+          src={p.spriteUrl}
+          alt={p.name}
+          className="size-16 rounded-xl border border-border-soft bg-card p-1.5 [image-rendering:pixelated]"
+        />
+        <div>
+          <h2 className="m-0 text-[18px] font-bold tracking-[-0.015em]">{p.name}</h2>
+          <p className="m-0 mt-0.5 font-mono text-[10px] tracking-[0.08em] text-faint-foreground">
+            #{p.number}
+          </p>
         </div>
       </div>
 
-      <button
-        type="button"
-        className="btn btn--primary detail__add"
-        onClick={() => addHouseWith(p.id)}
-      >
-        Add to a new house
-      </button>
+      <Button onClick={() => addHouseWith(p.id)}>Add to a new house</Button>
 
-      <dl className="detail__stats">
-        <div>
-          <dt>Habitat</dt>
-          <dd>{p.habitat}</dd>
-        </div>
-        <div>
-          <dt>Specialty</dt>
-          <dd>
-            {p.specialty1}
-            {p.specialty2 ? ` / ${p.specialty2}` : ''}
-          </dd>
-        </div>
-        <div>
-          <dt>Taste</dt>
-          <dd>{p.taste}</dd>
-        </div>
-        {p.litterDrop && (
-          <div>
-            <dt>Litter</dt>
-            <dd>{p.litterDrop}</dd>
-          </div>
-        )}
+      <dl className="m-0 flex flex-col gap-1 rounded-lg border border-border-soft bg-card p-2.5">
+        <Stat label="Habitat" value={p.habitat} />
+        <Stat
+          label="Specialty"
+          value={`${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`}
+        />
+        <Stat label="Taste" value={p.taste} />
+        {p.litterDrop && <Stat label="Litter" value={p.litterDrop} />}
       </dl>
 
-      <section className="detail__section">
-        <h3>Favorites</h3>
+      <Section title="Favorites">
         {p.favorites.length === 0 ? (
-          <p className="empty">No favorites listed.</p>
+          <p className="text-muted-foreground text-sm">No favorites listed.</p>
         ) : (
-          <ul className="detail__tags">
+          <ul className="flex flex-wrap gap-1 list-none m-0 p-0">
             {p.favorites.map((f) => (
-              <li key={f} className="habitat-chip">
+              <li
+                key={f}
+                className="rounded-full border border-border-soft bg-[color-mix(in_oklch,var(--color-foreground)_4%,transparent)] px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
+              >
                 {f}
               </li>
             ))}
           </ul>
         )}
-      </section>
+      </Section>
 
-      <section className="detail__section">
-        <h3>Similar Pokémon</h3>
+      <Section title="Similar Pokémon">
         {similar.length === 0 ? (
-          <p className="empty">No close matches.</p>
+          <p className="text-muted-foreground text-sm">No close matches.</p>
         ) : (
-          <ul className="detail__similar">
+          <ul className="grid grid-cols-4 gap-1.5 list-none m-0 p-0">
             {similar.map((q) => (
               <li key={q.id}>
                 <button
                   type="button"
-                  className="detail__similar-btn"
                   onClick={() => selectPokemon(q.id)}
                   title={`${q.name} — ${q.specialty1}`}
+                  className="w-full bg-card border border-border-soft rounded-md p-1 cursor-pointer flex flex-col items-center gap-1 text-foreground transition-all hover:border-primary hover:-translate-y-px"
                 >
-                  <img src={q.spriteUrl} alt={q.name} />
-                  <span>{q.name}</span>
+                  <img
+                    src={q.spriteUrl}
+                    alt={q.name}
+                    className="size-10 [image-rendering:pixelated]"
+                  />
+                  <span className="text-[10px] text-muted-foreground text-center w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                    {q.name}
+                  </span>
                 </button>
               </li>
             ))}
           </ul>
         )}
-      </section>
+      </Section>
     </div>
+  );
+}
+
+function BackButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="self-start inline-flex items-center gap-1 bg-transparent border-0 text-faint-foreground text-xs font-mono tracking-[0.05em] uppercase cursor-pointer p-0 hover:text-foreground transition-colors"
+    >
+      <ChevronLeft className="size-3.5" />
+      Back
+    </button>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="grid grid-cols-[64px_1fr] items-baseline gap-2">
+      <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-faint-foreground">
+        {label}
+      </dt>
+      <dd className="m-0 text-sm">{value}</dd>
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h3 className="m-0 mb-1.5 font-mono text-[10px] uppercase tracking-[0.1em] font-medium text-faint-foreground">
+        {title}
+      </h3>
+      {children}
+    </section>
   );
 }

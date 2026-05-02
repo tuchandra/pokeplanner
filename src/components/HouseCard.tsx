@@ -1,8 +1,28 @@
+import { LOCATIONS } from '@/data/locations';
+import { POKEMON_BY_ID } from '@/data/pokemon';
+import { cn } from '@/lib/cn';
+import { useStore } from '@/state/store';
+import { type House, type LocationId, derivedHabitats } from '@/types';
 import { useDroppable } from '@dnd-kit/core';
-import { LOCATION_BY_ID } from '../data/locations';
-import { POKEMON_BY_ID } from '../data/pokemon';
-import { useStore } from '../state/store';
-import { type House, derivedHabitats } from '../types';
+import { X } from 'lucide-react';
+import { Button } from './ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+
+const LOC_BORDER: Record<LocationId, string> = {
+  WW: 'border-loc-ww',
+  BB: 'border-loc-bb',
+  RR: 'border-loc-rr',
+  SS: 'border-loc-ss',
+  PT: 'border-loc-pt',
+};
+
+const LOC_BAR: Record<LocationId, string> = {
+  WW: 'bg-loc-ww',
+  BB: 'bg-loc-bb',
+  RR: 'bg-loc-rr',
+  SS: 'bg-loc-ss',
+  PT: 'bg-loc-pt',
+};
 
 type SlotProps = { houseId: string; slot: number; pokemonId: string | null };
 
@@ -14,14 +34,30 @@ function HouseSlot({ houseId, slot, pokemonId }: SlotProps) {
   });
   const p = pokemonId == null ? null : (POKEMON_BY_ID.get(pokemonId) ?? null);
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: drop target with click-to-clear shortcut; primary affordance is drag/drop
+    // biome-ignore lint/a11y/useKeyWithClickEvents: drop target with click-to-clear; primary affordance is drag
     <li
       ref={setNodeRef}
-      className={`member ${p ? 'filled' : 'empty'} ${isOver ? 'is-over' : ''}`}
+      className={cn(
+        'aspect-square rounded-lg border border-border-soft bg-card-soft grid place-items-center transition-colors relative overflow-hidden',
+        p ? 'cursor-pointer hover:border-destructive bg-background' : 'cursor-default',
+        isOver &&
+          'border-primary bg-[color-mix(in_oklch,var(--color-primary)_15%,transparent)] shadow-[inset_0_0_0_1px_var(--color-primary)]',
+      )}
       onClick={p ? () => setSlotPokemon(houseId, slot, null) : undefined}
       title={p ? `${p.name} — click to remove` : 'Drop a Pokémon here'}
     >
-      {p ? <img src={p.spriteUrl} alt={p.name} /> : <span className="member__empty">?</span>}
+      {p ? (
+        <>
+          <img
+            src={p.spriteUrl}
+            alt={p.name}
+            className="size-[86%] [image-rendering:pixelated] relative z-10"
+          />
+          <span className="absolute inset-0 bg-destructive/15 opacity-0 transition-opacity group-hover:opacity-100" />
+        </>
+      ) : (
+        <span className="font-medium text-base text-faint-foreground">?</span>
+      )}
     </li>
   );
 }
@@ -31,66 +67,100 @@ type Props = { house: House };
 export function HouseCard({ house }: Props) {
   const removeHouse = useStore((s) => s.removeHouse);
   const renameHouse = useStore((s) => s.renameHouse);
+  const relocateHouse = useStore((s) => s.relocateHouse);
   const selectHouse = useStore((s) => s.selectHouse);
   const isSelected = useStore((s) => s.selectedHouseId === house.id);
 
-  const locationClass = house.location.toLowerCase();
   const { lighting, tags } = derivedHabitats(house, (id) => POKEMON_BY_ID.get(id));
 
   return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: card click selects to scope the picker; nested controls remain individually focusable
+    // biome-ignore lint/a11y/useKeyWithClickEvents: card click selects to scope picker; nested controls remain focusable
     <article
-      className={`house ${locationClass} ${isSelected ? 'selected' : ''}`}
+      className={cn(
+        'relative rounded-2xl border bg-card p-3.5 flex flex-col gap-2.5 cursor-pointer transition-[border-color,transform] animate-in fade-in slide-in-from-bottom-1 duration-300',
+        isSelected
+          ? cn(
+              LOC_BORDER[house.location],
+              'shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-current',
+            )
+          : 'border-border-soft hover:border-border',
+      )}
       onClick={() => selectHouse(house.id)}
     >
-      <header className="house-header">
-        <div className="house-info">
+      <span
+        aria-hidden
+        className={cn(
+          'absolute top-0 left-4 right-4 h-[2px] rounded-b-full opacity-70',
+          LOC_BAR[house.location],
+        )}
+      />
+
+      <header className="flex items-start gap-1">
+        <div className="flex-1 min-w-0">
           <input
-            className="title"
+            className="w-full bg-transparent border-0 outline-none text-foreground text-[15px] font-bold tracking-[-0.015em] focus:text-[--color-loc-ww] p-0"
             value={house.name}
             onChange={(e) => renameHouse(house.id, e.target.value)}
             onClick={(e) => e.stopPropagation()}
           />
-          <div className="location">
-            {LOCATION_BY_ID[house.location].name} — {house.type === 'prefab' ? 'Prefab' : 'Custom'}
+          <div className="mt-0.5 flex items-center gap-1.5 text-[10px] uppercase tracking-[0.04em] font-mono text-faint-foreground">
+            <Select
+              value={house.location}
+              onValueChange={(v) => relocateHouse(house.id, v as LocationId)}
+            >
+              <SelectTrigger
+                size="sm"
+                className="h-auto px-1.5 py-0.5 border-transparent bg-transparent uppercase tracking-[0.04em] font-mono text-[10px] hover:bg-card-soft hover:border-border-soft w-auto gap-1"
+                onClick={(e) => e.stopPropagation()}
+                title="Move to another area"
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="start">
+                {LOCATIONS.map((l) => (
+                  <SelectItem key={l.id} value={l.id} className="text-xs">
+                    {l.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <span className="opacity-40">·</span>
+            <span>{house.type === 'prefab' ? 'Prefab' : 'Custom'}</span>
           </div>
         </div>
-        <button
-          type="button"
-          className="remove-house"
+        <Button
+          variant="destructive"
+          size="iconSm"
           aria-label="Remove house"
           onClick={(e) => {
             e.stopPropagation();
             removeHouse(house.id);
           }}
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-          >
-            <title>Remove house</title>
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
+          <X />
+        </Button>
       </header>
 
-      <ul className="members">
+      <ul className="grid grid-cols-4 gap-1.5 list-none m-0 p-0">
         {house.slots.map((pId, i) => (
           <HouseSlot key={`${house.id}-${i}`} houseId={house.id} slot={i} pokemonId={pId} />
         ))}
       </ul>
 
-      <div className="house-habitats">
+      <div className="flex flex-wrap gap-1 min-h-5">
         {lighting.map((l) => (
-          <span key={l} className="habitat-chip habitat-chip--lighting">
+          <span
+            key={l}
+            className="rounded-full border-0 bg-[color-mix(in_oklch,var(--color-primary)_18%,transparent)] px-2 py-0.5 text-[11px] font-semibold text-foreground"
+          >
             {l}
           </span>
         ))}
         {tags.map((t) => (
-          <span key={t} className="habitat-chip">
+          <span
+            key={t}
+            className="rounded-full border border-border-soft bg-[color-mix(in_oklch,var(--color-foreground)_4%,transparent)] px-2 py-0.5 text-[11px] font-medium text-muted-foreground"
+          >
             {t}
           </span>
         ))}

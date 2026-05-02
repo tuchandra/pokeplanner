@@ -1,10 +1,10 @@
+import { HouseGrid } from '@/components/HouseGrid';
+import { HouseTable } from '@/components/HouseTable';
+import { PokemonPicker } from '@/components/PokemonPicker';
+import { Topbar } from '@/components/Topbar';
+import { useStore } from '@/state/store';
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { useEffect } from 'react';
-import { HouseGrid } from './components/HouseGrid';
-import { HouseTable } from './components/HouseTable';
-import { PokemonPicker } from './components/PokemonPicker';
-import { Topbar } from './components/Topbar';
-import { useStore } from './state/store';
 
 export function App() {
   const view = useStore((s) => s.filters.view);
@@ -30,11 +30,13 @@ export function App() {
 
   return (
     <DndContext sensors={sensors} onDragEnd={onDragEnd}>
-      <div className="app">
+      <div className="grid grid-rows-[auto_1fr] h-screen">
         <Topbar />
-        <div className="app__body">
-          <main className="app__main">{view === 'grid' ? <HouseGrid /> : <HouseTable />}</main>
-          <aside className="app__sidebar">
+        <div className="grid grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_380px] min-h-0 overflow-hidden">
+          <main className="overflow-y-auto px-6 py-6 pb-12">
+            {view === 'grid' ? <HouseGrid /> : <HouseTable />}
+          </main>
+          <aside className="border-l border-border-soft bg-secondary flex flex-col min-h-0">
             <PokemonPicker />
           </aside>
         </div>

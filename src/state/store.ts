@@ -44,10 +44,14 @@ type AppActions = {
   addHouseWith: (pokemonId: string) => string;
   removeHouse: (id: string) => void;
   renameHouse: (id: string, name: string) => void;
+  /** Moves a house to a different location. */
+  relocateHouse: (id: string, location: LocationId) => void;
   setSlotPokemon: (houseId: string, slot: number, pokemonId: string | null) => void;
   selectHouse: (id: string | null) => void;
   selectPokemon: (id: string | null) => void;
   setFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
+  /** Replaces all houses with a curated demo set spanning all five locations. */
+  loadExample: () => void;
 };
 
 const initialFilters: Filters = {
@@ -75,6 +79,66 @@ function buildHouse(s: AppState, name: string): House {
     slotCount,
     slots: Array<string | null>(slotCount).fill(null),
   };
+}
+
+/**
+ * Demo data — curated houses across all five locations using Pokémon from the
+ * tracker. Each house has an `id`, `name`, `type`, `location`, `slotCount`,
+ * and pre-populated `slots`. Used by the "Load example" button.
+ */
+function buildExampleHouses(): House[] {
+  type Demo = {
+    name: string;
+    type: 'prefab' | 'custom';
+    location: LocationId;
+    slots: (string | null)[];
+  };
+  const demos: Demo[] = [
+    {
+      name: 'Greenhouse',
+      type: 'prefab',
+      location: 'WW',
+      slots: ['bulbasaur', 'ivysaur', 'venusaur', 'oddish'],
+    },
+    {
+      name: 'Charcoal Pit',
+      type: 'prefab',
+      location: 'WW',
+      slots: ['charmander', 'charmeleon'],
+    },
+    {
+      name: 'Tide Pool',
+      type: 'prefab',
+      location: 'BB',
+      slots: ['squirtle', 'wartortle', 'blastoise', 'magikarp'],
+    },
+    {
+      name: 'Stone Hut',
+      type: 'prefab',
+      location: 'RR',
+      slots: ['geodude', 'graveler', 'onix', 'rampardos'],
+    },
+    {
+      name: 'Roost',
+      type: 'prefab',
+      location: 'SS',
+      slots: ['pidgey', 'pidgeotto', 'pidgeot', 'swablu'],
+    },
+    {
+      name: "Painter's Loft",
+      type: 'custom',
+      location: 'PT',
+      slots: ['rotom', 'pikachu', 'mareep', 'flaaffy'],
+    },
+  ];
+  return demos.map((d) => ({
+    id: newId(),
+    name: d.name,
+    type: d.type,
+    location: d.location,
+    slotCount: d.slots.length as 1 | 2 | 4,
+    slots: d.slots,
+  }));
 }
 
 export const useStore = create<AppState & AppActions>()(
@@ -106,6 +170,11 @@ export const useStore = create<AppState & AppActions>()(
 
       removeHouse: (id) => set((s) => ({ houses: s.houses.filter((h) => h.id !== id) })),
 
+      relocateHouse: (id, location) =>
+        set((s) => ({
+          houses: s.houses.map((h) => (h.id === id ? { ...h, location } : h)),
+        })),
+
       renameHouse: (id, name) =>
         set((s) => ({
           houses: s.houses.map((h) => (h.id === id ? { ...h, name } : h)),
@@ -127,6 +196,9 @@ export const useStore = create<AppState & AppActions>()(
       selectPokemon: (id) => set({ selectedPokemonId: id }),
 
       setFilter: (key, value) => set((s) => ({ filters: { ...s.filters, [key]: value } })),
+
+      loadExample: () =>
+        set({ houses: buildExampleHouses(), selectedHouseId: null, selectedPokemonId: null }),
     }),
     {
       name: STORAGE_KEY,

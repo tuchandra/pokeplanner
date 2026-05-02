@@ -1,115 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
-import { LOCATIONS } from '../data/locations';
-import { useStore } from '../state/store';
-import { type House, type HouseType, type LocationId, capacityPoints } from '../types';
+import { LOCATIONS } from '@/data/locations';
+import { cn } from '@/lib/cn';
+import { useStore } from '@/state/store';
+import { type House, type HouseType, type LocationId, capacityPoints } from '@/types';
+import { LayoutGrid, List, Moon, Plus, Sun } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 
 function pointsAtLocation(houses: House[], id: LocationId): number {
   return houses.filter((h) => h.location === id).reduce((sum, h) => sum + capacityPoints(h), 0);
 }
 
-function SunIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <title>Sun</title>
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-    </svg>
-  );
-}
+const LOC_ACCENT: Record<LocationId, string> = {
+  WW: 'text-loc-ww',
+  BB: 'text-loc-bb',
+  RR: 'text-loc-rr',
+  SS: 'text-loc-ss',
+  PT: 'text-loc-pt',
+};
 
-function MoonIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <title>Moon</title>
-      <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
-    </svg>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-    >
-      <title>Add</title>
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
-}
-
-function GridIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <title>Grid</title>
-      <rect x="3" y="3" width="7" height="7" rx="1.5" />
-      <rect x="14" y="3" width="7" height="7" rx="1.5" />
-      <rect x="3" y="14" width="7" height="7" rx="1.5" />
-      <rect x="14" y="14" width="7" height="7" rx="1.5" />
-    </svg>
-  );
-}
-
-function ListIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    >
-      <title>List</title>
-      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-    </svg>
-  );
-}
+const LOC_BAR: Record<LocationId, string> = {
+  WW: 'bg-loc-ww',
+  BB: 'bg-loc-bb',
+  RR: 'bg-loc-rr',
+  SS: 'bg-loc-ss',
+  PT: 'bg-loc-pt',
+};
 
 function ComposePopover({ onClose }: { onClose: () => void }) {
   const { pendingType, pendingSlots, activeLocation } = useStore((s) => s.filters);
   const setFilter = useStore((s) => s.setFilter);
   const addHouse = useStore((s) => s.addHouse);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function onDoc(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
-    }
-    function onEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
-    }
-    const t = setTimeout(() => document.addEventListener('mousedown', onDoc), 0);
-    document.addEventListener('keydown', onEsc);
-    return () => {
-      clearTimeout(t);
-      document.removeEventListener('mousedown', onDoc);
-      document.removeEventListener('keydown', onEsc);
-    };
-  }, [onClose]);
 
   const slotOptions: readonly (1 | 2 | 4)[] = pendingType === 'custom' ? [1, 4] : [1, 2, 4];
   const targetName = activeLocation
@@ -117,54 +39,64 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
     : 'Withered Wastelands';
 
   return (
-    <div ref={ref} className="popover" aria-label="Add house">
-      <div className="popover__row">
-        <span className="popover__label">Type</span>
-        <div className="seg">
-          {(['prefab', 'custom'] as HouseType[]).map((t) => (
-            <button
-              key={t}
-              type="button"
-              className={`seg__btn ${pendingType === t ? 'seg__btn--on' : ''}`}
-              onClick={() => {
-                setFilter('pendingType', t);
-                if (t === 'custom' && pendingSlots === 2) setFilter('pendingSlots', 4);
-              }}
-            >
-              {t === 'prefab' ? 'Prefab' : 'Custom'}
-            </button>
-          ))}
-        </div>
+    <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-[60px_1fr] items-center gap-2.5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-faint-foreground">
+          Type
+        </span>
+        <ToggleGroup
+          type="single"
+          value={pendingType}
+          onValueChange={(v) => {
+            if (!v) return;
+            const t = v as HouseType;
+            setFilter('pendingType', t);
+            if (t === 'custom' && pendingSlots === 2) setFilter('pendingSlots', 4);
+          }}
+          className="w-full justify-stretch"
+        >
+          <ToggleGroupItem value="prefab" className="flex-1">
+            Prefab
+          </ToggleGroupItem>
+          <ToggleGroupItem value="custom" className="flex-1">
+            Custom
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
 
-      <div className="popover__row">
-        <span className="popover__label">Slots</span>
-        <div className="seg">
+      <div className="grid grid-cols-[60px_1fr] items-center gap-2.5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-faint-foreground">
+          Slots
+        </span>
+        <ToggleGroup
+          type="single"
+          value={String(pendingSlots)}
+          onValueChange={(v) => {
+            if (!v) return;
+            setFilter('pendingSlots', Number(v) as 1 | 2 | 4);
+          }}
+          className="w-full justify-stretch"
+        >
           {slotOptions.map((n) => (
-            <button
-              key={n}
-              type="button"
-              className={`seg__btn ${pendingSlots === n ? 'seg__btn--on' : ''}`}
-              onClick={() => setFilter('pendingSlots', n)}
-            >
+            <ToggleGroupItem key={n} value={String(n)} className="flex-1">
               {n}
-            </button>
+            </ToggleGroupItem>
           ))}
-        </div>
+        </ToggleGroup>
       </div>
 
-      <div className="popover__target">Adds to {targetName}</div>
+      <div className="text-center font-mono text-[10px] uppercase tracking-[0.08em] text-faint-foreground">
+        Adds to {targetName}
+      </div>
 
-      <button
-        type="button"
-        className="btn btn--primary popover__submit"
+      <Button
         onClick={() => {
           addHouse();
           onClose();
         }}
       >
         Add house
-      </button>
+      </Button>
     </div>
   );
 }
@@ -178,83 +110,104 @@ export function Topbar() {
   const [composeOpen, setComposeOpen] = useState(false);
 
   return (
-    <header className="topbar">
-      <div className="topbar__brand">
-        <span className="brand">Pokopia</span>
-        <span className="brand__sub">habitat planner</span>
+    <header className="grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-border-soft bg-secondary px-4 py-2 relative z-20">
+      <div className="inline-flex items-baseline gap-2.5 font-mono uppercase">
+        <span className="text-[15px] font-medium tracking-[0.16em] text-foreground">Pokopia</span>
+        <span className="hidden xl:inline text-[10px] tracking-[0.18em] text-faint-foreground whitespace-nowrap">
+          habitat planner
+        </span>
       </div>
 
-      <nav className="topbar__locations" aria-label="Locations">
+      <nav className="flex flex-wrap justify-center gap-1.5" aria-label="Locations">
         {LOCATIONS.map((loc) => {
           const used = pointsAtLocation(houses, loc.id);
           const active = activeLocation === loc.id;
           const ratio = Math.min(1, used / loc.capacity);
           return (
             <button
-              key={loc.id}
               type="button"
-              className={`loc ${active ? 'loc--active' : ''} loc--${loc.id.toLowerCase()}`}
+              key={loc.id}
               onClick={() => setFilter('activeLocation', active ? null : loc.id)}
               title={`${loc.name}${active ? ' — click to view all' : ''}`}
+              className={cn(
+                'relative inline-flex items-baseline gap-1.5 rounded-md border border-border-soft px-2.5 pt-1.5 pb-2 text-muted-foreground cursor-pointer transition-colors',
+                'hover:bg-card-soft hover:text-foreground',
+                active &&
+                  'bg-card text-foreground border-border shadow-[inset_0_0_0_1px_var(--color-border-soft)]',
+              )}
             >
-              <span className="loc__id">{loc.id}</span>
-              <span className="loc__count">
-                <span className="loc__used">{used}</span>
-                <span className="loc__sep">/</span>
+              <span
+                className={cn(
+                  'font-mono text-[12px] font-medium tracking-wide',
+                  active ? LOC_ACCENT[loc.id] : 'text-muted-foreground',
+                )}
+              >
+                {loc.id}
+              </span>
+              <span className="font-mono text-[11px] text-faint-foreground tabular-nums">
+                <span
+                  className={cn(active ? LOC_ACCENT[loc.id] : 'text-foreground', 'font-medium')}
+                >
+                  {used}
+                </span>
+                <span className="opacity-40 mx-0.5">/</span>
                 <span>{loc.capacity}</span>
               </span>
-              <span className="loc__bar" aria-hidden>
-                <span className="loc__bar-fill" style={{ width: `${ratio * 100}%` }} />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-x-2 bottom-1 h-[1.5px] overflow-hidden rounded-full bg-border-soft"
+              >
+                <span
+                  className={cn('block h-full transition-[width]', LOC_BAR[loc.id])}
+                  style={{ width: `${ratio * 100}%` }}
+                />
               </span>
             </button>
           );
         })}
       </nav>
 
-      <div className="topbar__actions">
-        <div className="seg seg--icon" aria-label="View">
-          <button
-            type="button"
-            className={`seg__btn ${view === 'grid' ? 'seg__btn--on' : ''}`}
-            onClick={() => setFilter('view', 'grid')}
-            title="Grid view"
-            aria-label="Grid view"
-          >
-            <GridIcon />
-          </button>
-          <button
-            type="button"
-            className={`seg__btn ${view === 'table' ? 'seg__btn--on' : ''}`}
-            onClick={() => setFilter('view', 'table')}
-            title="Table view"
+      <div className="flex items-center gap-2">
+        <ToggleGroup
+          type="single"
+          value={view}
+          onValueChange={(v) => v && setFilter('view', v as 'grid' | 'table')}
+          aria-label="View"
+        >
+          <ToggleGroupItem value="grid" className="px-2" aria-label="Grid view" title="Grid view">
+            <LayoutGrid />
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            value="table"
+            className="px-2"
             aria-label="Table view"
+            title="Table view"
           >
-            <ListIcon />
-          </button>
-        </div>
+            <List />
+          </ToggleGroupItem>
+        </ToggleGroup>
 
-        <div className="compose">
-          <button
-            type="button"
-            className="btn btn--primary"
-            onClick={() => setComposeOpen((v) => !v)}
-            aria-expanded={composeOpen}
-          >
-            <PlusIcon />
-            <span>House</span>
-          </button>
-          {composeOpen && <ComposePopover onClose={() => setComposeOpen(false)} />}
-        </div>
+        <Popover open={composeOpen} onOpenChange={setComposeOpen}>
+          <PopoverTrigger asChild>
+            <Button>
+              <Plus />
+              House
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <ComposePopover onClose={() => setComposeOpen(false)} />
+          </PopoverContent>
+        </Popover>
 
-        <button
-          type="button"
-          className="icon-btn"
+        <Button
+          variant="outline"
+          size="icon"
           onClick={() => setFilter('theme', theme === 'dark' ? 'light' : 'dark')}
           aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           title={theme === 'dark' ? 'Light theme' : 'Dark theme'}
         >
-          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-        </button>
+          {theme === 'dark' ? <Sun /> : <Moon />}
+        </Button>
       </div>
     </header>
   );

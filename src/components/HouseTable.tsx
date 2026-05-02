@@ -1,6 +1,7 @@
-import { LOCATION_BY_ID } from '../data/locations';
-import { POKEMON_BY_ID } from '../data/pokemon';
-import { useStore } from '../state/store';
+import { LOCATION_BY_ID } from '@/data/locations';
+import { POKEMON_BY_ID } from '@/data/pokemon';
+import { useStore } from '@/state/store';
+import { Button } from './ui/button';
 
 export function HouseTable() {
   const houses = useStore((s) => s.houses);
@@ -11,51 +12,63 @@ export function HouseTable() {
 
   if (visible.length === 0) {
     return (
-      <p className="empty">
+      <p className="text-center text-muted-foreground py-20">
         {activeLocation === null ? 'No houses yet.' : 'No houses in this location.'}
       </p>
     );
   }
 
   return (
-    <table className="table">
+    <table className="w-full border-collapse overflow-hidden rounded-xl border border-border-soft bg-card">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Type</th>
-          <th>Slots</th>
-          <th>Pokémon</th>
-          <th />
+          {['Name', 'Location', 'Type', 'Slots', 'Pokémon', ''].map((h, i) => (
+            <th
+              key={h || `col-${i}`}
+              className="border-b border-border-soft bg-card-soft px-3 py-2.5 text-left text-[10px] uppercase tracking-[0.08em] font-medium font-mono text-faint-foreground"
+            >
+              {h}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
         {visible.map((h) => (
-          <tr key={h.id}>
-            <td>{h.name}</td>
-            <td>{LOCATION_BY_ID[h.location].name}</td>
-            <td>{h.type === 'prefab' ? 'Prefab' : 'Custom'}</td>
-            <td>{h.slotCount}</td>
-            <td>
-              <ul className="table-sprites">
+          <tr key={h.id} className="border-b border-border-soft last:border-0">
+            <td className="px-3 py-2.5 align-middle">{h.name}</td>
+            <td className="px-3 py-2.5 align-middle">{LOCATION_BY_ID[h.location].name}</td>
+            <td className="px-3 py-2.5 align-middle">
+              {h.type === 'prefab' ? 'Prefab' : 'Custom'}
+            </td>
+            <td className="px-3 py-2.5 align-middle">{h.slotCount}</td>
+            <td className="px-3 py-2.5 align-middle">
+              <ul className="flex flex-wrap gap-1 list-none m-0 p-0">
                 {h.slots.map((id, i) => {
                   const p = id == null ? null : (POKEMON_BY_ID.get(id) ?? null);
                   return (
                     <li
                       key={`${h.id}-${i}`}
-                      className={`table-sprite ${p ? 'filled' : 'empty'}`}
+                      className="size-8 rounded-md bg-card-soft border border-border-soft grid place-items-center text-[11px] text-faint-foreground"
                       title={p?.name ?? 'Empty slot'}
                     >
-                      {p ? <img src={p.spriteUrl} alt={p.name} /> : '—'}
+                      {p ? (
+                        <img
+                          src={p.spriteUrl}
+                          alt={p.name}
+                          className="size-[88%] [image-rendering:pixelated]"
+                        />
+                      ) : (
+                        '—'
+                      )}
                     </li>
                   );
                 })}
               </ul>
             </td>
-            <td>
-              <button type="button" className="btn" onClick={() => removeHouse(h.id)}>
+            <td className="px-3 py-2.5 align-middle">
+              <Button variant="secondary" size="sm" onClick={() => removeHouse(h.id)}>
                 Delete
-              </button>
+              </Button>
             </td>
           </tr>
         ))}

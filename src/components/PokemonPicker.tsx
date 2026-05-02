@@ -1,9 +1,10 @@
+import { POKEMON, POKEMON_BY_ID } from '@/data/pokemon';
+import { cn } from '@/lib/cn';
+import { recommend } from '@/lib/recommend';
+import { useStore } from '@/state/store';
+import { type Pokemon, derivedHabitats } from '@/types';
 import { useDraggable } from '@dnd-kit/core';
 import { useEffect, useRef } from 'react';
-import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
-import { recommend } from '../lib/recommend';
-import { useStore } from '../state/store';
-import { type Pokemon, derivedHabitats } from '../types';
 import { PokemonDetail } from './PokemonDetail';
 import { SpecialtyFilter } from './SpecialtyFilter';
 
@@ -17,10 +18,9 @@ const STORY_NAMES: ReadonlySet<string> = new Set([
   'DJ Rotom',
   'Professor Tangrowth',
 ]);
-
-const MISC_GROUP = 'Misc.';
 const STORY_GROUP = 'Story';
-const MISC_THRESHOLD = 2; // groups with ≤2 (non-story) members fold into Misc.
+const MISC_GROUP = 'Misc.';
+const MISC_THRESHOLD = 2;
 
 function PickItem({
   p,
@@ -46,7 +46,6 @@ function PickItem({
     <li
       ref={setNodeRef}
       {...dragProps}
-      className={`pick ${isDragging ? 'pick--dragging' : ''} ${assigned ? 'pick--assigned' : ''}`}
       title={title}
       onClick={() => selectPokemon(p.id)}
       onKeyDown={(e) => {
@@ -55,23 +54,38 @@ function PickItem({
           selectPokemon(p.id);
         }
       }}
+      className={cn(
+        'aspect-square rounded-md border border-border-soft bg-card-soft cursor-pointer p-0 grid place-items-center transition-all list-none',
+        'hover:bg-card hover:border-border hover:-translate-y-px',
+        isDragging && 'cursor-grabbing opacity-55',
+        assigned &&
+          'cursor-default opacity-30 grayscale-[70%] hover:translate-y-0 hover:bg-card-soft hover:border-border-soft',
+      )}
     >
-      <img src={p.spriteUrl} alt={p.name} draggable={false} />
+      <img
+        src={p.spriteUrl}
+        alt={p.name}
+        draggable={false}
+        className="size-[86%] [image-rendering:pixelated] pointer-events-none"
+      />
     </li>
   );
 }
 
-/**
- * Groups Pokémon by specialty for the grouped picker view, with three rules:
- *   1. Story characters (named in STORY_NAMES) collapse into a single 'Story'
- *      group regardless of their specialty1/2.
- *   2. Pokémon with two specialties appear in BOTH groups (e.g. Venusaur in
- *      Grow and Litter).
- *   3. Specialties with very few members fold into a 'Misc.' group so the
- *      picker isn't dominated by tiny single-Pokémon sections.
- * Returns groups in this order: alphabetical work specialties, then Story,
- * then Misc.
- */
+function GroupTitle({ title, count }: { title: string; count?: number | string }) {
+  return (
+    <h3 className="m-0 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-faint-foreground font-medium">
+      <span>{title}</span>
+      {count != null && <span className="opacity-70 font-normal">{count}</span>}
+      <span aria-hidden className="flex-1 h-px bg-border-soft" />
+    </h3>
+  );
+}
+
+function Grid({ children }: { children: React.ReactNode }) {
+  return <ul className="grid grid-cols-6 gap-1 list-none m-0 p-0">{children}</ul>;
+}
+
 function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
   const groups = new Map<string, Pokemon[]>();
   const push = (key: string, p: Pokemon) => {
@@ -89,7 +103,6 @@ function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
     if (p.specialty2 && p.specialty2 !== p.specialty1) push(p.specialty2, p);
   }
 
-  // Any specialty with <= MISC_THRESHOLD members (excluding Story) folds into Misc.
   const misc: Pokemon[] = [];
   const main: [string, Pokemon[]][] = [];
   for (const [key, list] of groups) {
@@ -116,7 +129,6 @@ export function PokemonPicker() {
   const selectedHouseId = useStore((s) => s.selectedHouseId);
   const selectedPokemonId = useStore((s) => s.selectedPokemonId);
 
-  // Restore picker scroll position when the detail panel closes.
   const scrollRef = useRef<HTMLDivElement>(null);
   const savedScroll = useRef(0);
   const prevSelected = useRef<string | null>(null);
@@ -169,34 +181,31 @@ export function PokemonPicker() {
     : [];
 
   return (
-    <div className="picker">
-      <div className="picker__head">
+    <div className="flex flex-col flex-1 min-h-0">
+      <div className="sticky top-0 z-10 flex flex-col gap-2 px-3 py-2.5 bg-secondary border-b border-border-soft">
         <SpecialtyFilter />
       </div>
-      <div className="picker__scroll" ref={scrollRef}>
+      <div
+        ref={scrollRef}
+        className="flex flex-col gap-3.5 px-3 py-3 overflow-y-auto flex-1 min-h-0"
+      >
         {selectedPokemonId && <PokemonDetail key={selectedPokemonId} id={selectedPokemonId} />}
         {recommendations.length > 0 && (
-          <section className="picker__recs">
-            <h3 className="picker__group-title">
-              <span>Recommended</span>
-              <span className="picker__group-count">{selectedHouse?.name}</span>
-            </h3>
-            <ul className="picker__grid">
+          <section className="flex flex-col gap-1.5 pb-3 border-b border-dashed border-border-soft">
+            <GroupTitle title="Recommended" count={selectedHouse?.name} />
+            <Grid>
               {recommendations.map((p) => (
                 <PickItem key={`rec-${p.id}`} p={p} assigned={false} groupKey="rec" />
               ))}
-            </ul>
+            </Grid>
           </section>
         )}
         {grouping === 'specialty' ? (
-          <div className="picker__groups">
+          <div className="flex flex-col gap-4">
             {groupBySpecialty(visible).map(([specialty, members]) => (
-              <section key={specialty} className="picker__group">
-                <h3 className="picker__group-title">
-                  <span>{specialty}</span>
-                  <span className="picker__group-count">{members.length}</span>
-                </h3>
-                <ul className="picker__grid">
+              <section key={specialty} className="flex flex-col gap-1.5">
+                <GroupTitle title={specialty} count={members.length} />
+                <Grid>
                   {members.map((p) => (
                     <PickItem
                       key={`${specialty}-${p.id}`}
@@ -205,16 +214,16 @@ export function PokemonPicker() {
                       groupKey={specialty}
                     />
                   ))}
-                </ul>
+                </Grid>
               </section>
             ))}
           </div>
         ) : (
-          <ul className="picker__grid">
+          <Grid>
             {visible.map((p) => (
               <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
             ))}
-          </ul>
+          </Grid>
         )}
       </div>
     </div>
