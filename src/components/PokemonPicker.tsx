@@ -2,9 +2,11 @@ import { useDraggable } from '@dnd-kit/core';
 import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
 import { useStore } from '../state/store';
 import { type Pokemon, derivedHabitats } from '../types';
+import { PokemonDetail } from './PokemonDetail';
 import { SpecialtyFilter } from './SpecialtyFilter';
 
 function PickItem({ p, assigned }: { p: Pokemon; assigned: boolean }) {
+  const selectPokemon = useStore((s) => s.selectPokemon);
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `pokemon:${p.id}`,
     data: { kind: 'pokemon', pokemonId: p.id },
@@ -12,7 +14,7 @@ function PickItem({ p, assigned }: { p: Pokemon; assigned: boolean }) {
   });
   const dragProps = assigned ? {} : { ...attributes, ...listeners };
   const title = assigned
-    ? `${p.name} — already assigned`
+    ? `${p.name} — already assigned (click for details)`
     : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
   return (
     <li
@@ -20,6 +22,13 @@ function PickItem({ p, assigned }: { p: Pokemon; assigned: boolean }) {
       {...dragProps}
       className={`pick ${isDragging ? 'pick--dragging' : ''} ${assigned ? 'pick--assigned' : ''}`}
       title={title}
+      onClick={() => selectPokemon(p.id)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectPokemon(p.id);
+        }
+      }}
     >
       <img src={p.spriteUrl} alt={p.name} draggable={false} />
     </li>
@@ -31,6 +40,15 @@ export function PokemonPicker() {
   const habitatCompat = useStore((s) => s.filters.habitatCompatible);
   const houses = useStore((s) => s.houses);
   const selectedHouseId = useStore((s) => s.selectedHouseId);
+  const selectedPokemonId = useStore((s) => s.selectedPokemonId);
+
+  if (selectedPokemonId) {
+    return (
+      <div className="picker">
+        <PokemonDetail id={selectedPokemonId} />
+      </div>
+    );
+  }
 
   const selectedHouse = selectedHouseId
     ? (houses.find((h) => h.id === selectedHouseId) ?? null)

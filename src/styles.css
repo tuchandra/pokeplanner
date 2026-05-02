@@ -448,3 +448,124 @@ body,
   height: 90%;
   image-rendering: pixelated;
 }
+
+.pick {
+  cursor: pointer;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.detail__close {
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.2rem 0;
+  font-size: 0.85rem;
+}
+.detail__close:hover {
+  color: var(--text);
+}
+.detail__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.detail__sprite {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+}
+.detail__title h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.detail__num {
+  margin: 0.1rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.detail__stats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+.detail__stats > div {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.detail__stats dt {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.detail__stats dd {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.detail__section h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.detail__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.detail__similar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem;
+}
+.detail__similar-btn {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--text);
+}
+.detail__similar-btn:hover {
+  border-color: var(--accent);
+}
+.detail__similar-btn img {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+}
+.detail__similar-btn span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}

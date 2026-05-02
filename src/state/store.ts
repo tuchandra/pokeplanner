@@ -27,6 +27,8 @@ type AppState = {
   filters: Filters;
   /** Currently focused house — drives the picker's habitat-compat filter. */
   selectedHouseId: string | null;
+  /** Pokémon whose detail panel is open in the sidebar. Null = picker grid view. */
+  selectedPokemonId: string | null;
 };
 
 type AppActions = {
@@ -35,6 +37,7 @@ type AppActions = {
   renameHouse: (id: string, name: string) => void;
   setSlotPokemon: (houseId: string, slot: number, pokemonId: string | null) => void;
   selectHouse: (id: string | null) => void;
+  selectPokemon: (id: string | null) => void;
   setFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
 };
 
@@ -58,6 +61,7 @@ export const useStore = create<AppState & AppActions>()(
       houses: [],
       filters: initialFilters,
       selectedHouseId: null,
+      selectedPokemonId: null,
 
       addHouse: () =>
         set((s) => {
@@ -93,6 +97,8 @@ export const useStore = create<AppState & AppActions>()(
         })),
 
       selectHouse: (id) => set({ selectedHouseId: id }),
+
+      selectPokemon: (id) => set({ selectedPokemonId: id }),
 
       setFilter: (key, value) => set((s) => ({ filters: { ...s.filters, [key]: value } })),
     }),
