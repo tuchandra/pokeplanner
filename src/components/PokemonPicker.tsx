@@ -4,18 +4,22 @@ import { useStore } from '../state/store';
 import { type Pokemon, derivedHabitats } from '../types';
 import { SpecialtyFilter } from './SpecialtyFilter';
 
-function PickItem({ p }: { p: Pokemon }) {
+function PickItem({ p, assigned }: { p: Pokemon; assigned: boolean }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `pokemon:${p.id}`,
     data: { kind: 'pokemon', pokemonId: p.id },
+    disabled: assigned,
   });
+  const dragProps = assigned ? {} : { ...attributes, ...listeners };
+  const title = assigned
+    ? `${p.name} — already assigned`
+    : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
   return (
     <li
       ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      className={`pick ${isDragging ? 'pick--dragging' : ''}`}
-      title={`${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`}
+      {...dragProps}
+      className={`pick ${isDragging ? 'pick--dragging' : ''} ${assigned ? 'pick--assigned' : ''}`}
+      title={title}
     >
       <img src={p.spriteUrl} alt={p.name} draggable={false} />
     </li>
@@ -34,6 +38,13 @@ export function PokemonPicker() {
   const targetLighting = selectedHouse
     ? new Set(derivedHabitats(selectedHouse, (id) => POKEMON_BY_ID.get(id)).lighting)
     : null;
+
+  const assignedIds = new Set<string>();
+  for (const h of houses) {
+    for (const id of h.slots) {
+      if (id != null) assignedIds.add(id);
+    }
+  }
 
   const visible = POKEMON.filter((p) => {
     if (specFilter.length > 0) {
@@ -60,7 +71,7 @@ export function PokemonPicker() {
       </div>
       <ul className="picker__grid">
         {visible.map((p) => (
-          <PickItem key={p.id} p={p} />
+          <PickItem key={p.id} p={p} assigned={assignedIds.has(p.id)} />
         ))}
       </ul>
     </div>

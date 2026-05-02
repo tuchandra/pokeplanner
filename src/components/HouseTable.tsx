@@ -32,9 +32,20 @@ export function HouseTable() {
             <td>{h.type === 'prefab' ? 'Prefab' : 'Custom'}</td>
             <td>{h.slotCount}</td>
             <td>
-              {h.slots
-                .map((id) => (id == null ? '—' : (POKEMON_BY_ID.get(id)?.name ?? '?')))
-                .join(', ')}
+              <ul className="table-sprites">
+                {h.slots.map((id, i) => {
+                  const p = id == null ? null : (POKEMON_BY_ID.get(id) ?? null);
+                  return (
+                    <li
+                      key={`${h.id}-${i}`}
+                      className={`table-sprite ${p ? 'filled' : 'empty'}`}
+                      title={p?.name ?? 'Empty slot'}
+                    >
+                      {p ? <img src={p.spriteUrl} alt={p.name} /> : '—'}
+                    </li>
+                  );
+                })}
+              </ul>
             </td>
             <td>
               <button type="button" className="btn" onClick={() => removeHouse(h.id)}>

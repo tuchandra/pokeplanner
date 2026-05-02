@@ -415,3 +415,36 @@ body,
   image-rendering: pixelated;
   pointer-events: none;
 }
+.pick--assigned {
+  cursor: not-allowed;
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+.pick--assigned img {
+  pointer-events: none;
+}
+
+.table-sprites {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.table-sprite {
+  width: 36px;
+  height: 36px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+.table-sprite img {
+  width: 90%;
+  height: 90%;
+  image-rendering: pixelated;
+}
