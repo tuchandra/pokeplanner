@@ -1,0 +1,26 @@
+:root {
+  --bg: #051c0c;
+  --bg-elev: #0a2a14;
+  --bg-card: #0f3a1d;
+  --bg-card-self: #3a0f0f;
+  --border: #1c5430;
+  --accent: #2fbf4f;
+  --text: #e8f5ec;
+  --text-muted: #95c2a3;
+  --danger: #d83a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+}
