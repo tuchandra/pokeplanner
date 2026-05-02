@@ -1,5 +1,6 @@
 import { useDraggable } from '@dnd-kit/core';
 import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
+import { recommend } from '../lib/recommend';
 import { useStore } from '../state/store';
 import { type Pokemon, derivedHabitats } from '../types';
 import { PokemonDetail } from './PokemonDetail';
@@ -93,11 +94,25 @@ export function PokemonPicker() {
     return true;
   });
 
+  const recommendations = selectedHouse
+    ? recommend(POKEMON, selectedHouse, (id) => POKEMON_BY_ID.get(id), assignedIds)
+    : [];
+
   return (
     <div className="picker">
       <div className="picker__head">
         <SpecialtyFilter />
       </div>
+      {recommendations.length > 0 && (
+        <section className="picker__recs">
+          <h3 className="picker__group-title">Recommended for {selectedHouse?.name}</h3>
+          <ul className="picker__grid">
+            {recommendations.map((p) => (
+              <PickItem key={`rec-${p.id}`} p={p} assigned={false} />
+            ))}
+          </ul>
+        </section>
+      )}
       {grouping === 'specialty' ? (
         <div className="picker__groups">
           {groupBySpecialty(visible).map(([specialty, members]) => (
