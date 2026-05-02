@@ -24,3 +24,39 @@ body,
   color: var(--text);
   font-family: system-ui, -apple-system, sans-serif;
 }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+.app__main {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.app__sidebar {
+  border-left: 1px solid var(--border);
+  background: var(--bg-elev);
+  overflow: auto;
+  max-height: calc(100vh - 96px);
+}
+
+@media (max-width: 900px) {
+  .app__body {
+    grid-template-columns: 1fr;
+  }
+  .app__sidebar {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+  }
+}
