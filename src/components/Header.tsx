@@ -3,7 +3,7 @@ import { useStore } from '../state/store';
 import type { HouseType, LocationId } from '../types';
 
 export function Header() {
-  const { pendingType, pendingSlots, pendingLocation } = useStore((s) => s.filters);
+  const { pendingType, pendingSlots, pendingLocation, theme } = useStore((s) => s.filters);
   const setFilter = useStore((s) => s.setFilter);
   const addHouse = useStore((s) => s.addHouse);
 
@@ -56,9 +56,20 @@ export function Header() {
         </select>
       </div>
 
-      <button type="button" className="btn btn--primary" onClick={addHouse}>
-        Add House
-      </button>
+      <div className="header__actions">
+        <button type="button" className="btn btn--primary" onClick={addHouse}>
+          Add House
+        </button>
+        <button
+          type="button"
+          className="btn header__theme"
+          onClick={() => setFilter('theme', theme === 'dark' ? 'light' : 'dark')}
+          aria-pressed={theme === 'light'}
+          title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+        >
+          {theme === 'dark' ? 'Light' : 'Dark'}
+        </button>
+      </div>
     </header>
   );
 }

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
 import { useStore } from '../state/store';
 import type { Pokemon } from '../types';
@@ -22,10 +23,16 @@ function findSimilar(p: Pokemon): Pokemon[] {
 export function PokemonDetail({ id }: { id: string }) {
   const selectPokemon = useStore((s) => s.selectPokemon);
   const p = POKEMON_BY_ID.get(id);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll on id change
+  useEffect(() => {
+    ref.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  }, [id]);
 
   if (!p) {
     return (
-      <div className="detail">
+      <div className="detail" ref={ref}>
         <button type="button" className="detail__close" onClick={() => selectPokemon(null)}>
           ← Back
         </button>
@@ -37,7 +44,7 @@ export function PokemonDetail({ id }: { id: string }) {
   const similar = findSimilar(p);
 
   return (
-    <div className="detail">
+    <div className="detail" ref={ref}>
       <button type="button" className="detail__close" onClick={() => selectPokemon(null)}>
         ← Back
       </button>

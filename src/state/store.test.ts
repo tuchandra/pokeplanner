@@ -38,6 +38,7 @@ beforeEach(() => {
       habitatCompatible: false,
       pickerGrouping: 'none',
       view: 'grid',
+      theme: 'dark',
     },
     selectedHouseId: null,
   });

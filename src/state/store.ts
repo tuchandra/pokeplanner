@@ -25,6 +25,7 @@ type Filters = {
    */
   pickerGrouping: 'none' | 'specialty';
   view: 'grid' | 'table';
+  theme: 'dark' | 'light';
 };
 
 type AppState = {
@@ -55,6 +56,7 @@ const initialFilters: Filters = {
   habitatCompatible: false,
   pickerGrouping: 'none',
   view: 'grid',
+  theme: 'dark',
 };
 
 function newId(): string {

@@ -54,14 +54,6 @@ export function PokemonPicker() {
   const selectedHouseId = useStore((s) => s.selectedHouseId);
   const selectedPokemonId = useStore((s) => s.selectedPokemonId);
 
-  if (selectedPokemonId) {
-    return (
-      <div className="picker">
-        <PokemonDetail id={selectedPokemonId} />
-      </div>
-    );
-  }
-
   const selectedHouse = selectedHouseId
     ? (houses.find((h) => h.id === selectedHouseId) ?? null)
     : null;
@@ -103,6 +95,7 @@ export function PokemonPicker() {
       <div className="picker__head">
         <SpecialtyFilter />
       </div>
+      {selectedPokemonId && <PokemonDetail id={selectedPokemonId} />}
       {recommendations.length > 0 && (
         <section className="picker__recs">
           <h3 className="picker__group-title">Recommended for {selectedHouse?.name}</h3>

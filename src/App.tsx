@@ -1,4 +1,5 @@
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { useEffect } from 'react';
 import { Header } from './components/Header';
 import { HouseGrid } from './components/HouseGrid';
 import { HouseTable } from './components/HouseTable';
@@ -8,8 +9,13 @@ import { useStore } from './state/store';
 
 export function App() {
   const view = useStore((s) => s.filters.view);
+  const theme = useStore((s) => s.filters.theme);
   const setSlotPokemon = useStore((s) => s.setSlotPokemon);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   function onDragEnd(e: DragEndEvent) {
     const over = e.over;
