@@ -66,6 +66,12 @@ export function PokemonDetail({ id }: { id: string }) {
           <dt>Taste</dt>
           <dd>{p.taste}</dd>
         </div>
+        {p.litterDrop && (
+          <div>
+            <dt>Litter</dt>
+            <dd>{p.litterDrop}</dd>
+          </div>
+        )}
       </dl>
 
       <section className="detail__section">

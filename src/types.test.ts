@@ -35,6 +35,7 @@ describe('types', () => {
       habitat: 'Bright',
       favorites: ['Lots of nature'],
       taste: 'Sweet flavors',
+      litterDrop: null,
       spriteUrl: '/sprites/001.png',
     };
     expect(p.id).toBe('bulbasaur');
@@ -63,6 +64,7 @@ describe('derivedHabitats', () => {
     habitat,
     favorites,
     taste: 'None',
+    litterDrop: null,
     spriteUrl: '',
   });
 

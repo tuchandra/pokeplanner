@@ -83,6 +83,8 @@ export type Pokemon = {
   readonly habitat: Lighting;
   readonly favorites: readonly Tag[];
   readonly taste: Taste;
+  /** Item this Pokémon drops when its specialty is Litter. Null when unknown or N/A. */
+  readonly litterDrop: string | null;
   /** Path under the Vite base — e.g. '/pokeplanner/sprites/001.png' in prod. */
   readonly spriteUrl: string;
 };

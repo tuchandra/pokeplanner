@@ -35,7 +35,47 @@ import { parseTSVRows } from '../src/lib/tsv';
 
 const ROOT = resolve(import.meta.dir, '..');
 const SRC = resolve(ROOT, 'docs/reference/poketracker.tsv');
+const LITTER_SRC = resolve(ROOT, 'docs/reference/litter-drops-raw.txt');
 const OUT = resolve(ROOT, 'src/data/pokemon.generated.ts');
+
+/**
+ * Parses the raw Serebii litter-drops dump into a name -> item map.
+ * Each Pokémon block is 4 or 5 lines:
+ *   #NNN \tName Image \tName \t        ← header (extract Name)
+ *   ability1\tability1                  ← optional
+ *   ability2\tability2                  ← present when there are two abilities
+ *   \tItem Name                         ← item, prefixed by a tab
+ *   Item Name                           ← item, repeated bare
+ * The item line is unique within a block: it's the last `\t<name>` line.
+ */
+function parseLitterDrops(input: string): Map<string, string> {
+  const map = new Map<string, string>();
+  const lines = input.split('\n');
+  let currentName: string | null = null;
+  let pendingItem: string | null = null;
+
+  const flush = () => {
+    if (currentName && pendingItem) map.set(currentName, pendingItem);
+    currentName = null;
+    pendingItem = null;
+  };
+
+  const headerRe = /^#\d+\s*\t.*?\t([^\t]+?)\s*\t?\s*$/;
+  for (const raw of lines) {
+    const m = raw.match(headerRe);
+    if (m) {
+      flush();
+      currentName = m[1]?.trim() ?? null;
+      continue;
+    }
+    if (currentName && raw.startsWith('\t')) {
+      // tab-prefixed item line
+      pendingItem = raw.slice(1).trim();
+    }
+  }
+  flush();
+  return map;
+}
 
 function slug(name: string): string {
   return name
@@ -68,6 +108,8 @@ function specialtyCanonical(s: string): string | null {
 
 const tsv = readFileSync(SRC, 'utf8');
 const rows = parseTSVRows(tsv);
+const litterByName = parseLitterDrops(readFileSync(LITTER_SRC, 'utf8'));
+const usedLitter = new Set<string>();
 
 type Out = {
   id: string;
@@ -78,6 +120,7 @@ type Out = {
   habitat: string;
   favorites: string[];
   taste: string;
+  litterDrop: string | null;
 };
 
 const seen = new Set<string>();
@@ -150,6 +193,17 @@ for (const cells of rows) {
     }
   }
 
+  let litterDrop: string | null = null;
+  if (sp1 === 'Litter' || sp2 === 'Litter') {
+    const item = litterByName.get(name) ?? null;
+    if (item) {
+      litterDrop = item;
+      usedLitter.add(name);
+    } else {
+      errors.push(`missing litter drop entry for Litter-specialty Pokémon: ${name}`);
+    }
+  }
+
   out.push({
     id,
     number,
@@ -159,7 +213,14 @@ for (const cells of rows) {
     habitat,
     favorites: favs,
     taste,
+    litterDrop,
   });
+}
+
+for (const name of litterByName.keys()) {
+  if (!usedLitter.has(name)) {
+    errors.push(`litter drop entry has no matching tracker row: ${name}`);
+  }
 }
 
 if (errors.length) {

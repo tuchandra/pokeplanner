@@ -12,6 +12,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Soft stuff', 'Cute stuff', 'Lots of water', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/bulbasaur.png',
   },
   {
@@ -23,6 +24,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Soft stuff', 'Cute stuff', 'Pretty flowers', 'Colorful stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ivysaur.png',
   },
   {
@@ -34,6 +36,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Soft stuff', 'Cute stuff', 'Pretty flowers', 'Luxury'],
     taste: 'Sour flavors',
+    litterDrop: 'Leaf',
     spriteUrl: '/sprites/venusaur.png',
   },
   {
@@ -45,6 +48,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Wooden stuff', 'Hard stuff', 'Exercise', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/charmander.png',
   },
   {
@@ -56,6 +60,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Wooden stuff', 'Hard stuff', 'Exercise', 'Rides'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/charmeleon.png',
   },
   {
@@ -67,6 +72,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Nice breezes', 'Wooden stuff', 'Exercise', 'Luxury'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/charizard.png',
   },
   {
@@ -78,6 +84,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Healing', 'Cute stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/squirtle.png',
   },
   {
@@ -89,6 +96,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Healing', 'Exercise', 'Hard stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/wartortle.png',
   },
   {
@@ -100,6 +108,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Healing', 'Exercise', 'Luxury'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/blastoise.png',
   },
   {
@@ -111,6 +120,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Nice breezes', 'Watching stuff', 'Lots of nature', 'Play spaces'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pidgey.png',
   },
   {
@@ -128,6 +138,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Looks like food',
     ],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pidgeotto.png',
   },
   {
@@ -139,6 +150,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Nice breezes', 'Wooden stuff', 'Lots of nature', 'Luxury'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pidgeot.png',
   },
   {
@@ -150,6 +162,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Lots of dirt', 'Soft stuff', 'Pretty flowers', 'Lots of water'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/oddish.png',
   },
   {
@@ -161,6 +174,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Lots of dirt', 'Soft stuff', 'Pretty flowers', 'Garbage'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gloom.png',
   },
   {
@@ -172,6 +186,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Lots of dirt', 'Soft stuff', 'Pretty flowers', 'Colorful stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Leaf',
     spriteUrl: '/sprites/vileplume.png',
   },
   {
@@ -183,6 +198,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Pretty flowers', 'Play spaces', 'Cute stuff', 'Noisy stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/bellossom.png',
   },
   {
@@ -200,6 +216,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Looks like food',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/paras.png',
   },
   {
@@ -217,6 +234,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Strange stuff',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/parasect.png',
   },
   {
@@ -234,6 +252,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Letters and words',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/venonat.png',
   },
   {
@@ -251,6 +270,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Pretty flowers',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/venomoth.png',
   },
   {
@@ -268,6 +288,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Pretty flowers',
     ],
     taste: 'Dry flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/bellsprout.png',
   },
   {
@@ -285,6 +306,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Pretty flowers',
     ],
     taste: 'Bitter flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/weepinbell.png',
   },
   {
@@ -302,6 +324,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Pretty flowers',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/victreebel.png',
   },
   {
@@ -313,6 +336,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Strange stuff', 'Soft stuff', 'Healing'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/slowpoke.png',
   },
   {
@@ -324,6 +348,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Strange stuff', 'Group Activities', 'Healing'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/slowbro.png',
   },
   {
@@ -335,6 +360,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Strange stuff', 'Group Activities', 'Healing'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/slowking.png',
   },
   {
@@ -346,6 +372,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Metal stuff', 'Shiny stuff', 'Hard stuff', 'Group Activities'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magnemite.png',
   },
   {
@@ -357,6 +384,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Metal stuff', 'Shiny stuff', 'Gatherings', 'Group Activities'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magneton.png',
   },
   {
@@ -368,6 +396,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Metal stuff', 'Luxury', 'Gatherings', 'Hard stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magnezone.png',
   },
   {
@@ -379,6 +408,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Lots of dirt', 'Blocky stuff', 'Slender objects', 'Exercise'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/onix.png',
   },
   {
@@ -390,6 +420,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Metal stuff', 'Lots of dirt', 'Stone stuff', 'Slender objects', 'Hard stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/steelix.png',
   },
   {
@@ -401,6 +432,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of dirt', 'Construction', 'Exercise', 'Slender objects', 'Group Activities'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cubone.png',
   },
   {
@@ -412,6 +444,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of dirt', 'Construction', 'Exercise', 'Slender objects', 'Luxury'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/marowak.png',
   },
   {
@@ -423,6 +456,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Group Activities', 'Fabric', 'Stone stuff', 'Round stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tyrogue.png',
   },
   {
@@ -434,6 +468,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Group Activities', 'Fabric', 'Stone stuff', 'Round stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/hitmonlee.png',
   },
   {
@@ -445,6 +480,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Group Activities', 'Fabric', 'Stone stuff', 'Round stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/hitmonchan.png',
   },
   {
@@ -456,6 +492,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Group Activities', 'Fabric', 'Stone stuff', 'Round stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/hitmontop.png',
   },
   {
@@ -467,6 +504,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Gatherings', 'Complicated stuff', 'Soft stuff', 'Wobbly stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/koffing.png',
   },
   {
@@ -478,6 +516,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Gatherings', 'Complicated stuff', 'Soft stuff', 'Wobbly stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/weezing.png',
   },
   {
@@ -495,6 +534,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Slender objects',
     ],
     taste: 'Sour flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/tangela.png',
   },
   {
@@ -512,6 +552,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Group Activities',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/professor-tangrowth.png',
   },
   {
@@ -529,6 +570,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Watching stuff',
     ],
     taste: 'Bitter flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/tangrowth.png',
   },
   {
@@ -540,6 +582,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Nice breezes', 'Wooden stuff', 'Sharp stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/scyther.png',
   },
   {
@@ -551,6 +594,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Metal stuff', 'Wooden stuff', 'Hard stuff', 'Exercise'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/scizor.png',
   },
   {
@@ -562,6 +606,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Wooden stuff', 'Pretty flowers', 'Sharp stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pinsir.png',
   },
   {
@@ -573,6 +618,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Group Activities', 'Rides', 'Wobbly stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magikarp.png',
   },
   {
@@ -584,6 +630,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Nice breezes', 'Cleanliness', 'Slender objects'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gyarados.png',
   },
   {
@@ -595,6 +642,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: [],
     taste: 'None',
+    litterDrop: null,
     spriteUrl: '/sprites/ditto.png',
   },
   {
@@ -606,6 +654,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Soft stuff', 'Nice breezes', 'Fabric', 'Wobbly stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/hoothoot.png',
   },
   {
@@ -617,6 +666,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Soft stuff', 'Nice breezes', 'Letters and words', 'Containers', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/noctowl.png',
   },
   {
@@ -628,6 +678,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Wooden stuff', 'Pretty flowers', 'Looks like food', 'Exercise'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/heracross.png',
   },
   {
@@ -639,6 +690,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of nature', 'Wooden stuff', 'Shiny stuff', 'Cute stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/volbeat.png',
   },
   {
@@ -650,6 +702,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of nature', 'Wooden stuff', 'Shiny stuff', 'Cute stuff', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/illumise.png',
   },
   {
@@ -661,6 +714,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Cute stuff', 'Looks like food', 'Round stuff', 'Containers', 'Colorful stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gulpin.png',
   },
   {
@@ -672,6 +726,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Garbage', 'Looks like food', 'Round stuff', 'Containers', 'Colorful stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/swalot.png',
   },
   {
@@ -683,6 +738,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of nature', 'Pretty flowers', 'Cute stuff', 'Round stuff', 'Sharp stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cacnea.png',
   },
   {
@@ -694,6 +750,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of nature', 'Nice breezes', 'Luxury', 'Shiny stuff', 'Sharp stuff'],
     taste: 'Dry flavors',
+    litterDrop: 'Sturdy Stick',
     spriteUrl: '/sprites/cacturne.png',
   },
   {
@@ -705,6 +762,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Nice breezes', 'Wooden stuff', 'Gatherings', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: 'Honey',
     spriteUrl: '/sprites/combee.png',
   },
   {
@@ -722,6 +780,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Complicated stuff',
     ],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/vespiquen.png',
   },
   {
@@ -733,6 +792,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Colorful stuff', 'Containers'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/shellos.png',
   },
   {
@@ -744,6 +804,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Colorful stuff', 'Containers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/shellos-east-sea.png',
   },
   {
@@ -755,6 +816,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of dirt', 'Ocean vibes', 'Cleanliness', 'Containers'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gastrodon.png',
   },
   {
@@ -766,6 +828,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of dirt', 'Ocean vibes', 'Cleanliness', 'Containers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gastrodon-east-sea.png',
   },
   {
@@ -777,6 +840,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Spooky stuff', 'Strange stuff', 'Nice breezes', 'Cute stuff', 'Round stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/drifloon.png',
   },
   {
@@ -788,6 +852,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Spooky stuff', 'Strange stuff', 'Nice breezes', 'Wobbly stuff', 'Spinning stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/drifblim.png',
   },
   {
@@ -799,6 +864,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of dirt', 'Stone stuff', 'Lots of nature', 'Watching stuff', 'Sharp stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/drilbur.png',
   },
   {
@@ -810,6 +876,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of dirt', 'Metal stuff', 'Exercise', 'Watching stuff', 'Sharp stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/excadrill.png',
   },
   {
@@ -821,6 +888,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Wooden stuff', 'Slender objects', 'Blocky stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/timburr.png',
   },
   {
@@ -832,6 +900,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Metal stuff', 'Slender objects', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gurdurr.png',
   },
   {
@@ -843,6 +912,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Stone stuff', 'Slender objects', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/conkeldurr.png',
   },
   {
@@ -854,6 +924,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Spooky stuff', 'Strange stuff', 'Lots of fire', 'Wobbly stuff', 'Blocky stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/litwick.png',
   },
   {
@@ -865,6 +936,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Spooky stuff', 'Strange stuff', 'Lots of fire', 'Wobbly stuff', 'Containers'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lampent.png',
   },
   {
@@ -876,6 +948,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Spooky stuff', 'Strange stuff', 'Lots of fire', 'Wobbly stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/chandelure.png',
   },
   {
@@ -887,6 +960,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of fire', 'Luxury', 'Lots of dirt', 'Hard stuff', 'Sharp stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/axew.png',
   },
   {
@@ -898,6 +972,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of fire', 'Luxury', 'Lots of dirt', 'Exercise', 'Sharp stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/fraxure.png',
   },
   {
@@ -909,6 +984,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of fire', 'Luxury', 'Lots of dirt', 'Exercise', 'Sharp stuff'],
     taste: 'Sour flavors',
+    litterDrop: 'Small log',
     spriteUrl: '/sprites/haxorus.png',
   },
   {
@@ -920,6 +996,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Luxury', 'Lots of nature', 'Cleanliness', 'Healing'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/goomy.png',
   },
   {
@@ -931,6 +1008,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Luxury', 'Soft stuff', 'Cleanliness', 'Healing'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/sliggoo.png',
   },
   {
@@ -942,6 +1020,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Luxury', 'Exercise', 'Cleanliness', 'Healing'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/goodra.png',
   },
   {
@@ -959,6 +1038,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Looks like food',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cramorant.png',
   },
   {
@@ -970,6 +1050,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Cute stuff', 'Pretty flowers', 'Fabric'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pichu.png',
   },
   {
@@ -981,6 +1062,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Cute stuff', 'Healing', 'Letters and words'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/peakychu.png',
   },
   {
@@ -992,6 +1074,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Group Activities', 'Round stuff', 'Rides'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pikachu.png',
   },
   {
@@ -1003,6 +1086,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Group Activities', 'Round stuff', 'Play spaces'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/raichu.png',
   },
   {
@@ -1014,6 +1098,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Nice breezes', 'Wooden stuff', 'Noisy stuff', 'Complicated stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/zubat.png',
   },
   {
@@ -1025,6 +1110,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Nice breezes', 'Wooden stuff', 'Noisy stuff', 'Complicated stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/golbat.png',
   },
   {
@@ -1036,6 +1122,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Nice breezes', 'Wooden stuff', 'Garbage', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/crobat.png',
   },
   {
@@ -1047,6 +1134,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Containers', 'Group Activities', 'Shiny stuff', 'Glass stuff', 'Luxury'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/meowth.png',
   },
   {
@@ -1058,6 +1146,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Containers', 'Group Activities', 'Shiny stuff', 'Watching stuff', 'Luxury'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/persian.png',
   },
   {
@@ -1069,6 +1158,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Strange stuff', 'Complicated stuff', 'Healing'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/psyduck.png',
   },
   {
@@ -1086,6 +1176,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Sharp stuff',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/golduck.png',
   },
   {
@@ -1103,6 +1194,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Pretty flowers',
     ],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/growlithe.png',
   },
   {
@@ -1114,6 +1206,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Nice breezes', 'Watching stuff', 'Symbols'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/arcanine.png',
   },
   {
@@ -1125,6 +1218,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Nice breezes', 'Wooden stuff', 'Slender objects', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/farfetch-d.png',
   },
   {
@@ -1136,6 +1230,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Spooky stuff', 'Gatherings', 'Shiny stuff', 'Containers'],
     taste: 'Bitter flavors',
+    litterDrop: 'Nonburnable Garbage',
     spriteUrl: '/sprites/grimer.png',
   },
   {
@@ -1147,6 +1242,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Spooky stuff', 'Gatherings', 'Shiny stuff', 'Colorful stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Nonburnable Garbage',
     spriteUrl: '/sprites/muk.png',
   },
   {
@@ -1158,6 +1254,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Garbage', 'Containers', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gastly.png',
   },
   {
@@ -1169,6 +1266,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Garbage', 'Wobbly stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/haunter.png',
   },
   {
@@ -1180,6 +1278,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Garbage', 'Rides', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gengar.png',
   },
   {
@@ -1191,6 +1290,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Round stuff', 'Colorful stuff', 'Spinning stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/voltorb.png',
   },
   {
@@ -1202,6 +1302,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Round stuff', 'Play spaces', 'Spinning stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/electrode.png',
   },
   {
@@ -1219,6 +1320,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Group Activities',
     ],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/exeggcute.png',
   },
   {
@@ -1230,6 +1332,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Strange stuff', 'Gatherings', 'Watching stuff', 'Wooden stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/exeggutor.png',
   },
   {
@@ -1241,6 +1344,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Healing', 'Round stuff', 'Containers'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/happiny.png',
   },
   {
@@ -1252,6 +1356,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Healing', 'Round stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/chansey.png',
   },
   {
@@ -1263,6 +1368,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Healing', 'Round stuff', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: 'Stone',
     spriteUrl: '/sprites/blissey.png',
   },
   {
@@ -1274,6 +1380,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Cute stuff', 'Round stuff', 'Spinning stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/elekid.png',
   },
   {
@@ -1285,6 +1392,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Lots of fire', 'Sharp stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/electabuzz.png',
   },
   {
@@ -1296,6 +1404,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Lots of fire', 'Hard stuff', 'Exercise'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/electivire.png',
   },
   {
@@ -1307,6 +1416,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Watching stuff', 'Healing'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lapras.png',
   },
   {
@@ -1324,6 +1434,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Group Activities',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/munchlax.png',
   },
   {
@@ -1335,6 +1446,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Looks like food', 'Watching stuff', 'Strange stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mosslax.png',
   },
   {
@@ -1346,6 +1458,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Fabric', 'Looks like food', 'Wobbly stuff', 'Rides'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/snorlax.png',
   },
   {
@@ -1357,6 +1470,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Wooden stuff', 'Garbage', 'Rides', 'Colorful stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Twine',
     spriteUrl: '/sprites/spinarak.png',
   },
   {
@@ -1368,6 +1482,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Wooden stuff', 'Garbage', 'Rides', 'Colorful stuff'],
     taste: 'Sour flavors',
+    litterDrop: 'Twine',
     spriteUrl: '/sprites/ariados.png',
   },
   {
@@ -1379,6 +1494,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Glass stuff', 'Cute stuff', 'Fabric'],
     taste: 'Sweet flavors',
+    litterDrop: 'Fluff',
     spriteUrl: '/sprites/mareep.png',
   },
   {
@@ -1390,6 +1506,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Glass stuff', 'Cute stuff', 'Rides'],
     taste: 'Bitter flavors',
+    litterDrop: 'Fluff',
     spriteUrl: '/sprites/flaaffy.png',
   },
   {
@@ -1401,6 +1518,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Glass stuff', 'Cute stuff', 'Pretty flowers'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ampharos.png',
   },
   {
@@ -1412,6 +1530,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cute stuff', 'Cleanliness', 'Healing', 'Rides'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/azurill.png',
   },
   {
@@ -1423,6 +1542,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cute stuff', 'Cleanliness', 'Round stuff', 'Symbols'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/marill.png',
   },
   {
@@ -1434,6 +1554,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cute stuff', 'Construction', 'Wobbly stuff', 'Symbols'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/azumarill.png',
   },
   {
@@ -1445,6 +1566,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Garbage', 'Lots of dirt', 'Stone stuff', 'Cleanliness', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: 'Squishy Clay',
     spriteUrl: '/sprites/paldean-wooper.png',
   },
   {
@@ -1456,6 +1578,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Garbage', 'Lots of dirt', 'Lots of water', 'Cleanliness', 'Round stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Squishy Clay',
     spriteUrl: '/sprites/clodsire.png',
   },
   {
@@ -1467,6 +1590,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Strange stuff', 'Colorful stuff', 'Shiny stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/smeargle.png',
   },
   {
@@ -1478,6 +1602,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Cute stuff', 'Containers', 'Pretty flowers'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/torchic.png',
   },
   {
@@ -1489,6 +1614,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Exercise', 'Containers', 'Construction'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/combusken.png',
   },
   {
@@ -1500,6 +1626,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Luxury', 'Exercise', 'Containers', 'Construction'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/blaziken.png',
   },
   {
@@ -1511,6 +1638,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Nice breezes', 'Cleanliness', 'Ocean vibes', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/wingull.png',
   },
   {
@@ -1522,6 +1650,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Nice breezes', 'Cleanliness', 'Ocean vibes', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pelipper.png',
   },
   {
@@ -1533,6 +1662,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Fabric', 'Round stuff', 'Wooden stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/makuhita.png',
   },
   {
@@ -1544,6 +1674,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Fabric', 'Round stuff', 'Rides'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/hariyama.png',
   },
   {
@@ -1555,6 +1686,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Soft stuff', 'Nice breezes', 'Letters and words', 'Complicated stuff', 'Exercise'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/absol.png',
   },
   {
@@ -1566,6 +1698,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Nice breezes', 'Cleanliness', 'Containers'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/piplup.png',
   },
   {
@@ -1577,6 +1710,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Nice breezes', 'Cleanliness', 'Containers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/prinplup.png',
   },
   {
@@ -1588,6 +1722,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Metal stuff', 'Cleanliness', 'Letters and words'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/empoleon.png',
   },
   {
@@ -1599,6 +1734,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Healing', 'Cute stuff', 'Round stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/audino.png',
   },
   {
@@ -1610,6 +1746,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Garbage', 'Containers', 'Complicated stuff', 'Shiny stuff', 'Gatherings'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/trubbish.png',
   },
   {
@@ -1621,6 +1758,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Garbage', 'Containers', 'Complicated stuff', 'Shiny stuff', 'Gatherings'],
     taste: 'Sour flavors',
+    litterDrop: 'Nonburnable Garbage',
     spriteUrl: '/sprites/garbodor.png',
   },
   {
@@ -1632,6 +1770,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Shiny stuff', 'Luxury', 'Glass stuff', 'Cute stuff', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/zorua.png',
   },
   {
@@ -1643,6 +1782,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Shiny stuff', 'Luxury', 'Glass stuff', 'Strange stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/zoroark.png',
   },
   {
@@ -1654,6 +1794,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Rides', 'Cute stuff', 'Cleanliness'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/minccino.png',
   },
   {
@@ -1665,6 +1806,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Fabric', 'Rides', 'Cute stuff', 'Cleanliness'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cinccino.png',
   },
   {
@@ -1676,6 +1818,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Electronics', 'Watching stuff', 'Lots of dirt', 'Containers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/grubbin.png',
   },
   {
@@ -1687,6 +1830,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Electronics', 'Watching stuff', 'Glass stuff', 'Blocky stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/charjabug.png',
   },
   {
@@ -1698,6 +1842,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Electronics', 'Exercise', 'Glass stuff', 'Nice breezes'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/vikavolt.png',
   },
   {
@@ -1709,6 +1854,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Cute stuff', 'Electronics', 'Fabric', 'Group Activities'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mimikyu.png',
   },
   {
@@ -1720,6 +1866,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Cute stuff', 'Glass stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pawmi.png',
   },
   {
@@ -1731,6 +1878,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Exercise', 'Glass stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pawmo.png',
   },
   {
@@ -1742,6 +1890,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Exercise', 'Healing', 'Group Activities'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pawmot.png',
   },
   {
@@ -1759,6 +1908,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Gatherings',
     ],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tatsugiri-curly-form.png',
   },
   {
@@ -1776,6 +1926,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Blocky stuff',
     ],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tatsugiri-droopy-form.png',
   },
   {
@@ -1793,6 +1944,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Containers',
     ],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tatsugiri-stretchy-form.png',
   },
   {
@@ -1804,6 +1956,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Watching stuff', 'Lots of nature', 'Slender objects', 'Spinning stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ekans.png',
   },
   {
@@ -1815,6 +1968,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Garbage', 'Watching stuff', 'Lots of nature', 'Slender objects', 'Spinning stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/arbok.png',
   },
   {
@@ -1826,6 +1980,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Cute stuff', 'Round stuff', 'Colorful stuff', 'Healing', 'Rides'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cleffa.png',
   },
   {
@@ -1837,6 +1992,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Cute stuff', 'Play spaces', 'Pretty flowers', 'Healing', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/clefairy.png',
   },
   {
@@ -1848,6 +2004,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Cute stuff', 'Play spaces', 'Pretty flowers', 'Healing', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/clefable.png',
   },
   {
@@ -1859,6 +2016,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Cute stuff', 'Play spaces', 'Healing', 'Noisy stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/igglybuff.png',
   },
   {
@@ -1870,6 +2028,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Cute stuff', 'Play spaces', 'Healing', 'Wobbly stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/jigglypuff.png',
   },
   {
@@ -1881,6 +2040,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Cute stuff', 'Play spaces', 'Healing', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/wigglytuff.png',
   },
   {
@@ -1892,6 +2052,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of dirt', 'Play spaces', 'Cute stuff', 'Group Activities', 'Slender objects'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/diglett.png',
   },
   {
@@ -1903,6 +2064,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of dirt', 'Play spaces', 'Gatherings', 'Group Activities', 'Slender objects'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dugtrio.png',
   },
   {
@@ -1914,6 +2076,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Stone stuff', 'Hard stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/machop.png',
   },
   {
@@ -1925,6 +2088,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Stone stuff', 'Hard stuff', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/machoke.png',
   },
   {
@@ -1936,6 +2100,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Exercise', 'Construction', 'Stone stuff', 'Hard stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/machamp.png',
   },
   {
@@ -1947,6 +2112,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Spinning stuff', 'Round stuff', 'Exercise'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/geodude.png',
   },
   {
@@ -1958,6 +2124,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Spinning stuff', 'Round stuff', 'Exercise'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/graveler.png',
   },
   {
@@ -1969,6 +2136,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Spinning stuff', 'Round stuff', 'Exercise'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/golem.png',
   },
   {
@@ -1980,6 +2148,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Watching stuff', 'Cute stuff', 'Wobbly stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magby.png',
   },
   {
@@ -1991,6 +2160,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Electronics', 'Hard stuff', 'Exercise'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magmar.png',
   },
   {
@@ -2002,6 +2172,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Electronics', 'Hard stuff', 'Exercise'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/magmortar.png',
   },
   {
@@ -2013,6 +2184,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Lots of nature', 'Wooden stuff', 'Round stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/bonsly.png',
   },
   {
@@ -2024,6 +2196,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Lots of nature', 'Wooden stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/sudowoodo.png',
   },
   {
@@ -2035,6 +2208,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Shiny stuff', 'Nice breezes', 'Group Activities', 'Luxury', 'Fabric'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/murkrow.png',
   },
   {
@@ -2046,6 +2220,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Shiny stuff', 'Nice breezes', 'Spooky stuff', 'Letters and words', 'Glass stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/honchkrow.png',
   },
   {
@@ -2057,6 +2232,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Lots of dirt', 'Luxury', 'Shiny stuff', 'Looks like food'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/larvitar.png',
   },
   {
@@ -2068,6 +2244,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Luxury', 'Shiny stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/pupitar.png',
   },
   {
@@ -2079,6 +2256,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Luxury', 'Shiny stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tyranitar.png',
   },
   {
@@ -2090,6 +2268,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of nature', 'Cleanliness', 'Containers', 'Noisy stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lotad.png',
   },
   {
@@ -2101,6 +2280,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of nature', 'Cleanliness', 'Containers', 'Noisy stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lombre.png',
   },
   {
@@ -2112,6 +2292,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of nature', 'Play spaces', 'Containers', 'Noisy stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ludicolo.png',
   },
   {
@@ -2129,6 +2310,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Group Activities',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mawile.png',
   },
   {
@@ -2140,6 +2322,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Metal stuff', 'Hard stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/torkoal.png',
   },
   {
@@ -2157,6 +2340,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Watching stuff',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kricketot.png',
   },
   {
@@ -2174,6 +2358,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Watching stuff',
     ],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kricketune.png',
   },
   {
@@ -2185,6 +2370,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Nice breezes', 'Fabric', 'Slender objects', 'Play spaces', 'Noisy stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/chatot.png',
   },
   {
@@ -2196,6 +2382,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Exercise', 'Fabric', 'Construction', 'Gatherings', 'Watching stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/riolu.png',
   },
   {
@@ -2207,6 +2394,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Exercise', 'Metal stuff', 'Construction', 'Complicated stuff', 'Healing'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lucario.png',
   },
   {
@@ -2218,6 +2406,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Shiny stuff', 'Glass stuff', 'Noisy stuff', 'Group Activities', 'Blocky stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/stereo-rotom.png',
   },
   {
@@ -2229,6 +2418,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of nature', 'Lots of fire', 'Sharp stuff', 'Wooden stuff', 'Symbols'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/larvesta.png',
   },
   {
@@ -2240,6 +2430,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of nature', 'Lots of fire', 'Letters and words', 'Wooden stuff', 'Symbols'],
     taste: 'Dry flavors',
+    litterDrop: 'Twine',
     spriteUrl: '/sprites/volcarona.png',
   },
   {
@@ -2251,6 +2442,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of nature', 'Wooden stuff', 'Nice breezes', 'Containers', 'Spinning stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/rowlet.png',
   },
   {
@@ -2262,6 +2454,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Lots of nature', 'Wooden stuff', 'Nice breezes', 'Slender objects', 'Cleanliness'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dartrix.png',
   },
   {
@@ -2279,6 +2472,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Letters and words',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/decidueye.png',
   },
   {
@@ -2290,6 +2484,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Soft stuff', 'Group Activities', 'Sharp stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/scorbunny.png',
   },
   {
@@ -2301,6 +2496,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Play spaces', 'Group Activities', 'Construction'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/raboot.png',
   },
   {
@@ -2312,6 +2508,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Play spaces', 'Group Activities', 'Round stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cinderace.png',
   },
   {
@@ -2323,6 +2520,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Wooden stuff', 'Watching stuff', 'Looks like food', 'Round stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/skwovet.png',
   },
   {
@@ -2334,6 +2532,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Metal stuff', 'Group Activities', 'Looks like food', 'Luxury'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/greedent.png',
   },
   {
@@ -2345,6 +2544,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Stone stuff', 'Lots of fire', 'Hard stuff', 'Metal stuff', 'Rides'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/rolycoly.png',
   },
   {
@@ -2356,6 +2556,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Stone stuff', 'Lots of fire', 'Hard stuff', 'Metal stuff', 'Rides'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/carkol.png',
   },
   {
@@ -2367,6 +2568,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Stone stuff', 'Lots of fire', 'Hard stuff', 'Metal stuff', 'Rides'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/coalossal.png',
   },
   {
@@ -2378,6 +2580,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Electronics', 'Shiny stuff', 'Noisy stuff', 'Glass stuff', 'Garbage'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/toxel.png',
   },
   {
@@ -2389,6 +2592,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Electronics', 'Play spaces', 'Noisy stuff', 'Slender objects', 'Sharp stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/toxtricity-amped-form.png',
   },
   {
@@ -2400,6 +2604,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Electronics', 'Play spaces', 'Noisy stuff', 'Slender objects', 'Sharp stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/toxtricity-low-key-form.png',
   },
   {
@@ -2411,6 +2616,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Cute stuff', 'Watching stuff', 'Soft stuff', 'Lots of fire', 'Letters and words'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/fidough.png',
   },
   {
@@ -2428,6 +2634,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Looks like food',
     ],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dachsbun.png',
   },
   {
@@ -2439,6 +2646,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Strange stuff', 'Exercise', 'Luxury'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/charcadet.png',
   },
   {
@@ -2450,6 +2658,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Strange stuff', 'Exercise', 'Luxury'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/armarouge.png',
   },
   {
@@ -2461,6 +2670,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Spooky stuff', 'Strange stuff', 'Luxury'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ceruledge.png',
   },
   {
@@ -2472,6 +2682,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Garbage', 'Shiny stuff', 'Complicated stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Iron Ore',
     spriteUrl: '/sprites/glimmet.png',
   },
   {
@@ -2483,6 +2694,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Garbage', 'Shiny stuff', 'Complicated stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Iron Ore',
     spriteUrl: '/sprites/glimmora.png',
   },
   {
@@ -2494,6 +2706,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Metal stuff', 'Strange stuff', 'Shiny stuff', 'Complicated stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gimmighoul.png',
   },
   {
@@ -2505,6 +2718,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Spooky stuff', 'Metal stuff', 'Strange stuff', 'Shiny stuff', 'Complicated stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gholdengo.png',
   },
   {
@@ -2516,6 +2730,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Soft stuff', 'Cute stuff', 'Round stuff', 'Pretty flowers'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/vulpix.png',
   },
   {
@@ -2527,6 +2742,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Soft stuff', 'Watching stuff', 'Luxury', 'Pretty flowers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ninetales.png',
   },
   {
@@ -2538,6 +2754,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Round stuff', 'Rides', 'Spinning stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/poliwag.png',
   },
   {
@@ -2549,6 +2766,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Lots of nature', 'Exercise', 'Spinning stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/poliwhirl.png',
   },
   {
@@ -2560,6 +2778,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Construction', 'Exercise', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/poliwrath.png',
   },
   {
@@ -2571,6 +2790,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Play spaces', 'Noisy stuff', 'Gatherings', 'Group Activities'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/politoed.png',
   },
   {
@@ -2582,6 +2802,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Strange stuff', 'Wobbly stuff', 'Metal stuff', 'Soft stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/abra.png',
   },
   {
@@ -2593,6 +2814,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Strange stuff', 'Wobbly stuff', 'Metal stuff', 'Containers', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kadabra.png',
   },
   {
@@ -2610,6 +2832,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Watching stuff',
     ],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/alakazam.png',
   },
   {
@@ -2621,6 +2844,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Cute stuff', 'Rides', 'Play spaces', 'Colorful stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mime-jr.png',
   },
   {
@@ -2632,6 +2856,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Cute stuff', 'Rides', 'Wobbly stuff', 'Lots of water'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mr-mime.png',
   },
   {
@@ -2643,6 +2868,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Strange stuff', 'Blocky stuff', 'Construction', 'Colorful stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/porygon.png',
   },
   {
@@ -2654,6 +2880,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Strange stuff', 'Round stuff', 'Construction', 'Colorful stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/porygon2.png',
   },
   {
@@ -2665,6 +2892,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Strange stuff', 'Fabric', 'Watching stuff', 'Colorful stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/porygon-z.png',
   },
   {
@@ -2676,6 +2904,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of fire', 'Cleanliness', 'Cute stuff', 'Slender objects'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dratini.png',
   },
   {
@@ -2687,6 +2916,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Lots of fire', 'Cleanliness', 'Glass stuff', 'Slender objects'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dragonair.png',
   },
   {
@@ -2698,6 +2928,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of fire', 'Nice breezes', 'Cleanliness', 'Symbols', 'Pretty flowers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dragonite.png',
   },
   {
@@ -2709,6 +2940,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Fabric', 'Slender objects', 'Metal stuff', 'Rides'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cyndaquil.png',
   },
   {
@@ -2720,6 +2952,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Fabric', 'Slender objects', 'Metal stuff', 'Rides'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/quilava.png',
   },
   {
@@ -2731,6 +2964,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Fabric', 'Slender objects', 'Metal stuff', 'Rides'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/typhlosion.png',
   },
   {
@@ -2742,6 +2976,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Shiny stuff', 'Colorful stuff', 'Watching stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/misdreavus.png',
   },
   {
@@ -2753,6 +2988,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Noisy stuff', 'Wobbly stuff', 'Group Activities'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mismagius.png',
   },
   {
@@ -2764,6 +3000,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Strange stuff', 'Rides', 'Watching stuff', 'Slender objects'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/girafarig.png',
   },
   {
@@ -2775,6 +3012,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Strange stuff', 'Rides', 'Watching stuff', 'Slender objects'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/farigiraf.png',
   },
   {
@@ -2786,6 +3024,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Cute stuff', 'Healing', 'Watching stuff', 'Symbols'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ralts.png',
   },
   {
@@ -2797,6 +3036,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Cute stuff', 'Healing', 'Watching stuff', 'Symbols'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kirlia.png',
   },
   {
@@ -2808,6 +3048,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Luxury', 'Healing', 'Watching stuff', 'Symbols'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gardevoir.png',
   },
   {
@@ -2819,6 +3060,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Strange stuff', 'Exercise', 'Healing', 'Construction', 'Fabric'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/gallade.png',
   },
   {
@@ -2830,6 +3072,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Soft stuff', 'Cute stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/plusle.png',
   },
   {
@@ -2841,6 +3084,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Glass stuff', 'Soft stuff', 'Cute stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/minun.png',
   },
   {
@@ -2852,6 +3096,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of dirt', 'Hard stuff', 'Strange stuff', 'Watching stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: 'Squishy Clay',
     spriteUrl: '/sprites/trapinch.png',
   },
   {
@@ -2863,6 +3108,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of dirt', 'Lots of fire', 'Lots of nature', 'Luxury', 'Noisy stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/vibrava.png',
   },
   {
@@ -2874,6 +3120,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Lots of dirt', 'Lots of fire', 'Lots of nature', 'Stone stuff', 'Wooden stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/flygon.png',
   },
   {
@@ -2885,6 +3132,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Nice breezes', 'Cute stuff', 'Watching stuff', 'Cleanliness'],
     taste: 'Sweet flavors',
+    litterDrop: 'Fluff',
     spriteUrl: '/sprites/swablu.png',
   },
   {
@@ -2896,6 +3144,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Soft stuff', 'Nice breezes', 'Cute stuff', 'Watching stuff', 'Noisy stuff'],
     taste: 'Sour flavors',
+    litterDrop: 'Fluff',
     spriteUrl: '/sprites/altaria.png',
   },
   {
@@ -2907,6 +3156,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Rides', 'Glass stuff', 'Fabric'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/duskull.png',
   },
   {
@@ -2918,6 +3168,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Rides', 'Soft stuff', 'Containers'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dusclops.png',
   },
   {
@@ -2929,6 +3180,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Spooky stuff', 'Strange stuff', 'Rides', 'Group Activities', 'Containers'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dusknoir.png',
   },
   {
@@ -2940,6 +3192,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Metal stuff', 'Strange stuff', 'Hard stuff', 'Complicated stuff', 'Stone stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/beldum.png',
   },
   {
@@ -2951,6 +3204,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Metal stuff', 'Strange stuff', 'Hard stuff', 'Complicated stuff', 'Stone stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/metang.png',
   },
   {
@@ -2962,6 +3216,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Metal stuff', 'Strange stuff', 'Hard stuff', 'Exercise', 'Luxury'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/metagross.png',
   },
   {
@@ -2973,6 +3228,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Wooden stuff', 'Lots of water', 'Wobbly stuff', 'Shiny stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/snivy.png',
   },
   {
@@ -2984,6 +3240,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Wooden stuff', 'Lots of water', 'Cleanliness', 'Shiny stuff'],
     taste: 'Bitter flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/servine.png',
   },
   {
@@ -2995,6 +3252,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of nature', 'Wooden stuff', 'Lots of water', 'Containers', 'Slender objects'],
     taste: 'Dry flavors',
+    litterDrop: 'Vine Rope',
     spriteUrl: '/sprites/serperior.png',
   },
   {
@@ -3006,6 +3264,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Watching stuff', 'Containers'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/froakie.png',
   },
   {
@@ -3017,6 +3276,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Watching stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/frogadier.png',
   },
   {
@@ -3028,6 +3288,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Shiny stuff', 'Exercise'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/greninja.png',
   },
   {
@@ -3045,6 +3306,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Looks like food',
     ],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dedenne.png',
   },
   {
@@ -3056,6 +3318,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Nice breezes', 'Lots of fire', 'Watching stuff', 'Luxury', 'Looks like food'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/noibat.png',
   },
   {
@@ -3067,6 +3330,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Nice breezes', 'Lots of fire', 'Lots of water', 'Play spaces', 'Looks like food'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/noivern.png',
   },
   {
@@ -3078,6 +3342,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Nice breezes', 'Shiny stuff', 'Containers', 'Slender objects', 'Wooden stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/rookidee.png',
   },
   {
@@ -3089,6 +3354,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Nice breezes', 'Shiny stuff', 'Containers', 'Slender objects', 'Wooden stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/corvisquire.png',
   },
   {
@@ -3100,6 +3366,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Nice breezes', 'Metal stuff', 'Shiny stuff', 'Containers', 'Wooden stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/corviknight.png',
   },
   {
@@ -3111,6 +3378,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of fire', 'Spooky stuff', 'Rides', 'Strange stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dreepy.png',
   },
   {
@@ -3122,6 +3390,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of fire', 'Spooky stuff', 'Rides', 'Strange stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/drakloak.png',
   },
   {
@@ -3133,6 +3402,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of fire', 'Spooky stuff', 'Rides', 'Strange stuff', 'Group Activities'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/dragapult.png',
   },
   {
@@ -3144,6 +3414,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Pretty flowers', 'Containers', 'Colorful stuff', 'Cute stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/sprigatito.png',
   },
   {
@@ -3155,6 +3426,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Pretty flowers', 'Sharp stuff', 'Colorful stuff', 'Cute stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/floragato.png',
   },
   {
@@ -3166,6 +3438,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Pretty flowers', 'Shiny stuff', 'Luxury', 'Cute stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/meowscarada.png',
   },
   {
@@ -3177,6 +3450,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Nice breezes', 'Ocean vibes', 'Gatherings', 'Complicated stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/wattrel.png',
   },
   {
@@ -3188,6 +3462,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Nice breezes', 'Ocean vibes', 'Gatherings', 'Slender objects'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kilowattrel.png',
   },
   {
@@ -3199,6 +3474,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Cute stuff', 'Metal stuff', 'Construction', 'Looks like food', 'Exercise'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tinkatink.png',
   },
   {
@@ -3210,6 +3486,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Cute stuff', 'Metal stuff', 'Construction', 'Group Activities', 'Exercise'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tinkatuff.png',
   },
   {
@@ -3221,6 +3498,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Cute stuff', 'Metal stuff', 'Construction', 'Blocky stuff', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tinkaton.png',
   },
   {
@@ -3232,6 +3510,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Nice breezes', 'Hard stuff', 'Shiny stuff', 'Spinning stuff'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/aerodactyl.png',
   },
   {
@@ -3243,6 +3522,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Wobbly stuff', 'Group Activities', 'Exercise'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/cranidos.png',
   },
   {
@@ -3254,6 +3534,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Metal stuff', 'Luxury', 'Exercise'],
     taste: 'Dry flavors',
+    litterDrop: 'Stone',
     spriteUrl: '/sprites/rampardos.png',
   },
   {
@@ -3265,6 +3546,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Metal stuff', 'Luxury', 'Round stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/shieldon.png',
   },
   {
@@ -3276,6 +3558,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Stone stuff', 'Hard stuff', 'Metal stuff', 'Luxury', 'Exercise'],
     taste: 'Bitter flavors',
+    litterDrop: 'Stone',
     spriteUrl: '/sprites/bastiodon.png',
   },
   {
@@ -3287,6 +3570,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Lots of fire', 'Luxury', 'Exercise'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/tyrunt.png',
   },
   {
@@ -3298,6 +3582,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dry',
     favorites: ['Stone stuff', 'Hard stuff', 'Lots of fire', 'Luxury', 'Exercise'],
     taste: 'Sour flavors',
+    litterDrop: 'Stone',
     spriteUrl: '/sprites/tyrantrum.png',
   },
   {
@@ -3309,6 +3594,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Stone stuff', 'Hard stuff', 'Shiny stuff', 'Group Activities', 'Containers'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/amaura.png',
   },
   {
@@ -3320,6 +3606,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Stone stuff', 'Hard stuff', 'Shiny stuff', 'Noisy stuff', 'Symbols'],
     taste: 'Sour flavors',
+    litterDrop: 'Stone',
     spriteUrl: '/sprites/aurorus.png',
   },
   {
@@ -3331,6 +3618,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Soft stuff', 'Stone stuff', 'Cute stuff', 'Letters and words', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/eevee.png',
   },
   {
@@ -3342,6 +3630,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Cleanliness', 'Cute stuff', 'Pretty flowers', 'Watching stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/vaporeon.png',
   },
   {
@@ -3353,6 +3642,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Shiny stuff', 'Cute stuff', 'Glass stuff', 'Sharp stuff'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/jolteon.png',
   },
   {
@@ -3364,6 +3654,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Wooden stuff', 'Cute stuff', 'Metal stuff', 'Rides'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/flareon.png',
   },
   {
@@ -3381,6 +3672,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Watching stuff',
     ],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/espeon.png',
   },
   {
@@ -3392,6 +3684,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Dark',
     favorites: ['Shiny stuff', 'Luxury', 'Cute stuff', 'Letters and words', 'Watching stuff'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/umbreon.png',
   },
   {
@@ -3403,6 +3696,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Lots of nature', 'Pretty flowers', 'Cute stuff', 'Fabric', 'Healing'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/leafeon.png',
   },
   {
@@ -3414,6 +3708,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Lots of water', 'Shiny stuff', 'Cute stuff', 'Glass stuff', 'Group Activities'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/glaceon.png',
   },
   {
@@ -3425,6 +3720,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Cute stuff', 'Lots of nature', 'Fabric', 'Noisy stuff', 'Round stuff'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/sylveon.png',
   },
   {
@@ -3436,6 +3732,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Luxury', 'Shiny stuff', 'Glass stuff'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/kyogre.png',
   },
   {
@@ -3447,6 +3744,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Nice breezes', 'Shiny stuff', 'Glass stuff', 'Luxury'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/raikou.png',
   },
   {
@@ -3458,6 +3756,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Stone stuff', 'Symbols', 'Exercise', 'Luxury'],
     taste: 'Bitter flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/entei.png',
   },
   {
@@ -3469,6 +3768,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Lots of water', 'Ocean vibes', 'Cleanliness', 'Watching stuff', 'Healing'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/suicune.png',
   },
   {
@@ -3480,6 +3780,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Lots of water', 'Stone stuff', 'Containers', 'Symbols'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/volcanion.png',
   },
   {
@@ -3491,6 +3792,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Cool',
     favorites: ['Lots of water', 'Nice breezes', 'Shiny stuff', 'Symbols', 'Luxury'],
     taste: 'Sour flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/articuno.png',
   },
   {
@@ -3502,6 +3804,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Bright',
     favorites: ['Electronics', 'Nice breezes', 'Glass stuff', 'Symbols', 'Luxury'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/zapdos.png',
   },
   {
@@ -3513,6 +3816,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Nice breezes', 'Stone stuff', 'Symbols', 'Luxury'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/moltres.png',
   },
   {
@@ -3524,6 +3828,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Humid',
     favorites: ['Strange stuff', 'Nice breezes', 'Lots of water', 'Ocean vibes', 'Symbols'],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/lugia.png',
   },
   {
@@ -3535,6 +3840,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Lots of fire', 'Wooden stuff', 'Nice breezes', 'Lots of nature', 'Symbols'],
     taste: 'Spicy flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/ho-oh.png',
   },
   {
@@ -3552,6 +3858,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
       'Stone stuff',
     ],
     taste: 'Dry flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mewtwo.png',
   },
   {
@@ -3563,6 +3870,7 @@ export const POKEMON_RAW: readonly Pokemon[] = [
     habitat: 'Warm',
     favorites: ['Strange stuff', 'Watching stuff', 'Luxury', 'Complicated stuff', 'Play spaces'],
     taste: 'Sweet flavors',
+    litterDrop: null,
     spriteUrl: '/sprites/mew.png',
   },
 ] as const;
