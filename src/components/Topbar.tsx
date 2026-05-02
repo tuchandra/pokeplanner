@@ -90,7 +90,7 @@ function ListIcon() {
 }
 
 function ComposePopover({ onClose }: { onClose: () => void }) {
-  const { pendingType, pendingSlots, pendingLocation } = useStore((s) => s.filters);
+  const { pendingType, pendingSlots, activeLocation } = useStore((s) => s.filters);
   const setFilter = useStore((s) => s.setFilter);
   const addHouse = useStore((s) => s.addHouse);
   const ref = useRef<HTMLDivElement>(null);
@@ -102,7 +102,6 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
     function onEsc(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();
     }
-    // defer attach so the click that opened the popover doesn't immediately close it
     const t = setTimeout(() => document.addEventListener('mousedown', onDoc), 0);
     document.addEventListener('keydown', onEsc);
     return () => {
@@ -113,6 +112,9 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   const slotOptions: readonly (1 | 2 | 4)[] = pendingType === 'custom' ? [1, 4] : [1, 2, 4];
+  const targetName = activeLocation
+    ? (LOCATIONS.find((l) => l.id === activeLocation)?.name ?? activeLocation)
+    : 'Withered Wastelands';
 
   return (
     <div ref={ref} className="popover" aria-label="Add house">
@@ -151,20 +153,7 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="popover__row">
-        <span className="popover__label">Location</span>
-        <select
-          value={pendingLocation}
-          onChange={(e) => setFilter('pendingLocation', e.target.value as LocationId)}
-          className="popover__select"
-        >
-          {LOCATIONS.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="popover__target">Adds to {targetName}</div>
 
       <button
         type="button"
@@ -205,10 +194,10 @@ export function Topbar() {
               key={loc.id}
               type="button"
               className={`loc ${active ? 'loc--active' : ''} loc--${loc.id.toLowerCase()}`}
-              onClick={() => setFilter('activeLocation', loc.id)}
+              onClick={() => setFilter('activeLocation', active ? null : loc.id)}
+              title={`${loc.name}${active ? ' — click to view all' : ''}`}
             >
               <span className="loc__id">{loc.id}</span>
-              <span className="loc__name">{loc.name}</span>
               <span className="loc__count">
                 <span className="loc__used">{used}</span>
                 <span className="loc__sep">/</span>

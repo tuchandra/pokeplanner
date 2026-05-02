@@ -31,9 +31,8 @@ beforeEach(() => {
     houses: [],
     filters: {
       activeLocation: 'WW',
-      pendingType: 'custom',
+      pendingType: 'prefab',
       pendingSlots: 4,
-      pendingLocation: 'WW',
       specialtyFilter: [],
       habitatCompatible: false,
       pickerGrouping: 'none',

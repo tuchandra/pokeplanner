@@ -22,6 +22,7 @@ function findSimilar(p: Pokemon): Pokemon[] {
 
 export function PokemonDetail({ id }: { id: string }) {
   const selectPokemon = useStore((s) => s.selectPokemon);
+  const addHouseWith = useStore((s) => s.addHouseWith);
   const p = POKEMON_BY_ID.get(id);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -56,6 +57,14 @@ export function PokemonDetail({ id }: { id: string }) {
           <p className="detail__num">#{p.number}</p>
         </div>
       </div>
+
+      <button
+        type="button"
+        className="btn btn--primary detail__add"
+        onClick={() => addHouseWith(p.id)}
+      >
+        Add to a new house
+      </button>
 
       <dl className="detail__stats">
         <div>

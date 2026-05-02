@@ -4,10 +4,10 @@ import type { House, HouseType, LocationId, SlotCount, Specialty } from '../type
 import { STORAGE_KEY } from './storage';
 
 type Filters = {
-  activeLocation: LocationId;
+  /** Active location tab. Null = "All locations" view. */
+  activeLocation: LocationId | null;
   pendingType: HouseType;
   pendingSlots: SlotCount;
-  pendingLocation: LocationId;
   /**
    * Work-specialty filter for the Pokémon picker. Multi-select via checkboxes
    * (matches reference). Empty array = no filter; otherwise show only Pokémon
@@ -21,7 +21,7 @@ type Filters = {
   habitatCompatible: boolean;
   /**
    * How to render the picker grid. 'none' is the default flat tracker order
-   * (preserves evolutionary adjacency). 'specialty' groups by specialty1.
+   * (preserves evolutionary adjacency). 'specialty' groups by specialty1/2.
    */
   pickerGrouping: 'none' | 'specialty';
   view: 'grid' | 'table';
@@ -38,7 +38,10 @@ type AppState = {
 };
 
 type AppActions = {
-  addHouse: () => void;
+  /** Adds a house to the active location (or 'WW' when "All" is active). */
+  addHouse: () => string;
+  /** Adds a house and assigns the given Pokémon to its first slot. */
+  addHouseWith: (pokemonId: string) => string;
   removeHouse: (id: string) => void;
   renameHouse: (id: string, name: string) => void;
   setSlotPokemon: (houseId: string, slot: number, pokemonId: string | null) => void;
@@ -49,9 +52,8 @@ type AppActions = {
 
 const initialFilters: Filters = {
   activeLocation: 'WW',
-  pendingType: 'custom',
+  pendingType: 'prefab',
   pendingSlots: 4,
-  pendingLocation: 'WW',
   specialtyFilter: [],
   habitatCompatible: false,
   pickerGrouping: 'none',
@@ -63,28 +65,44 @@ function newId(): string {
   return `h_${Math.random().toString(36).slice(2, 10)}`;
 }
 
+function buildHouse(s: AppState, name: string): House {
+  const slotCount = s.filters.pendingSlots;
+  return {
+    id: newId(),
+    name,
+    type: s.filters.pendingType,
+    location: s.filters.activeLocation ?? 'WW',
+    slotCount,
+    slots: Array<string | null>(slotCount).fill(null),
+  };
+}
+
 export const useStore = create<AppState & AppActions>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       houses: [],
       filters: initialFilters,
       selectedHouseId: null,
       selectedPokemonId: null,
 
-      addHouse: () =>
-        set((s) => {
-          const slotCount = s.filters.pendingSlots;
-          const slots = Array<string | null>(slotCount).fill(null);
-          const house: House = {
-            id: newId(),
-            name: `House ${s.houses.length + 1}`,
-            type: s.filters.pendingType,
-            location: s.filters.pendingLocation,
-            slotCount,
-            slots,
-          };
-          return { houses: [...s.houses, house], selectedHouseId: house.id };
-        }),
+      addHouse: () => {
+        const s = get();
+        const house = buildHouse(s, `House ${s.houses.length + 1}`);
+        set({ houses: [...s.houses, house], selectedHouseId: house.id });
+        return house.id;
+      },
+
+      addHouseWith: (pokemonId) => {
+        const s = get();
+        const house = buildHouse(s, `House ${s.houses.length + 1}`);
+        house.slots = [pokemonId, ...house.slots.slice(1)];
+        set({
+          houses: [...s.houses, house],
+          selectedHouseId: house.id,
+          selectedPokemonId: null,
+        });
+        return house.id;
+      },
 
       removeHouse: (id) => set((s) => ({ houses: s.houses.filter((h) => h.id !== id) })),
 

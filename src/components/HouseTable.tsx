@@ -6,10 +6,15 @@ export function HouseTable() {
   const houses = useStore((s) => s.houses);
   const activeLocation = useStore((s) => s.filters.activeLocation);
   const removeHouse = useStore((s) => s.removeHouse);
-  const visible = houses.filter((h) => h.location === activeLocation);
+  const visible =
+    activeLocation === null ? houses : houses.filter((h) => h.location === activeLocation);
 
   if (visible.length === 0) {
-    return <p className="empty">No houses in this location.</p>;
+    return (
+      <p className="empty">
+        {activeLocation === null ? 'No houses yet.' : 'No houses in this location.'}
+      </p>
+    );
   }
 
   return (
