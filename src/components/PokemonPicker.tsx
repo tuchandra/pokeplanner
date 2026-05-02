@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { POKEMON, POKEMON_BY_ID } from '../data/pokemon';
 import { useStore } from '../state/store';
-import { derivedHabitats, type Pokemon } from '../types';
+import { type Pokemon, derivedHabitats } from '../types';
 import { SpecialtyFilter } from './SpecialtyFilter';
 
 function PickItem({ p }: { p: Pokemon }) {

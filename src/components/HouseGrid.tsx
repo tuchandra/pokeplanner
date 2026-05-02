@@ -7,9 +7,7 @@ export function HouseGrid() {
   const visible = houses.filter((h) => h.location === activeLocation);
 
   if (visible.length === 0) {
-    return (
-      <p className="empty">No houses in this location. Use the controls above to add one.</p>
-    );
+    return <p className="empty">No houses in this location. Use the controls above to add one.</p>;
   }
 
   return (

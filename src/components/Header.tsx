@@ -1,6 +1,6 @@
 import { LOCATIONS } from '../data/locations';
-import type { HouseType, LocationId } from '../types';
 import { useStore } from '../state/store';
+import type { HouseType, LocationId } from '../types';
 
 export function Header() {
   const { pendingType, pendingSlots, pendingLocation } = useStore((s) => s.filters);
