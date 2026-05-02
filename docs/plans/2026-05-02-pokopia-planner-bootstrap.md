@@ -2540,6 +2540,7 @@ After live-site investigation (`pokehouseplan.com` via Chrome) plus user clarifi
 - ✅ **Custom slot picker shows only 1/4** (no 2). Prefab shows 1/2/4. The Slot type union is still `1 | 2 | 4`; the Header just hides "2" when Type=Custom.
 - ✅ **Member identifier format is the Pokémon name string** (`"Bulbasaur"`, `"Pikachu"`). Reference uses lowercase location ids and PascalCase name strings.
 - ✅ **Reference persistence schema**: `{id, name, type, location, members[]}` under localStorage key `pokemon-houses`. Our plan uses `slots` internally (cleaner) and a different key (`pokeplanner.v1`); see Q3 below for whether to align.
+- ✅ **Custom-domain inheritance** (resolved in Phase 2): `tusharc.dev` is correctly inherited from the user-pages repo. `tuchandra.github.io/pokeplanner/` 301-redirects to `tusharc.dev/pokeplanner/`. No CNAME work needed in this repo.
 
 ### Still open
 
@@ -2547,7 +2548,6 @@ After live-site investigation (`pokehouseplan.com` via Chrome) plus user clarifi
 2. **Schema compatibility with the reference site.** v1 uses our own localStorage key (`pokeplanner.v1`) and field names (`slots`, uppercase location ids). The reference uses `pokemon-houses` and `{members[], lowercase ids}`. Optional follow-up: an importer that reads the reference's blob from a paste-area or a fixed key. User preference.
 3. **Pokémon types in the UI.** Reference bundle has `type1`/`type2` per Pokémon; user's tracker doesn't include them. v1 ignores types. User preference whether to display.
 4. **TSV anomalies.** Row for Toxtricity Low Key Form has number `#00`; Pikachu/Peakychu both at `#079`; Mosslax/Snorlax both at `#108` (intentional form variants — confirm). Ingest script warns but does not fail.
-5. **Custom-domain inheritance.** Plan assumes `tusharc.dev` is the custom domain on the user-pages repo so project pages from `tuchandra/pokeplanner` serve at `tusharc.dev/pokeplanner/`. If not, the site will live at `tuchandra.github.io/pokeplanner/`. Resolution: check Pages settings on the user-pages repo before Task 21.
 
 None of these block any phase of the plan.
 
