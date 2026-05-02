@@ -8,16 +8,18 @@ import { useEffect, useRef } from 'react';
 import { PokemonDetail } from './PokemonDetail';
 import { SpecialtyFilter } from './SpecialtyFilter';
 
+// Tracker uses real Pokémon names; the parenthetical is the in-game character.
 const STORY_NAMES: ReadonlySet<string> = new Set([
-  'Tinkmaster',
   'Peakychu',
   'Mosslax',
-  'Smearguru',
   'Ditto',
-  'Chef Dente',
-  'DJ Rotom',
   'Professor Tangrowth',
+  'Smeargle', // Smearguru
+  'Stereo Rotom', // DJ Rotom
+  'Greedent', // Chef Dente
+  'Tinkaton', // Tinkmaster
 ]);
+const UNKNOWN_SPECIALTY = '???';
 const STORY_GROUP = 'Story';
 const MISC_GROUP = 'Misc.';
 const MISC_THRESHOLD = 2;
@@ -107,7 +109,9 @@ function groupBySpecialty(visible: readonly Pokemon[]): [string, Pokemon[]][] {
   const main: [string, Pokemon[]][] = [];
   for (const [key, list] of groups) {
     if (key === STORY_GROUP) continue;
-    if (list.length <= MISC_THRESHOLD) {
+    // ??? always folds into Misc (legendaries with no work specialty), as do
+    // any specialty group small enough to be an island.
+    if (key === UNKNOWN_SPECIALTY || list.length <= MISC_THRESHOLD) {
       for (const p of list) {
         if (!misc.includes(p)) misc.push(p);
       }
