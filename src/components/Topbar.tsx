@@ -2,7 +2,7 @@ import { LOCATIONS } from '@/data/locations';
 import { cn } from '@/lib/cn';
 import { useStore } from '@/state/store';
 import { type House, type HouseType, type LocationId, capacityPoints } from '@/types';
-import { LayoutGrid, List, Moon, Plus, Sun } from 'lucide-react';
+import { Info, LayoutGrid, List, Moon, Plus, Sun } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -216,6 +216,48 @@ export function Topbar() {
         >
           {theme === 'dark' ? <Sun /> : <Moon />}
         </Button>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline" size="icon" aria-label="About this project" title="About">
+              <Info />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 p-4 text-sm leading-relaxed">
+            <p className="m-0">
+              Developed by tushar c. for personal use. Contribute on{' '}
+              <a
+                href="https://github.com/tuchandra/pokeplanner"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2 hover:no-underline"
+              >
+                Github
+              </a>
+              .
+            </p>
+            <p className="mt-3 mb-0">
+              I am enormously thankful to Joe Merrick at{' '}
+              <a
+                href="https://www.serebii.net/pokemonpokopia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2 hover:no-underline"
+              >
+                Serebii.net
+              </a>{' '}
+              for collecting information and making it freely available for projects like this to
+              use. Even for data that I didn't directly read from Serebii, like flavors or
+              environment preferences, it's almost a certainty that my source used Serebii
+              themselves. Pokémon would not be the same without years of hard work by Joe &amp;
+              team.
+            </p>
+            <p className="mt-3 mb-0 text-faint-foreground text-xs">
+              This project made heavy use of AI coding tools. This infobox was written by a human.
+              The "thank you"s are genuine.
+            </p>
+          </PopoverContent>
+        </Popover>
       </div>
     </header>
   );
