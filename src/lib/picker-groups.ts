@@ -19,6 +19,9 @@ const STORY_NAMES: ReadonlySet<string> = new Set([
   'Lugia',
   'Kyogre',
   'Volcanion',
+  // Tangrowth is exclusive to the Cloud Island game mode and isn't available
+  // in the main game.
+  'Tangrowth',
 ]);
 
 /**
@@ -31,6 +34,7 @@ export const UNPLACEABLE_NAMES: ReadonlySet<string> = new Set([
   'Lugia',
   'Kyogre',
   'Volcanion',
+  'Tangrowth',
 ]);
 
 export type GroupPartition = {
