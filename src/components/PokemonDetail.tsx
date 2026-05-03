@@ -1,5 +1,6 @@
 import { LITTER_ITEM_SPRITES } from '@/data/litter-items';
 import { POKEMON, POKEMON_BY_ID } from '@/data/pokemon';
+import { UNPLACEABLE_NAMES } from '@/lib/picker-groups';
 import { useStore } from '@/state/store';
 import type { Pokemon } from '@/types';
 import { ChevronLeft } from 'lucide-react';
@@ -76,7 +77,13 @@ export function PokemonDetail({ id }: { id: string }) {
         </div>
       </div>
 
-      <Button onClick={() => addHouseWith(p.id)}>Move to a new house</Button>
+      {UNPLACEABLE_NAMES.has(p.name) ? (
+        <p className="m-0 rounded-md border border-dashed border-border-soft bg-card-soft px-3 py-2 text-center text-xs text-muted-foreground">
+          Story Pokémon — can't be housed
+        </p>
+      ) : (
+        <Button onClick={() => addHouseWith(p.id)}>Move to a new house</Button>
+      )}
 
       <dl className="m-0 flex items-stretch divide-x divide-border-soft rounded-lg border border-border-soft bg-card text-center">
         <Stat label="Habitat" value={p.habitat} />
