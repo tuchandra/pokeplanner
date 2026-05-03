@@ -160,7 +160,6 @@ export function PokemonPicker() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const savedScroll = useRef(0);
   const prevSelected = useRef<string | null>(null);
-  // biome-ignore lint/correctness/useExhaustiveDependencies: respond to id transitions
   useEffect(() => {
     const node = scrollRef.current;
     if (!node) return;
