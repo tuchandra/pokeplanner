@@ -2,16 +2,21 @@ import { HouseGrid } from '@/components/HouseGrid';
 import { HouseTable } from '@/components/HouseTable';
 import { PokemonPicker } from '@/components/PokemonPicker';
 import { Topbar } from '@/components/Topbar';
+import { cn } from '@/lib/cn';
 import { clearShareHash, readShareHash } from '@/lib/share';
 import { useStore } from '@/state/store';
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { useEffect } from 'react';
+import { X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function App() {
   const view = useStore((s) => s.filters.view);
   const theme = useStore((s) => s.filters.theme);
   const setSlotPokemon = useStore((s) => s.setSlotPokemon);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }));
+
+  // Mobile-only: the picker slides in as a drawer when open. md+ ignores this.
+  const [pickerOpen, setPickerOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -64,12 +69,41 @@ export function App() {
   return (
     <DndContext sensors={sensors} onDragEnd={onDragEnd}>
       <div className="grid grid-rows-[auto_1fr] h-screen">
-        <Topbar />
-        <div className="grid grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_380px] min-h-0 overflow-hidden">
-          <main className="overflow-y-auto px-6 py-6 pb-12">
+        <Topbar onTogglePicker={() => setPickerOpen((v) => !v)} pickerOpen={pickerOpen} />
+        <div className="relative md:grid md:grid-cols-[minmax(0,1fr)_360px] xl:md:grid-cols-[minmax(0,1fr)_380px] min-h-0 overflow-hidden">
+          <main className="h-full overflow-y-auto px-3 sm:px-6 py-4 sm:py-6 pb-12">
             {view === 'grid' ? <HouseGrid /> : <HouseTable />}
           </main>
-          <aside className="border-l border-border-soft bg-secondary flex flex-col min-h-0">
+
+          {/* Backdrop — mobile only, while the picker is open */}
+          <button
+            type="button"
+            aria-label="Close Pokémon list"
+            tabIndex={pickerOpen ? 0 : -1}
+            onClick={() => setPickerOpen(false)}
+            className={cn(
+              'md:hidden fixed inset-0 z-20 bg-black/45 transition-opacity',
+              pickerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none',
+            )}
+          />
+
+          <aside
+            className={cn(
+              // Desktop: in-flow column, always visible.
+              'md:relative md:flex md:flex-col md:translate-x-0 md:bg-secondary md:border-l md:border-border-soft md:min-h-0',
+              // Mobile: fixed drawer sliding in from the right.
+              'fixed inset-y-0 right-0 z-30 w-full max-w-sm bg-secondary border-l border-border-soft flex flex-col transition-transform duration-200',
+              pickerOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0',
+            )}
+          >
+            <button
+              type="button"
+              aria-label="Close Pokémon list"
+              onClick={() => setPickerOpen(false)}
+              className="md:hidden absolute top-1.5 right-1.5 z-20 size-8 rounded-md bg-card border border-border-soft grid place-items-center text-muted-foreground hover:text-foreground"
+            >
+              <X className="size-4" />
+            </button>
             <PokemonPicker />
           </aside>
         </div>

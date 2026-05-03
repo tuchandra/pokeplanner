@@ -3,7 +3,17 @@ import { cn } from '@/lib/cn';
 import { buildShareUrl } from '@/lib/share';
 import { useStore } from '@/state/store';
 import { type House, type HouseType, type LocationId, capacityPoints } from '@/types';
-import { Check, Info, LayoutGrid, List, Moon, Plus, Share2, Sun } from 'lucide-react';
+import {
+  Check,
+  Info,
+  LayoutGrid,
+  List,
+  Moon,
+  PanelRightOpen,
+  Plus,
+  Share2,
+  Sun,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -104,7 +114,14 @@ function ComposePopover({ onClose }: { onClose: () => void }) {
   );
 }
 
-export function Topbar() {
+export function Topbar({
+  onTogglePicker,
+  pickerOpen,
+}: {
+  /** Mobile-only callback. The button this triggers is hidden at md+. */
+  onTogglePicker?: () => void;
+  pickerOpen?: boolean;
+}) {
   const houses = useStore((s) => s.houses);
   const activeLocation = useStore((s) => s.filters.activeLocation);
   const view = useStore((s) => s.filters.view);
@@ -203,6 +220,19 @@ export function Topbar() {
       </nav>
 
       <div className="[grid-area:actions] flex items-center gap-1.5 sm:gap-2 justify-self-end">
+        {onTogglePicker && (
+          <Button
+            variant="outline"
+            size="icon"
+            className="md:hidden"
+            onClick={onTogglePicker}
+            aria-label={pickerOpen ? 'Close Pokémon list' : 'Open Pokémon list'}
+            aria-pressed={pickerOpen}
+            title={pickerOpen ? 'Close Pokémon list' : 'Pokémon list'}
+          >
+            <PanelRightOpen />
+          </Button>
+        )}
         <ToggleGroup
           type="single"
           value={view}
