@@ -3,7 +3,7 @@ import { SPECIALTY_ICONS } from '@/data/specialty-icons';
 import { cn } from '@/lib/cn';
 import { partitionGroups } from '@/lib/picker-groups';
 import { useStore } from '@/state/store';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, FolderTree } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Checkbox } from './ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -49,13 +49,13 @@ export function SpecialtyFilter() {
     );
 
   return (
-    <div className="grid grid-cols-1 gap-1.5">
+    <div className="flex gap-1.5 items-stretch">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <button
             type="button"
             className={cn(
-              'inline-flex items-center justify-between gap-2 rounded-md border bg-card px-3 py-2 text-sm text-foreground cursor-pointer transition-colors min-h-9',
+              'flex-1 inline-flex items-center justify-between gap-2 rounded-md border bg-card px-3 py-2 text-sm text-foreground cursor-pointer transition-colors min-h-9 min-w-0',
               open ? 'border-primary' : 'border-border-soft hover:border-border',
             )}
           >
@@ -117,15 +117,16 @@ export function SpecialtyFilter() {
         type="button"
         onClick={() => setFilter('pickerGrouping', grouping === 'specialty' ? 'none' : 'specialty')}
         aria-pressed={grouping === 'specialty'}
-        title="Group by specialty"
+        aria-label={grouping === 'specialty' ? 'Show as flat list' : 'Group by specialty'}
+        title={grouping === 'specialty' ? 'Show as flat list' : 'Group by specialty'}
         className={cn(
-          'rounded-md px-2.5 py-2 text-xs whitespace-nowrap cursor-pointer transition-colors',
+          'inline-grid place-items-center rounded-md min-w-9 px-2 cursor-pointer transition-colors shrink-0',
           grouping === 'specialty'
-            ? 'bg-primary text-primary-foreground border-0 font-semibold'
+            ? 'bg-primary text-primary-foreground border-0'
             : 'bg-card text-muted-foreground border border-border-soft hover:text-foreground hover:border-border',
         )}
       >
-        Group: {grouping === 'specialty' ? 'specialty' : 'flat'}
+        <FolderTree className="size-4" />
       </button>
     </div>
   );

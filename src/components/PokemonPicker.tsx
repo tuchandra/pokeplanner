@@ -214,6 +214,9 @@ export function PokemonPicker() {
   const quickPlaceMode =
     !!selectedHouse && !selectedHouse.locked && selectedHouse.slots.some((s) => s == null);
 
+  const placedCount = assignedIds.size;
+  const remainingCount = POKEMON.length - placedCount;
+
   return (
     <div className="flex flex-col flex-1 min-h-0">
       <div className="sticky top-0 z-10 flex flex-col gap-2 px-3 py-2.5 bg-secondary border-b border-border-soft">
@@ -223,6 +226,15 @@ export function PokemonPicker() {
         ref={scrollRef}
         className="flex flex-col gap-3.5 px-3 py-3 overflow-y-auto flex-1 min-h-0"
       >
+        <div className="flex items-baseline justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-faint-foreground">
+          <span>
+            <span className="text-foreground font-medium tabular-nums">{placedCount}</span> placed
+          </span>
+          <span>
+            <span className="text-foreground font-medium tabular-nums">{remainingCount}</span> still
+            need a home
+          </span>
+        </div>
         {selectedPokemonId && <PokemonDetail key={selectedPokemonId} id={selectedPokemonId} />}
         {compatible.length > 0 && (
           <section className="flex flex-col gap-1.5 pb-3 border-b border-dashed border-border-soft">

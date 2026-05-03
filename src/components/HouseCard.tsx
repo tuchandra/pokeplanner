@@ -151,7 +151,7 @@ export function HouseCard({ house }: Props) {
             )
           : 'border-border-soft hover:border-border',
       )}
-      onClick={() => selectHouse(house.id)}
+      onClick={() => selectHouse(isSelected ? null : house.id)}
     >
       <header className="flex items-start gap-1">
         <div className="flex-1 min-w-0">
