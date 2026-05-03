@@ -128,15 +128,26 @@ export function Topbar() {
   }
 
   return (
-    <header className="grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-border-soft bg-secondary px-4 py-2 relative z-20">
-      <div className="inline-flex items-baseline gap-2.5 font-mono uppercase">
+    <header
+      className={cn(
+        'grid items-center gap-y-1.5 gap-x-3 border-b border-border-soft bg-secondary px-3 sm:px-4 py-2 relative z-20',
+        // mobile: brand + actions on row 1, tabs full-width on row 2
+        "grid-cols-[auto_1fr] [grid-template-areas:'brand_actions'_'tabs_tabs']",
+        // sm+: classic 3-col with tabs in the middle
+        "sm:grid-cols-[auto_1fr_auto] sm:gap-5 sm:[grid-template-areas:'brand_tabs_actions']",
+      )}
+    >
+      <div className="[grid-area:brand] inline-flex items-baseline gap-2.5 font-mono uppercase">
         <span className="text-[15px] font-medium tracking-[0.16em] text-foreground">Pokopia</span>
         <span className="hidden xl:inline text-[10px] tracking-[0.18em] text-faint-foreground whitespace-nowrap">
           habitat planner
         </span>
       </div>
 
-      <nav className="flex flex-wrap justify-center gap-1.5" aria-label="Locations">
+      <nav
+        className="[grid-area:tabs] flex flex-wrap justify-center gap-1 sm:gap-1.5 -mx-1 sm:mx-0 overflow-x-auto sm:overflow-visible"
+        aria-label="Locations"
+      >
         {LOCATIONS.map((loc) => {
           const used = pointsAtLocation(houses, loc.id);
           const active = activeLocation === loc.id;
@@ -191,7 +202,7 @@ export function Topbar() {
         })}
       </nav>
 
-      <div className="flex items-center gap-2">
+      <div className="[grid-area:actions] flex items-center gap-1.5 sm:gap-2 justify-self-end">
         <ToggleGroup
           type="single"
           value={view}

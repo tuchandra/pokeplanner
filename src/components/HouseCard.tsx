@@ -12,7 +12,8 @@ import {
   derivedHabitats,
 } from '@/types';
 import { useDroppable } from '@dnd-kit/core';
-import { Lock, Package, Unlock, Wrench, X } from 'lucide-react';
+import { Lock, Package, Pencil, Unlock, Wrench, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
@@ -57,6 +58,71 @@ function shapeKey(h: Pick<House, 'type' | 'slotCount'>): string {
 function TypeIcon({ type, className }: { type: HouseType; className?: string }) {
   const Icon = type === 'prefab' ? Package : Wrench;
   return <Icon className={cn('size-3.5', className)} aria-hidden />;
+}
+
+/**
+ * House title — display by default, editable when the user explicitly clicks
+ * the pencil (or presses Enter on it). Stops accidental keyboard popups on
+ * mobile when tapping anywhere on the card.
+ */
+function NameField({
+  name,
+  locked,
+  onRename,
+}: {
+  name: string;
+  locked: boolean;
+  onRename: (next: string) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (editing) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    }
+  }, [editing]);
+
+  if (editing) {
+    return (
+      <input
+        ref={inputRef}
+        className="w-full bg-transparent border-0 outline-none text-foreground text-[15px] font-bold tracking-[-0.015em] focus:text-[--color-loc-ww] p-0"
+        value={name}
+        onChange={(e) => onRename(e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+        onBlur={() => setEditing(false)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === 'Escape') {
+            e.preventDefault();
+            setEditing(false);
+          }
+        }}
+      />
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-1.5 min-w-0">
+      <span className="truncate text-foreground text-[15px] font-bold tracking-[-0.015em]">
+        {name}
+      </span>
+      {!locked && (
+        <button
+          type="button"
+          aria-label="Rename house"
+          title="Rename"
+          className="text-faint-foreground hover:text-foreground transition-colors shrink-0 cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            setEditing(true);
+          }}
+        >
+          <Pencil className="size-3.5" />
+        </button>
+      )}
+    </div>
+  );
 }
 
 type SlotProps = {
@@ -157,13 +223,7 @@ export function HouseCard({ house }: Props) {
     >
       <header className="flex items-start gap-1">
         <div className="flex-1 min-w-0">
-          <input
-            className="w-full bg-transparent border-0 outline-none text-foreground text-[15px] font-bold tracking-[-0.015em] focus:text-[--color-loc-ww] p-0 disabled:cursor-default"
-            value={house.name}
-            disabled={locked}
-            onChange={(e) => renameHouse(house.id, e.target.value)}
-            onClick={(e) => e.stopPropagation()}
-          />
+          <NameField name={house.name} locked={locked} onRename={(v) => renameHouse(house.id, v)} />
           <div className="mt-0.5 flex items-center gap-1 text-[10px] uppercase tracking-[0.04em] font-mono text-faint-foreground flex-wrap">
             <Select
               value={house.location}
