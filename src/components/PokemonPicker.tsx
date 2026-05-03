@@ -210,7 +210,9 @@ export function PokemonPicker() {
       : [];
 
   // Click → place into the active house's first empty slot when one exists.
-  const quickPlaceMode = !!selectedHouse && selectedHouse.slots.some((s) => s == null);
+  // Locked houses opt out (quick-place would just be a silent no-op anyway).
+  const quickPlaceMode =
+    !!selectedHouse && !selectedHouse.locked && selectedHouse.slots.some((s) => s == null);
 
   return (
     <div className="flex flex-col flex-1 min-h-0">

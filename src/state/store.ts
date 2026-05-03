@@ -40,8 +40,12 @@ type AppActions = {
   addHouseWith: (pokemonId: string) => string;
   removeHouse: (id: string) => void;
   renameHouse: (id: string, name: string) => void;
-  /** Moves a house to a different location. */
+  /** Moves a house to a different location. No-op when the house is locked. */
   relocateHouse: (id: string, location: LocationId) => void;
+  /** Reshapes a house — change type (prefab/custom) and/or slotCount. Custom is forced to 4 slots. */
+  reshapeHouse: (id: string, type: HouseType, slotCount: SlotCount) => void;
+  /** Toggle the locked flag on a house. Locked houses block other state-changing actions. */
+  setHouseLocked: (id: string, locked: boolean) => void;
   setSlotPokemon: (houseId: string, slot: number, pokemonId: string | null) => void;
   selectHouse: (id: string | null) => void;
   selectPokemon: (id: string | null) => void;
@@ -153,12 +157,12 @@ export const useStore = create<AppState & AppActions>()(
 
       addHouseWith: (pokemonId) => {
         const s = get();
-        // Strip the Pokemon from any existing slot first so this acts like a
-        // move rather than producing a duplicate placement.
-        const stripped = s.houses.map((h) => ({
-          ...h,
-          slots: h.slots.map((id) => (id === pokemonId ? null : id)),
-        }));
+        // Strip the Pokemon from any UNLOCKED existing slot first so this acts
+        // like a move rather than producing a duplicate placement. Locked
+        // houses keep their member.
+        const stripped = s.houses.map((h) =>
+          h.locked ? h : { ...h, slots: h.slots.map((id) => (id === pokemonId ? null : id)) },
+        );
         const house = buildHouse(s, `House ${s.houses.length + 1}`);
         house.slots = [pokemonId, ...house.slots.slice(1)];
         set({
@@ -169,11 +173,34 @@ export const useStore = create<AppState & AppActions>()(
         return house.id;
       },
 
-      removeHouse: (id) => set((s) => ({ houses: s.houses.filter((h) => h.id !== id) })),
+      removeHouse: (id) =>
+        set((s) => {
+          const h = s.houses.find((x) => x.id === id);
+          if (h?.locked) return {};
+          return { houses: s.houses.filter((x) => x.id !== id) };
+        }),
 
       relocateHouse: (id, location) =>
         set((s) => ({
-          houses: s.houses.map((h) => (h.id === id ? { ...h, location } : h)),
+          houses: s.houses.map((h) => (h.id === id && !h.locked ? { ...h, location } : h)),
+        })),
+
+      reshapeHouse: (id, type, slotCount) =>
+        set((s) => ({
+          houses: s.houses.map((h) => {
+            if (h.id !== id || h.locked) return h;
+            // Custom houses always have 4 slots; ignore the requested size
+            // when switching to custom.
+            const targetSlots: SlotCount = type === 'custom' ? 4 : slotCount;
+            const next: (string | null)[] = h.slots.slice(0, targetSlots);
+            while (next.length < targetSlots) next.push(null);
+            return { ...h, type, slotCount: targetSlots, slots: next };
+          }),
+        })),
+
+      setHouseLocked: (id, locked) =>
+        set((s) => ({
+          houses: s.houses.map((h) => (h.id === id ? { ...h, locked } : h)),
         })),
 
       renameHouse: (id, name) =>
@@ -182,15 +209,19 @@ export const useStore = create<AppState & AppActions>()(
         })),
 
       setSlotPokemon: (houseId, slot, pokemonId) =>
-        set((s) => ({
-          houses: s.houses.map((h) => {
-            if (h.id !== houseId) return h;
-            const slots = [...h.slots];
-            slots[slot] = pokemonId;
-            return { ...h, slots };
-          }),
-          selectedHouseId: houseId,
-        })),
+        set((s) => {
+          const target = s.houses.find((h) => h.id === houseId);
+          if (target?.locked) return {};
+          return {
+            houses: s.houses.map((h) => {
+              if (h.id !== houseId) return h;
+              const slots = [...h.slots];
+              slots[slot] = pokemonId;
+              return { ...h, slots };
+            }),
+            selectedHouseId: houseId,
+          };
+        }),
 
       selectHouse: (id) => set({ selectedHouseId: id }),
 

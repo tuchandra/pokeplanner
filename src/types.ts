@@ -100,6 +100,8 @@ export type House = {
   slotCount: SlotCount;
   /** Pokémon ids by slot index, or null for empty. Length always equals slotCount. */
   slots: ReadonlyArray<string | null>;
+  /** When true, removeHouse / setSlotPokemon / resizeHouse / relocateHouse are no-ops for this house. */
+  locked?: boolean;
   // Note: habitat lighting + feature tags are NOT stored. They're derived
   // from the assigned Pokémon (see derivedHabitats below).
 };
