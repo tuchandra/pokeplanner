@@ -16,6 +16,7 @@
  * Conversion rules:
  *  - id = slug(name)  e.g. "Mr. Mime" -> "mr-mime"
  *  - number = leading "#" stripped, zero-padded to 3 chars; "00"/"000" -> "???"
+ *    (event entries like "#E001" pass through as "E001")
  *  - habitat is title-cased already in the TSV, validated against LIGHTING.
  *  - favorites: tracker uses lowercase ("lots of nature") — looked up
  *    case-insensitively against canonical TAGS to recover correct casing.
@@ -24,6 +25,7 @@
  *    against TASTES. Empty taste -> "None".
  *  - specialty1/2: tracker uses canonical case already, validated against
  *    SPECIALTIES. Empty specialty2 -> null.
+ *  - litterDrop: read directly from column 7. Empty for non-Litter mons.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -35,47 +37,7 @@ import { parseTSVRows } from '../src/lib/tsv';
 
 const ROOT = resolve(import.meta.dir, '..');
 const SRC = resolve(ROOT, 'docs/reference/poketracker.tsv');
-const LITTER_SRC = resolve(ROOT, 'docs/reference/litter-drops-raw.txt');
 const OUT = resolve(ROOT, 'src/data/pokemon.generated.ts');
-
-/**
- * Parses the raw Serebii litter-drops dump into a name -> item map.
- * Each Pokémon block is 4 or 5 lines:
- *   #NNN \tName Image \tName \t        ← header (extract Name)
- *   ability1\tability1                  ← optional
- *   ability2\tability2                  ← present when there are two abilities
- *   \tItem Name                         ← item, prefixed by a tab
- *   Item Name                           ← item, repeated bare
- * The item line is unique within a block: it's the last `\t<name>` line.
- */
-function parseLitterDrops(input: string): Map<string, string> {
-  const map = new Map<string, string>();
-  const lines = input.split('\n');
-  let currentName: string | null = null;
-  let pendingItem: string | null = null;
-
-  const flush = () => {
-    if (currentName && pendingItem) map.set(currentName, pendingItem);
-    currentName = null;
-    pendingItem = null;
-  };
-
-  const headerRe = /^#\d+\s*\t.*?\t([^\t]+?)\s*\t?\s*$/;
-  for (const raw of lines) {
-    const m = raw.match(headerRe);
-    if (m) {
-      flush();
-      currentName = m[1]?.trim() ?? null;
-      continue;
-    }
-    if (currentName && raw.startsWith('\t')) {
-      // tab-prefixed item line
-      pendingItem = raw.slice(1).trim();
-    }
-  }
-  flush();
-  return map;
-}
 
 function slug(name: string): string {
   return name
@@ -108,8 +70,6 @@ function specialtyCanonical(s: string): string | null {
 
 const tsv = readFileSync(SRC, 'utf8');
 const rows = parseTSVRows(tsv);
-const litterByName = parseLitterDrops(readFileSync(LITTER_SRC, 'utf8'));
-const usedLitter = new Set<string>();
 
 type Out = {
   id: string;
@@ -193,15 +153,12 @@ for (const cells of rows) {
     }
   }
 
-  let litterDrop: string | null = null;
-  if (sp1 === 'Litter' || sp2 === 'Litter') {
-    const item = litterByName.get(name) ?? null;
-    if (item) {
-      litterDrop = item;
-      usedLitter.add(name);
-    } else {
-      errors.push(`missing litter drop entry for Litter-specialty Pokémon: ${name}`);
-    }
+  // Litter drop comes directly from column 7. The TSV is the source of truth;
+  // we no longer cross-reference Serebii's separate dump.
+  const litterRaw = (cells[7] ?? '').trim();
+  const litterDrop = litterRaw === '' ? null : litterRaw;
+  if ((sp1 === 'Litter' || sp2 === 'Litter') && !litterDrop) {
+    errors.push(`Litter-specialty Pokémon has no item in column 7: ${name}`);
   }
 
   out.push({
@@ -215,12 +172,6 @@ for (const cells of rows) {
     taste,
     litterDrop,
   });
-}
-
-for (const name of litterByName.keys()) {
-  if (!usedLitter.has(name)) {
-    errors.push(`litter drop entry has no matching tracker row: ${name}`);
-  }
 }
 
 if (errors.length) {
