@@ -223,21 +223,24 @@ export function Topbar() {
           </PopoverContent>
         </Popover>
 
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleShare}
-          aria-label="Copy share link"
-          title={
-            shareCopied
-              ? 'Link copied'
-              : 'Copy a link with your current planner — paste into another browser or device'
-          }
-          disabled={houses.length === 0}
-          className={shareCopied ? 'text-primary' : undefined}
-        >
-          {shareCopied ? <Check /> : <Share2 />}
-        </Button>
+        <div className="relative">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleShare}
+            aria-label="Copy share link"
+            title="Copy a link with your current planner — paste into another browser or device"
+            disabled={houses.length === 0}
+          >
+            <Share2 />
+          </Button>
+          {shareCopied && (
+            <output className="absolute top-full right-0 mt-2 z-30 whitespace-nowrap rounded-md border border-border bg-popover px-2.5 py-1.5 text-xs text-popover-foreground shadow-[0_8px_24px_-8px_rgba(0,0,0,0.32)] flex items-center gap-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
+              <Check className="size-3.5 text-primary" />
+              <span>Copied shareable URL to clipboard</span>
+            </output>
+          )}
+        </div>
 
         <Button
           variant="outline"
