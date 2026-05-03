@@ -148,10 +148,10 @@ export function Topbar({
     <header
       className={cn(
         'grid items-center gap-y-1.5 gap-x-3 border-b border-border-soft bg-secondary px-3 sm:px-4 py-2 relative z-20',
-        // mobile: brand + actions on row 1, tabs full-width on row 2
+        // narrow / tablet: brand + actions on row 1, tabs full-width on row 2
         "grid-cols-[auto_1fr] [grid-template-areas:'brand_actions'_'tabs_tabs']",
-        // sm+: classic 3-col with tabs in the middle
-        "sm:grid-cols-[auto_1fr_auto] sm:gap-5 sm:[grid-template-areas:'brand_tabs_actions']",
+        // lg+: classic 3-col with tabs in the middle, single row
+        "lg:grid-cols-[auto_1fr_auto] lg:gap-5 lg:[grid-template-areas:'brand_tabs_actions']",
       )}
     >
       <div className="[grid-area:brand] inline-flex items-baseline gap-2.5 font-mono uppercase">
@@ -162,7 +162,7 @@ export function Topbar({
       </div>
 
       <nav
-        className="[grid-area:tabs] flex flex-wrap justify-center gap-1 sm:gap-1.5 -mx-1 sm:mx-0 overflow-x-auto sm:overflow-visible"
+        className="[grid-area:tabs] flex flex-nowrap justify-start lg:justify-center gap-1 sm:gap-1.5 overflow-x-auto lg:overflow-visible -mx-1 sm:-mx-2 px-1 sm:px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         aria-label="Locations"
       >
         {LOCATIONS.map((loc) => {
@@ -176,7 +176,7 @@ export function Topbar({
               onClick={() => setFilter('activeLocation', active ? null : loc.id)}
               title={`${loc.name}${active ? ' — click to view all' : ''}`}
               className={cn(
-                'relative inline-flex items-center gap-1.5 rounded-md border border-border-soft px-2.5 pt-1.5 pb-2 text-muted-foreground cursor-pointer transition-colors',
+                'relative inline-flex shrink-0 items-center gap-1.5 rounded-md border border-border-soft px-2.5 pt-1.5 pb-2 text-muted-foreground cursor-pointer transition-colors',
                 'hover:bg-card-soft hover:text-foreground',
                 active &&
                   'bg-card text-foreground border-border shadow-[inset_0_0_0_1px_var(--color-border-soft)]',
