@@ -4,6 +4,7 @@ import {
   type GroupPartition,
   MISC_GROUP,
   STORY_GROUP,
+  UNPLACEABLE_NAMES,
   partitionGroups,
   pokemonInGroup,
 } from '@/lib/picker-groups';
@@ -31,16 +32,18 @@ function PickItem({
   const setSlotPokemon = useStore((s) => s.setSlotPokemon);
   const selectedHouseId = useStore((s) => s.selectedHouseId);
   const houses = useStore((s) => s.houses);
+  const unplaceable = UNPLACEABLE_NAMES.has(p.name);
+  const inert = assigned || unplaceable; // greyed + un-draggable + click-only-opens-detail
   const dndId = groupKey ? `pokemon:${groupKey}:${p.id}` : `pokemon:${p.id}`;
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: dndId,
     data: { kind: 'pokemon', pokemonId: p.id },
-    disabled: assigned,
+    disabled: inert,
   });
-  const dragProps = assigned ? {} : { ...attributes, ...listeners };
+  const dragProps = inert ? {} : { ...attributes, ...listeners };
 
   function handleClick() {
-    if (quickPlaceMode && !assigned && selectedHouseId) {
+    if (quickPlaceMode && !inert && selectedHouseId) {
       const house = houses.find((h) => h.id === selectedHouseId);
       if (house) {
         const emptyIdx = house.slots.findIndex((s) => s == null);
@@ -53,11 +56,13 @@ function PickItem({
     selectPokemon(p.id);
   }
 
-  const title = assigned
-    ? `${p.name} — already assigned (click for details)`
-    : quickPlaceMode
-      ? `${p.name} — click to place; drag to a specific slot`
-      : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
+  const title = unplaceable
+    ? `${p.name} — story Pokémon, can't be housed (click for details)`
+    : assigned
+      ? `${p.name} — already assigned (click for details)`
+      : quickPlaceMode
+        ? `${p.name} — click to place; drag to a specific slot`
+        : `${p.name} — ${p.habitat}, ${p.specialty1}${p.specialty2 ? ` / ${p.specialty2}` : ''}`;
   return (
     <li
       ref={setNodeRef}
@@ -74,7 +79,7 @@ function PickItem({
         'aspect-square rounded-md border border-border-soft bg-card-soft cursor-pointer p-0 grid place-items-center transition-all list-none',
         'hover:bg-card hover:border-border hover:-translate-y-px',
         isDragging && 'cursor-grabbing opacity-55',
-        assigned &&
+        inert &&
           'cursor-default opacity-30 grayscale-[70%] hover:translate-y-0 hover:bg-card-soft hover:border-border-soft',
       )}
     >
@@ -215,7 +220,11 @@ export function PokemonPicker() {
     !!selectedHouse && !selectedHouse.locked && selectedHouse.slots.some((s) => s == null);
 
   const placedCount = assignedIds.size;
-  const remainingCount = POKEMON.length - placedCount;
+  // Story-only legendaries (Ho-Oh, Lugia, Kyogre, Volcanion) can't be housed,
+  // so they're excluded from the target — otherwise "still need a home" never
+  // hits zero.
+  const homeableTotal = POKEMON.length - UNPLACEABLE_NAMES.size;
+  const remainingCount = Math.max(0, homeableTotal - placedCount);
 
   return (
     <div className="flex flex-col flex-1 min-h-0">

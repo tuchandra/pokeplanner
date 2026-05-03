@@ -14,6 +14,23 @@ const STORY_NAMES: ReadonlySet<string> = new Set([
   'Stereo Rotom',
   'Greedent',
   'Tinkaton',
+  // Legendaries that exist in the game but can't actually be housed.
+  'Ho-Oh',
+  'Lugia',
+  'Kyogre',
+  'Volcanion',
+]);
+
+/**
+ * Story characters that exist in the roster but can't be assigned to a house.
+ * The picker shows them greyed out (matching the assigned-elsewhere visual);
+ * drag and click-to-place are disabled. Click still opens the detail panel.
+ */
+export const UNPLACEABLE_NAMES: ReadonlySet<string> = new Set([
+  'Ho-Oh',
+  'Lugia',
+  'Kyogre',
+  'Volcanion',
 ]);
 
 export type GroupPartition = {
