@@ -46,6 +46,13 @@ Each mirror script is idempotent — files already present are skipped. Inputs i
 
 The Share button in the topbar gzips the planner state, base64url-encodes it, drops it in the URL hash, and copies the URL to your clipboard. Open that URL on any other device and the app hydrates from the hash on load (with a confirm prompt if you have an existing local planner).
 
+## Mobile
+
+- Topbar layout switches at the lg breakpoint (1024px). Below that, brand+actions sit on the first row and the location tabs get their own full-width row underneath (with hidden horizontal-scroll if all five don't fit). At lg+ everything sits on a single line.
+- The Pokémon picker is hidden by default on screens narrower than md (768px) and slides in as a drawer when the user taps the panel-toggle button in the topbar. Backdrop tap or in-drawer × dismisses.
+- House title is click-to-edit (pencil icon) so tapping anywhere on a card never accidentally focuses the input.
+- House table view collapses location/type/slots into a single row of mono metadata under the name, with a destructive `×` icon (with confirm) replacing the wider "Delete" button.
+
 ## Status & plans
 
 - `docs/plans/2026-05-02-pokopia-planner-bootstrap.md` — current state of the project, what shipped, what's outstanding.
