@@ -255,7 +255,7 @@ export function Topbar() {
               <Info />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-96 max-h-[80vh] overflow-y-auto p-4 text-sm leading-relaxed">
+          <PopoverContent className="w-80 p-4 text-sm leading-relaxed">
             <p className="m-0">
               Developed by tushar c. for personal use. Contribute on{' '}
               <a
@@ -285,30 +285,7 @@ export function Topbar() {
               team.
             </p>
 
-            <p className="mt-4 mb-1 font-semibold">How many Pokémon are there?</p>
-            <p className="m-0">312 different "characters" in the game; 307 that need housing.</p>
-            <ul className="mt-2 mb-0 list-disc pl-5 space-y-1.5 text-[13px]">
-              <li>The Pokédex spans #1 to #300.</li>
-              <li>
-                Shellos (#059), Gastrodon (#060), and Toxtricity (#197) each have two forms with the
-                same number. Tatsugiri (#145) has three forms.
-              </li>
-              <li>
-                Some "story" Pokémon have ordinary variants, too: Mosslax/Snorlax, Pikachu/Peakychu,
-                and Tangrowth/Professor Tangrowth, adding 3 more.
-              </li>
-              <li>
-                At the time of writing (May 2, 2026) there are 4 event-exclusive Pokémon (Hoppip,
-                Skiploom, Jumpluff, Sableye).
-              </li>
-            </ul>
-            <p className="mt-2 mb-0 text-[13px]">
-              This totals 312 Pokémon. However, ordinary Tangrowth is exclusive to the Cloud Island;
-              and Ho-Oh, Lugia, Volcanion, and Kyogre cannot move in, giving us 307 Pokémon that
-              need housing.
-            </p>
-
-            <p className="mt-4 mb-0 text-faint-foreground text-xs">
+            <p className="mt-3 mb-0 text-faint-foreground text-xs">
               This project made heavy use of AI coding tools. This infobox was written by a human.
               The "thank you"s are genuine.
             </p>

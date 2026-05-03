@@ -15,6 +15,37 @@ import { useDraggable } from '@dnd-kit/core';
 import { useEffect, useMemo, useRef } from 'react';
 import { PokemonDetail } from './PokemonDetail';
 import { SpecialtyFilter } from './SpecialtyFilter';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+
+function RosterCountInfo({ remaining, total }: { remaining: number; total: number }) {
+  return (
+    <div className="text-sm leading-relaxed normal-case tracking-normal">
+      <p className="m-0 font-semibold">How many Pokémon are there?</p>
+      <p className="mt-1 mb-0">
+        {total} different "characters" in the game; {remaining} that need housing.
+      </p>
+      <ul className="mt-2 mb-0 list-disc pl-5 space-y-1.5 text-[13px]">
+        <li>The Pokédex spans #1 to #300.</li>
+        <li>
+          Shellos (#059), Gastrodon (#060), and Toxtricity (#197) each have two forms with the same
+          number. Tatsugiri (#145) has three forms.
+        </li>
+        <li>
+          Some "story" Pokémon have ordinary variants too — Mosslax/Snorlax, Pikachu/Peakychu, and
+          Tangrowth/Professor Tangrowth — adding 3 more.
+        </li>
+        <li>
+          At the time of writing (May 2, 2026) there are 4 event-exclusive Pokémon (Hoppip,
+          Skiploom, Jumpluff, Sableye).
+        </li>
+      </ul>
+      <p className="mt-2 mb-0 text-[13px]">
+        That's 312 total. Ordinary Tangrowth is exclusive to the Cloud Island, and Ho-Oh, Lugia,
+        Volcanion, and Kyogre can't move in — leaving 307 that actually need a home.
+      </p>
+    </div>
+  );
+}
 
 function PickItem({
   p,
@@ -238,10 +269,20 @@ export function PokemonPicker() {
           <span>
             <span className="text-foreground font-medium tabular-nums">{placedCount}</span> placed
           </span>
-          <span>
-            <span className="text-foreground font-medium tabular-nums">{remainingCount}</span> still
-            need a home
-          </span>
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="cursor-help underline decoration-dotted decoration-faint-foreground underline-offset-[3px] hover:text-foreground hover:decoration-foreground transition-colors"
+              >
+                <span className="text-foreground font-medium tabular-nums">{remainingCount}</span>{' '}
+                still need a home
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-96 max-h-[70vh] overflow-y-auto p-4" align="end">
+              <RosterCountInfo remaining={307} total={POKEMON.length} />
+            </PopoverContent>
+          </Popover>
         </div>
         {selectedPokemonId && <PokemonDetail key={selectedPokemonId} id={selectedPokemonId} />}
         {compatible.length > 0 && (
