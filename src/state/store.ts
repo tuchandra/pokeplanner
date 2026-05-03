@@ -227,7 +227,21 @@ export const useStore = create<AppState & AppActions>()(
 
       selectPokemon: (id) => set({ selectedPokemonId: id }),
 
-      setFilter: (key, value) => set((s) => ({ filters: { ...s.filters, [key]: value } })),
+      setFilter: (key, value) =>
+        set((s) => {
+          const filters = { ...s.filters, [key]: value };
+          // Switching to a specific area should deselect any selected house
+          // that lives in a different area, otherwise click-to-place silently
+          // adds Pokémon to an off-screen house. ('All' / null leaves the
+          // selection alone.)
+          if (key === 'activeLocation' && value !== null && s.selectedHouseId) {
+            const h = s.houses.find((x) => x.id === s.selectedHouseId);
+            if (h && h.location !== value) {
+              return { filters, selectedHouseId: null };
+            }
+          }
+          return { filters };
+        }),
 
       loadExample: () =>
         set({ houses: buildExampleHouses(), selectedHouseId: null, selectedPokemonId: null }),
