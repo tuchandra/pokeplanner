@@ -12,7 +12,7 @@ import {
   derivedHabitats,
 } from '@/types';
 import { useDroppable } from '@dnd-kit/core';
-import { Lock, Unlock, X } from 'lucide-react';
+import { Lock, Package, Unlock, Wrench, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
@@ -53,8 +53,10 @@ const SHAPE_OPTIONS: ReadonlyArray<{
 function shapeKey(h: Pick<House, 'type' | 'slotCount'>): string {
   return h.type === 'custom' ? 'custom' : `prefab-${h.slotCount}`;
 }
-function shapeLabel(h: Pick<House, 'type' | 'slotCount'>): string {
-  return SHAPE_OPTIONS.find((o) => o.value === shapeKey(h))?.label ?? 'Prefab';
+
+function TypeIcon({ type, className }: { type: HouseType; className?: string }) {
+  const Icon = type === 'prefab' ? Package : Wrench;
+  return <Icon className={cn('size-3.5', className)} aria-hidden />;
 }
 
 type SlotProps = {
@@ -223,15 +225,23 @@ export function HouseCard({ house }: Props) {
             >
               <SelectTrigger
                 size="sm"
-                className="h-auto px-1.5 py-0.5 border-transparent bg-transparent uppercase tracking-[0.04em] font-mono text-[10px] hover:bg-card-soft hover:border-border-soft w-auto gap-1 disabled:opacity-100"
+                className="h-auto px-1.5 py-0.5 border-transparent bg-transparent uppercase tracking-[0.04em] font-mono text-[10px] hover:bg-card-soft hover:border-border-soft w-auto gap-1.5 disabled:opacity-100"
                 onClick={(e) => e.stopPropagation()}
                 title={locked ? 'House is locked' : 'Change house type or size'}
               >
-                <SelectValue>{shapeLabel(house)}</SelectValue>
+                <TypeIcon type={house.type} />
+                <SelectValue>
+                  {house.type === 'prefab' ? `Prefab · ${house.slotCount}` : 'Custom'}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent align="start">
                 {SHAPE_OPTIONS.map((o) => (
-                  <SelectItem key={o.value} value={o.value} className="text-xs">
+                  <SelectItem
+                    key={o.value}
+                    value={o.value}
+                    className="text-xs"
+                    icon={<TypeIcon type={o.type} className="shrink-0" />}
+                  >
                     {o.label}
                   </SelectItem>
                 ))}
