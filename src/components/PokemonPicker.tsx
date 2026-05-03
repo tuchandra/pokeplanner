@@ -147,7 +147,6 @@ function buildGroupedView(
 
 export function PokemonPicker() {
   const specFilter = useStore((s) => s.filters.specialtyFilter);
-  const habitatCompat = useStore((s) => s.filters.habitatCompatible);
   const grouping = useStore((s) => s.filters.pickerGrouping);
   const houses = useStore((s) => s.houses);
   const selectedHouseId = useStore((s) => s.selectedHouseId);
@@ -191,20 +190,24 @@ export function PokemonPicker() {
       const ok = specFilter.some((key) => pokemonInGroup(p, key, partition));
       if (!ok) return false;
     }
-    if (
-      habitatCompat &&
-      targetLighting &&
-      targetLighting.size > 0 &&
-      !targetLighting.has(p.habitat)
-    ) {
-      return false;
-    }
     return true;
   });
 
-  const recommendations = selectedHouse
-    ? recommend(POKEMON, selectedHouse, (id) => POKEMON_BY_ID.get(id), assignedIds)
-    : [];
+  // "Compatible" = Pokémon that already share the active house's lighting set
+  // (so adding them won't expand its habitat chips). Sorted by recommend score
+  // so the strongest fits float to the top of the section. Only shown when a
+  // house is selected and has at least one assigned Pokémon — otherwise the
+  // lighting set is empty and "compatible" has no meaning.
+  const compatible =
+    selectedHouse && targetLighting && targetLighting.size > 0
+      ? recommend(
+          POKEMON.filter((p) => targetLighting.has(p.habitat)),
+          selectedHouse,
+          (id) => POKEMON_BY_ID.get(id),
+          assignedIds,
+          Number.POSITIVE_INFINITY,
+        )
+      : [];
 
   // Click → place into the active house's first empty slot when one exists.
   const quickPlaceMode = !!selectedHouse && selectedHouse.slots.some((s) => s == null);
@@ -219,17 +222,17 @@ export function PokemonPicker() {
         className="flex flex-col gap-3.5 px-3 py-3 overflow-y-auto flex-1 min-h-0"
       >
         {selectedPokemonId && <PokemonDetail key={selectedPokemonId} id={selectedPokemonId} />}
-        {recommendations.length > 0 && (
+        {compatible.length > 0 && (
           <section className="flex flex-col gap-1.5 pb-3 border-b border-dashed border-border-soft">
-            <GroupTitle title="Recommended" count={selectedHouse?.name} />
+            <GroupTitle title="Compatible" count={selectedHouse?.name} />
             <Grid>
-              {recommendations.map((p) => (
+              {compatible.map((p) => (
                 <PickItem
-                  key={`rec-${p.id}`}
+                  key={`compat-${p.id}`}
                   p={p}
-                  assigned={false}
+                  assigned={assignedIds.has(p.id)}
                   quickPlaceMode={quickPlaceMode}
-                  groupKey="rec"
+                  groupKey="compat"
                 />
               ))}
             </Grid>

@@ -1,7 +1,7 @@
 import { POKEMON } from '@/data/pokemon';
 import { SPECIALTY_ICONS } from '@/data/specialty-icons';
 import { cn } from '@/lib/cn';
-import { MISC_GROUP, STORY_GROUP, partitionGroups } from '@/lib/picker-groups';
+import { partitionGroups } from '@/lib/picker-groups';
 import { useStore } from '@/state/store';
 import { ChevronDown } from 'lucide-react';
 import { useMemo, useState } from 'react';
@@ -10,7 +10,6 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 export function SpecialtyFilter() {
   const selected = useStore((s) => s.filters.specialtyFilter);
-  const habitatCompat = useStore((s) => s.filters.habitatCompatible);
   const grouping = useStore((s) => s.filters.pickerGrouping);
   const setFilter = useStore((s) => s.setFilter);
   const [open, setOpen] = useState(false);
@@ -27,21 +26,41 @@ export function SpecialtyFilter() {
     setFilter('specialtyFilter', Array.from(set));
   }
 
-  const label = selected.length === 0 ? 'All Specialties' : `${selected.length} selected`;
+  const triggerContent =
+    selected.length === 0 ? (
+      <span className="text-muted-foreground">All Specialties</span>
+    ) : (
+      <span className="flex items-center gap-1.5 min-w-0 flex-wrap">
+        {selected.map((key) => {
+          const icon = SPECIALTY_ICONS[key];
+          return (
+            <span
+              key={key}
+              className="inline-flex items-center gap-1 rounded-full bg-card-soft px-1.5 py-0.5 text-xs"
+            >
+              {icon ? (
+                <img src={icon} alt="" aria-hidden className="size-4 [image-rendering:pixelated]" />
+              ) : null}
+              <span>{key}</span>
+            </span>
+          );
+        })}
+      </span>
+    );
 
   return (
-    <div className="grid grid-cols-2 gap-1.5">
+    <div className="grid grid-cols-1 gap-1.5">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <button
             type="button"
             className={cn(
-              'col-span-2 inline-flex items-center justify-between gap-2 rounded-md border bg-card px-3 py-2 text-sm text-foreground cursor-pointer transition-colors',
+              'inline-flex items-center justify-between gap-2 rounded-md border bg-card px-3 py-2 text-sm text-foreground cursor-pointer transition-colors min-h-9',
               open ? 'border-primary' : 'border-border-soft hover:border-border',
             )}
           >
-            <span>{label}</span>
-            <ChevronDown className="size-3.5 opacity-60" />
+            <span className="flex-1 min-w-0 text-left">{triggerContent}</span>
+            <ChevronDown className="size-3.5 opacity-60 shrink-0" />
           </button>
         </PopoverTrigger>
         <PopoverContent
@@ -49,10 +68,24 @@ export function SpecialtyFilter() {
           align="start"
         >
           <ul className="list-none m-0 p-0">
+            <li>
+              <button
+                type="button"
+                onClick={() => setFilter('specialtyFilter', [])}
+                className={cn(
+                  'flex w-full items-center gap-2.5 rounded-sm px-2 py-1.5 text-sm cursor-pointer hover:bg-card-soft text-left',
+                  selected.length === 0 && 'bg-card-soft',
+                )}
+              >
+                <Checkbox checked={selected.length === 0} tabIndex={-1} />
+                <span aria-hidden className="inline-block size-5 shrink-0" />
+                <span className="font-medium">All</span>
+              </button>
+            </li>
+            <li aria-hidden className="my-1 border-t border-border-soft" />
             {options.map((key) => {
               const checked = selected.includes(key);
               const icon = SPECIALTY_ICONS[key];
-              const isVirtual = key === STORY_GROUP || key === MISC_GROUP;
               return (
                 <li key={key}>
                   <button
@@ -69,13 +102,7 @@ export function SpecialtyFilter() {
                         className="size-5 [image-rendering:pixelated] shrink-0"
                       />
                     ) : (
-                      <span
-                        aria-hidden
-                        className={cn(
-                          'inline-block size-5 rounded-sm shrink-0',
-                          isVirtual ? 'bg-card-soft' : 'bg-card-soft',
-                        )}
-                      />
+                      <span aria-hidden className="inline-block size-5 shrink-0" />
                     )}
                     <span>{key}</span>
                   </button>
@@ -85,20 +112,6 @@ export function SpecialtyFilter() {
           </ul>
         </PopoverContent>
       </Popover>
-
-      <button
-        type="button"
-        onClick={() => setFilter('habitatCompatible', !habitatCompat)}
-        aria-pressed={habitatCompat}
-        className={cn(
-          'rounded-md px-2.5 py-2 text-xs whitespace-nowrap cursor-pointer transition-colors',
-          habitatCompat
-            ? 'bg-primary text-primary-foreground border-0 font-semibold'
-            : 'bg-card text-muted-foreground border border-border-soft hover:text-foreground hover:border-border',
-        )}
-      >
-        Habitat: {habitatCompat ? 'compatible' : 'all'}
-      </button>
 
       <button
         type="button"

@@ -65,12 +65,13 @@ function SelectContent({
 function SelectItem({
   className,
   children,
+  icon,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+}: React.ComponentProps<typeof SelectPrimitive.Item> & { icon?: React.ReactNode }) {
   return (
     <SelectPrimitive.Item
       className={cn(
-        'relative flex w-full cursor-pointer items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-card-soft focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+        'relative flex w-full cursor-pointer items-center gap-2 rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-card-soft focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
         className,
       )}
       {...props}
@@ -80,6 +81,7 @@ function SelectItem({
           <CheckIcon className="size-4 text-primary" />
         </SelectPrimitive.ItemIndicator>
       </span>
+      {icon}
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );

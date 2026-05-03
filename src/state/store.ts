@@ -16,11 +16,6 @@ type Filters = {
    */
   specialtyFilter: readonly string[];
   /**
-   * Restrict the picker to Pokémon whose `habitat` is one of the selected
-   * house's derived lighting chips. False = show all.
-   */
-  habitatCompatible: boolean;
-  /**
    * How to render the picker grid. 'none' is the default flat tracker order
    * (preserves evolutionary adjacency). 'specialty' groups by specialty1/2.
    */
@@ -60,7 +55,6 @@ const initialFilters: Filters = {
   pendingType: 'prefab',
   pendingSlots: 4,
   specialtyFilter: [],
-  habitatCompatible: false,
   pickerGrouping: 'none',
   view: 'grid',
   theme: 'dark',

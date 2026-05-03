@@ -132,7 +132,7 @@ export function Topbar() {
               onClick={() => setFilter('activeLocation', active ? null : loc.id)}
               title={`${loc.name}${active ? ' — click to view all' : ''}`}
               className={cn(
-                'relative inline-flex items-baseline gap-1.5 rounded-md border border-border-soft px-2.5 pt-1.5 pb-2 text-muted-foreground cursor-pointer transition-colors',
+                'relative inline-flex items-center gap-1.5 rounded-md border border-border-soft px-2.5 pt-1.5 pb-2 text-muted-foreground cursor-pointer transition-colors',
                 'hover:bg-card-soft hover:text-foreground',
                 active &&
                   'bg-card text-foreground border-border shadow-[inset_0_0_0_1px_var(--color-border-soft)]',
@@ -142,17 +142,17 @@ export function Topbar() {
                 src={loc.iconUrl}
                 alt=""
                 aria-hidden
-                className="size-5 [image-rendering:pixelated] -mt-0.5"
+                className="size-4 [image-rendering:pixelated] shrink-0"
               />
               <span
                 className={cn(
-                  'font-mono text-[12px] font-medium tracking-wide',
+                  'font-mono text-[12px] font-medium tracking-wide leading-none',
                   active ? LOC_ACCENT[loc.id] : 'text-muted-foreground',
                 )}
               >
                 {loc.id}
               </span>
-              <span className="font-mono text-[11px] text-faint-foreground tabular-nums">
+              <span className="font-mono text-[11px] text-faint-foreground tabular-nums leading-none">
                 <span
                   className={cn(active ? LOC_ACCENT[loc.id] : 'text-foreground', 'font-medium')}
                 >

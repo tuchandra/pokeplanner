@@ -135,20 +135,26 @@ export function HouseCard({ house }: Props) {
               </SelectTrigger>
               <SelectContent align="start">
                 {LOCATIONS.map((l) => (
-                  <SelectItem key={l.id} value={l.id} className="text-xs">
-                    <span className="inline-flex items-center gap-2">
-                      <span
-                        aria-hidden
-                        className={cn('inline-block size-2 rounded-full', LOC_DOT[l.id])}
-                      />
-                      <img
-                        src={l.iconUrl}
-                        alt=""
-                        aria-hidden
-                        className="size-4 [image-rendering:pixelated]"
-                      />
-                      {l.name}
-                    </span>
+                  <SelectItem
+                    key={l.id}
+                    value={l.id}
+                    className="text-xs"
+                    icon={
+                      <span className="inline-flex items-center gap-1.5 shrink-0">
+                        <span
+                          aria-hidden
+                          className={cn('inline-block size-2 rounded-full', LOC_DOT[l.id])}
+                        />
+                        <img
+                          src={l.iconUrl}
+                          alt=""
+                          aria-hidden
+                          className="size-4 [image-rendering:pixelated]"
+                        />
+                      </span>
+                    }
+                  >
+                    {l.name}
                   </SelectItem>
                 ))}
               </SelectContent>

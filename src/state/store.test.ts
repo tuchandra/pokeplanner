@@ -34,7 +34,6 @@ beforeEach(() => {
       pendingType: 'prefab',
       pendingSlots: 4,
       specialtyFilter: [],
-      habitatCompatible: false,
       pickerGrouping: 'none',
       view: 'grid',
       theme: 'dark',

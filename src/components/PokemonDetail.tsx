@@ -53,11 +53,21 @@ export function PokemonDetail({ id }: { id: string }) {
       <BackButton onClick={() => selectPokemon(null)} />
 
       <div className="flex items-center gap-3">
-        <img
-          src={p.spriteUrl}
-          alt={p.name}
-          className="size-16 rounded-xl border border-border-soft bg-card p-1.5 [image-rendering:pixelated]"
-        />
+        <div className="relative size-16">
+          <img
+            src={p.spriteUrl}
+            alt={p.name}
+            className="size-16 rounded-xl border border-border-soft bg-card p-1.5 [image-rendering:pixelated]"
+          />
+          {p.litterDrop && LITTER_ITEM_SPRITES[p.litterDrop] && (
+            <img
+              src={LITTER_ITEM_SPRITES[p.litterDrop]}
+              alt={p.litterDrop}
+              title={p.litterDrop}
+              className="absolute -right-1 -bottom-1 size-7 rounded-md bg-card border border-border-soft p-1 [image-rendering:pixelated]"
+            />
+          )}
+        </div>
         <div>
           <h2 className="m-0 text-[18px] font-bold tracking-[-0.015em]">{p.name}</h2>
           <p className="m-0 mt-0.5 font-mono text-[10px] tracking-[0.08em] text-faint-foreground">
