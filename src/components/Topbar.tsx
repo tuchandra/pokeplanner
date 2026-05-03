@@ -202,8 +202,8 @@ export function Topbar({
                 >
                   {used}
                 </span>
-                <span className="opacity-40 mx-0.5">/</span>
-                <span>{loc.capacity}</span>
+                <span className="hidden sm:inline opacity-40 mx-0.5">/</span>
+                <span className="hidden sm:inline">{loc.capacity}</span>
               </span>
               <span
                 aria-hidden
@@ -254,9 +254,9 @@ export function Topbar({
 
         <Popover open={composeOpen} onOpenChange={setComposeOpen}>
           <PopoverTrigger asChild>
-            <Button>
+            <Button className="px-2 sm:px-3.5" aria-label="Add a house" title="Add a house">
               <Plus />
-              House
+              <span className="hidden sm:inline">House</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent>
