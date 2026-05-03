@@ -2,6 +2,7 @@ import { HouseGrid } from '@/components/HouseGrid';
 import { HouseTable } from '@/components/HouseTable';
 import { PokemonPicker } from '@/components/PokemonPicker';
 import { Topbar } from '@/components/Topbar';
+import { clearShareHash, readShareHash } from '@/lib/share';
 import { useStore } from '@/state/store';
 import { DndContext, type DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { useEffect } from 'react';
@@ -15,6 +16,38 @@ export function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
+
+  // On mount, hydrate from a share hash if present. Confirm overwrite when the
+  // user already has houses locally so a stray link can't wipe their work.
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      const payload = await readShareHash(window.location.hash);
+      if (cancelled || !payload) return;
+      const existing = useStore.getState().houses.length;
+      if (
+        existing > 0 &&
+        !window.confirm(
+          `This link contains a shared planner with ${payload.houses.length} house${
+            payload.houses.length === 1 ? '' : 's'
+          }. Replace your current ${existing}-house planner?`,
+        )
+      ) {
+        clearShareHash();
+        return;
+      }
+      useStore.setState({
+        houses: [...payload.houses],
+        filters: payload.filters,
+        selectedHouseId: null,
+        selectedPokemonId: null,
+      });
+      clearShareHash();
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   function onDragEnd(e: DragEndEvent) {
     const over = e.over;

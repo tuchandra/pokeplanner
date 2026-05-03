@@ -1,8 +1,9 @@
 import { LOCATIONS } from '@/data/locations';
 import { cn } from '@/lib/cn';
+import { buildShareUrl } from '@/lib/share';
 import { useStore } from '@/state/store';
 import { type House, type HouseType, type LocationId, capacityPoints } from '@/types';
-import { Info, LayoutGrid, List, Moon, Plus, Sun } from 'lucide-react';
+import { Check, Info, LayoutGrid, List, Moon, Plus, Share2, Sun } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -110,6 +111,21 @@ export function Topbar() {
   const theme = useStore((s) => s.filters.theme);
   const setFilter = useStore((s) => s.setFilter);
   const [composeOpen, setComposeOpen] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  async function handleShare() {
+    const filters = useStore.getState().filters;
+    const url = await buildShareUrl({ houses: useStore.getState().houses, filters });
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 1800);
+    } catch {
+      // Clipboard API blocked (insecure context, permission denied) — surface
+      // the URL via prompt as a fallback so the user can copy manually.
+      window.prompt('Share this URL:', url);
+    }
+  }
 
   return (
     <header className="grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-border-soft bg-secondary px-4 py-2 relative z-20">
@@ -206,6 +222,22 @@ export function Topbar() {
             <ComposePopover onClose={() => setComposeOpen(false)} />
           </PopoverContent>
         </Popover>
+
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleShare}
+          aria-label="Copy share link"
+          title={
+            shareCopied
+              ? 'Link copied'
+              : 'Copy a link with your current planner — paste into another browser or device'
+          }
+          disabled={houses.length === 0}
+          className={shareCopied ? 'text-primary' : undefined}
+        >
+          {shareCopied ? <Check /> : <Share2 />}
+        </Button>
 
         <Button
           variant="outline"
